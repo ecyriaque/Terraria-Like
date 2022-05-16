@@ -72,7 +72,8 @@ public class Controller implements Initializable{
 		img = new ImageView(new Image("jeu/modele/image/droite.png"));
         img.translateXProperty().bind(j.xProperty());
         img.translateYProperty().bind(j.yProperty());
-        conteneur.getChildren().add(img);  
+        conteneur.getChildren().add(img);
+        System.out.println("nothing");
 	}
 	
 	@FXML
