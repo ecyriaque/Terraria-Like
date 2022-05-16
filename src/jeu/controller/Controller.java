@@ -73,7 +73,7 @@ public class Controller implements Initializable{
         img.translateXProperty().bind(j.xProperty());
         img.translateYProperty().bind(j.yProperty());
         conteneur.getChildren().add(img);  
-        System.out.println("jjj");
+        System.out.println("jjjaa");
 	}
 	
 	@FXML
