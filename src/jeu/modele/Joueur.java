@@ -1,19 +1,19 @@
 package jeu.modele;
 
-import java.util.Random;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.scene.shape.Circle;
 
 
 public class Joueur {
 	private int xx,yy;
 	private IntegerProperty x,y;
+	private IntegerProperty nbCoeursProperty;
 	protected Environnement env;
 	
 	public Joueur() {
 		this.xx = 100;
 		this.yy = 350;
+		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 	}
@@ -49,4 +49,16 @@ public class Joueur {
     public final IntegerProperty yProperty(){
         return this.y;
     }
+
+	public final int getNbCoeurs() {
+		return this.nbCoeursProperty.getValue();
+	}
+	
+	public final void setNbCoeurs(int nb) {
+		nbCoeursProperty.setValue(nb);
+	}
+	
+	public final IntegerProperty nbCoeurProperty() {
+		return this.nbCoeursProperty;
+	}
 }
