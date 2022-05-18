@@ -51,40 +51,6 @@ public class Controller implements Initializable{
 		this.map();
 		this.joueur();
 		afficherCoeurs();
-		
-		
-
-//		// actions clavier:
-//		root.setOnMouseEntered(e -> {
-//			
-//			switch (joueur.getNbCoeurs()) {
-//			case 5:
-//				coeurs.setImage(new Image("jeu/modele/image/hearts.png"));
-//				System.out.println("4coeurs");
-//				break;
-//			case 4:
-//				coeurs.setImage(new Image("jeu/modele/image/4hearts.png"));
-//				System.out.println("4coeurs");
-//				break;
-//			case 3:
-//				coeurs.setImage(new Image("jeu/modele/image/3hearts.png"));
-//				System.out.println("3coeurs");
-//				break;
-//			case 2:
-//				coeurs.setImage(new Image("jeu/modele/image/2hearts.png"));
-//				System.out.println("2coeurs");
-//				break;
-//			case 1:
-//				coeurs.setImage(new Image("jeu/modele/image/1hearts.png"));
-//				System.out.println("1coeurs");
-//				break;
-//					
-//			default:
-//				break;
-//			}
-//			
-//		});
-		
 	}
 	
 	public void map () {
