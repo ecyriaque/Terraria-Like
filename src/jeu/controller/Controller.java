@@ -65,6 +65,11 @@ public class Controller implements Initializable{
             	img.setImage(new Image("jeu/modele/image/droite.png"));
                 joueur.allerADroite();
                 System.out.println(joueur.getX());
+                break;
+            case Z :
+            	joueur.saut();
+            	System.out.println(joueur.getY());
+            	break;
             default:
                 break;
 
@@ -124,9 +129,18 @@ public class Controller implements Initializable{
 					default:
 						break;
 					}
+					
+					gravite();
 				})
 				);
+		
+	
 		gameLoop.getKeyFrames().add(kf);
+	}
+	
+	//AJOUTE UNE GRAVITE
+	public void gravite() {
+		joueur.tombe();
 	}
 	
 }

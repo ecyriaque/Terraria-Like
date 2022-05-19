@@ -5,28 +5,46 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 
 public class Joueur {
+	//VARIABLE
 	private int xx,yy;
 	private IntegerProperty x,y;
 	private IntegerProperty nbCoeursProperty;
 	protected Environnement env;
+	private int vitesseX;
 	
+	//CONSTRUCTEUR
 	public Joueur() {
 		this.xx = 100;
 		this.yy = 350;
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
+		this.vitesseX = 8;
 	}
 	
 	public void allerAGauche() {
-		int npos = getX()-8;
+		int npos = getX()-vitesseX;
 		if(npos > -10)
 			this.x.setValue(npos);
     }
     public void allerADroite() {
-    	int npos = getX()+8;
+    	int npos = getX()+vitesseX;
     	if (npos <770)
     		this.x.setValue(npos);
+    }
+    
+    public void tombe() {
+    	int npos = getY()+5;
+    	if(npos <= 350)
+    		this.y.setValue(npos);
+    }
+
+    
+    public void saut() {
+    	
+    	int npos = getY()-50;
+    	if(getY() >= 350)
+    		this.y.setValue(npos);
     }
 
     public final int getX() {
