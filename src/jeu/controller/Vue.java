@@ -8,9 +8,7 @@ import jeu.modele.Environnement;
 import jeu.modele.Joueur;
 
 public class Vue {
-	public Vue() {
-	}
-
+	//AFFICHAGE DE LA MAP
 	public static  void map (TilePane carte) {
 		ImageView img = null;
 		Environnement env = new Environnement ();
