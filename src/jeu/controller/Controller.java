@@ -17,29 +17,27 @@ import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 
 public class Controller implements Initializable{
+	//VARIABLE
 	@FXML
-    private BorderPane root;
+    private BorderPane root;//ROOT 
 	@FXML
-	private TilePane carte;
+	private TilePane carte;//LA MAP
 	@FXML
-	private Pane conteneur;
-	Joueur joueur =new Joueur();
+	private Pane conteneur;//CONTENEUR DES DIFFERENTS OBJETS
+	Joueur joueur =new Joueur();//LE PERSONNAGE 	
+	private Timeline gameLoop;	
+	private ImageView img,coeurs;//IMAGE UTILISE
 	
-	private Timeline gameLoop;
-	
-	private int temps;
-	private ImageView img,coeurs;
-
-	 @FXML
-	    void perdre1pv(ActionEvent event) {
-		 joueur.perdrepv();
-	    }
-
-	   @FXML
-	    void gaggner1(ActionEvent event) {
-		   joueur.gagnerpv();
-	    }
-   
+	//FONCTION GAGNE OU PERD UN COEUR
+	@FXML
+	void perdre1pv(ActionEvent event) {
+		joueur.perdrepv();
+	}
+	@FXML
+	void gaggner1(ActionEvent event) {
+		joueur.gagnerpv();
+	}
+	//INITILISATION
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
@@ -48,46 +46,12 @@ public class Controller implements Initializable{
 		int pxl = 40;
 		int taille = 20;
 		carte.setMaxSize(pxl*taille, pxl*taille);
-		this.map();
-		this.joueur();
+		Vue.map(carte);
+		afficherJoueur();
 		afficherCoeurs();
 	}
 	
-	public void map () {
-		ImageView img = null;
-		Environnement env = new Environnement ();
-		int[] t = env.getTab();
-		for(int a=0 ; a<t.length; a++) {
-			switch(t[a]) {
-			case 0 :
-				img = new ImageView(new Image("jeu/modele/image/bleu.png"));
-				break;
-			case 1 :
-				img = new ImageView(new Image("jeu/modele/image/marron.png"));
-				break;
-			case 2 :
-				img = new ImageView(new Image("jeu/modele/image/vert.png"));
-				break;
-			case 3 :
-				img = new ImageView(new Image("jeu/modele/image/gris.png"));
-				break;
-			case 4 :
-				img = new ImageView(new Image("jeu/modele/image/violet.png"));
-				break;
-			}
-			carte.getChildren().add(img);
-		}
-
-	
-	}
-	
-	public void joueur() {
-		img = new ImageView(new Image("jeu/modele/image/droite.png"));
-        img.translateXProperty().bind(joueur.xProperty());
-        img.translateYProperty().bind(joueur.yProperty());
-        conteneur.getChildren().add(img);  
-	}
-	
+	//DEPLACEMENT DU PERSONNAGE
 	@FXML
 	void deplacer() {
 		root.setOnKeyPressed(e -> {
@@ -108,6 +72,14 @@ public class Controller implements Initializable{
         });
 	}
     
+	//AFFICHAGE DU JOUEUR 
+	public void afficherJoueur() {
+		img = new ImageView(new Image("jeu/modele/image/droite.png"));
+        img.translateXProperty().bind(joueur.xProperty());
+        img.translateYProperty().bind(joueur.yProperty());
+        conteneur.getChildren().add(img);  
+	}
+	//AFFICHAGE DES COEURS DU PERSONNAGES
 	public void afficherCoeurs() {
 		coeurs = new ImageView(new Image("jeu/modele/image/hearts.png"));
 		coeurs.translateXProperty().setValue(-80);
@@ -115,9 +87,9 @@ public class Controller implements Initializable{
         conteneur.getChildren().add(coeurs);  
 	}
 	
+	//BOUCLE QUI MET A JOUR LE NOMBRE DE COUEUR DU PERSONNAGE
 	private void initAnimation() {
 		gameLoop = new Timeline();
-		temps=0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 
 		KeyFrame kf = new KeyFrame(
