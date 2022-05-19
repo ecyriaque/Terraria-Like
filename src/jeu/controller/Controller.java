@@ -6,6 +6,8 @@ import jeu.modele.*;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -24,10 +26,10 @@ public class Controller implements Initializable{
 	@FXML
 	private Pane conteneur;
 	Joueur joueur =new Joueur();
-	
+	private IntegerProperty ncoeurIntegerProperty=new SimpleIntegerProperty();
+
 	private Timeline gameLoop;
 	
-	private int temps;
 	private ImageView img,coeurs;
 
 	 @FXML
@@ -117,9 +119,8 @@ public class Controller implements Initializable{
 	
 	private void initAnimation() {
 		gameLoop = new Timeline();
-		temps=0;
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
-
+		ncoeurIntegerProperty.bind(joueur.nbCoeurProperty());
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
 				Duration.seconds(0.127), 
@@ -127,7 +128,7 @@ public class Controller implements Initializable{
 				// c'est un eventHandler d'ou le lambda
 				(ev ->{
 					
-					switch (joueur.getNbCoeurs()) {
+					switch (ncoeurIntegerProperty.getValue()) {
 					case 5:
 						coeurs.setImage(new Image("jeu/modele/image/hearts.png"));
 					
