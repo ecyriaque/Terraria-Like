@@ -4,13 +4,19 @@ package jeu.controller;
 import java.net.URL;
 import jeu.modele.*;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -26,7 +32,9 @@ public class Controller implements Initializable{
 	private Pane conteneur;//CONTENEUR DES DIFFERENTS OBJETS
 	Joueur joueur =new Joueur();//LE PERSONNAGE 	
 	private Timeline gameLoop;	
-	private ImageView img,coeurs;//IMAGE UTILISE
+	private ImageView imgJoueur,coeurs;//IMAGE UTILIS
+	private boolean saute =true , tombe = false; //action saut vraie si le personnage saute
+	private int positionJoueurX,positionJoueurY;
 	
 	//FONCTION GAGNE OU PERD UN COEUR
 	@FXML
@@ -49,40 +57,34 @@ public class Controller implements Initializable{
 		Vue.map(carte);
 		afficherJoueur();
 		afficherCoeurs();
+		positionJoueurX = joueur.getX();
+		positionJoueurY = joueur.getY();
 	}
 	
 	//DEPLACEMENT DU PERSONNAGE
 	@FXML
 	void deplacer() {
 		root.setOnKeyPressed(e -> {
-            switch(e.getCode()){
-            case Q :
-            	img.setImage(new Image("jeu/modele/image/gauche.png"));
-                joueur.allerAGauche();
-                System.out.println(joueur.getX());
-                break;
-            case D :
-            	img.setImage(new Image("jeu/modele/image/droite.png"));
-                joueur.allerADroite();
-                System.out.println(joueur.getX());
-                break;
-            case Z :
-            	joueur.saut();
-            	System.out.println(joueur.getY());
-            	break;
-            default:
-                break;
-
-            }
+			//System.out.println("X : "+positionJoueurX);
+			if(e.getCode().equals(KeyCode.Q)) {
+            	allerGauche();
+			}
+			else if(e.getCode().equals(KeyCode.D)) {
+            	allerDroite();
+			}
+			else if (e.getCode().equals(KeyCode.Z) && saute) {
+            	sauter();
+			}
         });
 	}
-    
+	
+   
 	//AFFICHAGE DU JOUEUR 
 	public void afficherJoueur() {
-		img = new ImageView(new Image("jeu/modele/image/droite.png"));
-        img.translateXProperty().bind(joueur.xProperty());
-        img.translateYProperty().bind(joueur.yProperty());
-        conteneur.getChildren().add(img);  
+		imgJoueur = new ImageView(new Image("jeu/modele/image/droite.png"));
+        imgJoueur.setX(100);
+        imgJoueur.setY(350);
+        conteneur.getChildren().add(imgJoueur);  
 	}
 	//AFFICHAGE DES COEURS DU PERSONNAGES
 	public void afficherCoeurs() {
@@ -129,18 +131,70 @@ public class Controller implements Initializable{
 					default:
 						break;
 					}
-					
-					gravite();
+					if (positionJoueurY == 270)
+						System.out.println(positionJoueurY);
 				})
+				
 				);
-		
-	
+
 		gameLoop.getKeyFrames().add(kf);
 	}
 	
-	//AJOUTE UNE GRAVITE
-	public void gravite() {
-		joueur.tombe();
+	public void allerDroite() {
+		imgJoueur.setImage(new Image("jeu/modele/image/droite.png"));
+    	TranslateTransition droite = new TranslateTransition(Duration.millis(1),imgJoueur);
+    	droite.setByX(+8);
+    	if(positionJoueurX < 750) {
+    		droite.play();
+        	positionJoueurX +=8;
+    	}
+	}
+	
+	public void allerGauche() {
+		imgJoueur.setImage(new Image("jeu/modele/image/gauche.png"));
+    	TranslateTransition gauche = new TranslateTransition(Duration.millis(1),imgJoueur);
+    	gauche.setByX(-8);
+    	if(positionJoueurX > -11) {
+    		gauche.play();
+        	positionJoueurX -=8;
+    	}
+	}
+	
+	public void sauter() {
+		TranslateTransition saut = new TranslateTransition(Duration.millis(400),imgJoueur);
+    	saut.setByY(-80);
+    	if(positionJoueurY == 350 && saute) {
+        	saut.play();
+    		saute = false;
+    	}
+    	Timer peutSauterDans = new Timer();        
+    	peutSauterDans.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				saute = true;
+			}
+		}, 1400);
+    	Timer tempSaut = new Timer();        
+    	tempSaut.schedule(new TimerTask() {
+			@Override
+			public void run() {
+          		positionJoueurY -=80;
+			}
+		}, 400);
+    	tombe();
+	}
+	
+	public void tombe() {
+		TranslateTransition tomber = new TranslateTransition(Duration.millis(400),imgJoueur);
+		tomber.setByY(+80);
+		Timer tempTombe = new Timer();
+		tempTombe.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				tomber.play();
+				positionJoueurY +=80; 
+			}
+		}, 1000);
 	}
 	
 }

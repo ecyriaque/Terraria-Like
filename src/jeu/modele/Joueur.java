@@ -40,8 +40,7 @@ public class Joueur {
     }
 
     
-    public void saut() {
-    	
+    public void saut() {   	
     	int npos = getY()-50;
     	if(getY() >= 350)
     		this.y.setValue(npos);
