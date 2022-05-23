@@ -4,6 +4,7 @@ package jeu.controller;
 import java.net.URL;
 import jeu.modele.*;
 import java.util.ResourceBundle;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -17,10 +18,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
-
 public class Controller implements Initializable{
 	@FXML
-    private BorderPane root;
+    private Pane root;
 	@FXML
 	private TilePane carte;
 	@FXML
@@ -31,7 +31,11 @@ public class Controller implements Initializable{
 	private Timeline gameLoop;
 	
 	private ImageView img,coeurs;
-
+	ImageView mechant = new ImageView("jeu/modele/image/droite.png");
+	private int[]tabMap;
+	
+	
+	
 	 @FXML
 	    void perdre1pv(ActionEvent event) {
 		 joueur.perdrepv();
@@ -50,18 +54,21 @@ public class Controller implements Initializable{
 		int pxl = 40;
 		int taille = 20;
 		carte.setMaxSize(pxl*taille, pxl*taille);
-		this.map();
+		tabMap=this.map();
 		this.joueur();
 		afficherCoeurs();
+		this.deplacer();
+		
 	}
 	
-	public void map () {
+	public  int[] map () {
 		ImageView img = null;
 		Environnement env = new Environnement ();
 		int[] t = env.getTab();
 		for(int a=0 ; a<t.length; a++) {
 			switch(t[a]) {
 			case 0 :
+				
 				img = new ImageView(new Image("jeu/modele/image/bleu.png"));
 				break;
 			case 1 :
@@ -79,11 +86,11 @@ public class Controller implements Initializable{
 			}
 			carte.getChildren().add(img);
 		}
-
-	
+		return t;
 	}
 	
 	public void joueur() {
+		
 		img = new ImageView(new Image("jeu/modele/image/droite.png"));
         img.translateXProperty().bind(joueur.xProperty());
         img.translateYProperty().bind(joueur.yProperty());
@@ -92,17 +99,44 @@ public class Controller implements Initializable{
 	
 	@FXML
 	void deplacer() {
+		
+		
 		root.setOnKeyPressed(e -> {
+			int xtile,ytile,ValeurTile;
+			
+			xtile=joueur.getX()/40;
+			ytile=joueur.getY()/40;
+			ValeurTile=tabMap[(xtile+(ytile*20))];
             switch(e.getCode()){
             case Q :
-            	img.setImage(new Image("jeu/modele/image/gauche.png"));
-                joueur.allerAGauche();
-                System.out.println(joueur.getX());
+            	img.setImage(new Image("jeu/modele/image/droite.png"));
+            	
+					
+				if(!this.collisionGauche()) {
+					joueur.allerAGauche();
+				}
+            	System.out.println("x joueur : "+joueur.getX());
+                System.out.println("x tile : "+xtile);
+                System.out.println("ytile : "+ytile);
+                System.out.println("numero de tile  : "+ValeurTile);
                 break;
             case D :
             	img.setImage(new Image("jeu/modele/image/droite.png"));
-                joueur.allerADroite();
-                System.out.println(joueur.getX());
+            	if(!this.collisionDroite()) {
+					joueur.allerADroite();
+				}
+            	System.out.println("x joueur : "+joueur.getX());
+                System.out.println("x tile : "+xtile);
+                System.out.println("ytile : "+ytile);
+                System.out.println("numero de tile  : "+ValeurTile);
+                break;
+            case T :
+            	joueur.perdrepv();
+                break;
+            case Y :
+            	joueur.gagnerpv();
+                break;  
+               
             default:
                 break;
 
@@ -117,6 +151,39 @@ public class Controller implements Initializable{
         conteneur.getChildren().add(coeurs);  
 	}
 	
+	
+	public void gestionDesPv() {
+		switch (ncoeurIntegerProperty.getValue()) {
+		case 5:
+			coeurs.setImage(new Image("jeu/modele/image/hearts.png"));
+		
+			break;
+		case 4:
+			coeurs.setImage(new Image("jeu/modele/image/4hearts.png"));
+		
+			break;
+		case 3:
+			coeurs.setImage(new Image("jeu/modele/image/3hearts.png"));
+			
+			break;
+		case 2:
+			coeurs.setImage(new Image("jeu/modele/image/2hearts.png"));
+			
+			break;
+		case 1:
+			coeurs.setImage(new Image("jeu/modele/image/1hearts.png"));
+		
+			break;
+		case 0:
+			
+			System.exit(0);
+			break;
+				
+		default:
+			break;
+		} 
+	}
+	
 	private void initAnimation() {
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
@@ -128,34 +195,36 @@ public class Controller implements Initializable{
 				// c'est un eventHandler d'ou le lambda
 				(ev ->{
 					
-					switch (ncoeurIntegerProperty.getValue()) {
-					case 5:
-						coeurs.setImage(new Image("jeu/modele/image/hearts.png"));
+					gestionDesPv();
 					
-						break;
-					case 4:
-						coeurs.setImage(new Image("jeu/modele/image/4hearts.png"));
-					
-						break;
-					case 3:
-						coeurs.setImage(new Image("jeu/modele/image/3hearts.png"));
-						
-						break;
-					case 2:
-						coeurs.setImage(new Image("jeu/modele/image/2hearts.png"));
-						
-						break;
-					case 1:
-						coeurs.setImage(new Image("jeu/modele/image/1hearts.png"));
-					
-						break;
-							
-					default:
-						break;
-					}
 				})
 				);
 		gameLoop.getKeyFrames().add(kf);
 	}
 	
+	public boolean collisionDroite(){
+		int xtile,ytile,ValeurTile;
+		
+		xtile=(joueur.getX()+20)/40;
+		ytile=joueur.getY()/40;
+		ValeurTile=tabMap[(xtile+(ytile*20))];
+		if (ValeurTile==1) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean collisionGauche(){
+		int xtile,ytile,ValeurTile;
+		
+		xtile=(joueur.getX()-20)/40;
+		ytile=joueur.getY()/40;
+		ValeurTile=tabMap[(xtile+(ytile*20))];
+		if (ValeurTile==1) {
+			return true;
+		}
+		return false;
+	}
+	
+
 }
