@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.TilePane?>
+
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#gestionDesTouches" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controller.Controller">
+   <children>
+      <Pane fx:id="conteneur" prefHeight="600.0" prefWidth="800.0">
+         <children>
+            <TilePane fx:id="carte" prefHeight="600.0" prefWidth="800.0" />
+         </children>
+      </Pane>
+   </children>
+</Pane>
