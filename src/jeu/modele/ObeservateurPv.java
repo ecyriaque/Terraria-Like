@@ -1,13 +1,8 @@
 package jeu.modele;
 
-import javax.management.loading.PrivateClassLoader;
-import jeu.modele.*;
 import jeu.vue.VuePv;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
-import javafx.scene.layout.Pane;
 
 public class ObeservateurPv implements ChangeListener<Number> {
 	

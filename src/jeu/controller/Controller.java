@@ -32,7 +32,7 @@ public class Controller implements Initializable{
 	private Timeline gameLoop;//boucle du jeu
 	private ImageView imgJoueur,coeurs;	//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
-	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
+	
 	
 	private Circle red;
 
@@ -61,61 +61,27 @@ public class Controller implements Initializable{
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		root.setOnKeyPressed(e -> {
-			switch(e.getCode()){
-			case Q :
-				gauche=true;
-				break;
-			case D :
-				droite=true;
-				break;
-			case Z :
-				if(Collision.graviter(joueur, tabMap)) {
-					saute=true;
-				}		
-				break;
-			case T :
-				joueur.perdrepv();
-				break;
-			case Y :
-				joueur.gagnerpv();
-				break;         
-			default:
-				break;
-			}
-		});
-		root.setOnKeyReleased(ev -> {
-			switch(ev.getCode()){
-			case Q :
-				gauche=false;
-				break;
-			case D :
-				droite=false;
-				break;
-			case Z :
-				saute=false;
-				break;
-			default :
-				break;
-			}
-		});
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap);
+		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur);
+		root.setOnKeyPressed(toucheAppuyer);
+		root.setOnKeyReleased(toucheLacher);
 	}
 	
 	//DEPLACEMENT DU JOUEUR
 	public void deplacement() {
-		if(gauche) {
+		if(this.joueur.getGauche()) {
 			imgJoueur.setImage(new Image("jeu/modele/image/vert.png"));		
 			if(!Collision.collisionGauche(joueur, tabMap)) {
 				joueur.allerAGauche();
 			}
 		}
-		if(droite) {
+		if(this.joueur.getDroite()) {
 			imgJoueur.setImage(new Image("jeu/modele/image/vert.png"));
 			if(!Collision.collisionDroite(joueur, tabMap)) {
 				joueur.allerADroite();
 			}
 		}
-		if(saute) {
+		if(this.joueur.getSaute()) {
 			imgJoueur.setImage(new Image("jeu/modele/image/vert.png"));
 			if(!Collision.collisionHaut(joueur, tabMap)) {
 				joueur.sauter();
@@ -141,7 +107,7 @@ public class Controller implements Initializable{
 				// c'est un eventHandler d'ou le lambda
 				(ev ->{			
 					
-					if(!Collision.graviter(joueur, tabMap)&& !saute || joueur.getNbSaut()==6) {
+					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6) {
 						joueur.tomber();
 						System.out.println(joueur.getY());
 					}

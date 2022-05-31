@@ -12,7 +12,7 @@ public class Joueur {
 	protected Map env;
 	private int nbSaut =0;
 	private int vitesse;
-
+	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
 	
 	//CONSTRUCTEUR//
 	public Joueur() {
@@ -101,5 +101,35 @@ public class Joueur {
 	}
 	public int getNbSaut() {
 		return nbSaut;
+	}
+
+
+	public boolean getDroite() {
+		return droite;
+	}
+
+
+	public void setDroite(boolean droite) {
+		this.droite = droite;
+	}
+
+
+	public boolean getGauche() {
+		return gauche;
+	}
+
+
+	public void setGauche(boolean gauche) {
+		this.gauche = gauche;
+	}
+
+
+	public boolean getSaute() {
+		return saute;
+	}
+
+
+	public void setSaute(boolean saute) {
+		this.saute = saute;
 	}
 }
