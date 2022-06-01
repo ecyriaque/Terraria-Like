@@ -1,7 +1,13 @@
 package jeu.modele;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import jeu.modele.objet.Bandage;
+import jeu.modele.objet.Epee;
+import jeu.modele.objet.KitDeSoin;
+import jeu.modele.objet.Objet;
 
 
 public class Joueur {
@@ -9,11 +15,16 @@ public class Joueur {
 	private int xx,yy;
 	private IntegerProperty x,y;
 	private IntegerProperty nbCoeursProperty;
-	protected Map env;
+	private Map env;
 	private int nbSaut =0;
 	private int vitesse;
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
-	
+	private ArrayList<Objet> inventaire;
+	private Objet epee=new Epee("bois");
+	private Objet soin=new Bandage();
+	private Objet kit=new KitDeSoin();
+	private Objet bandage=new Bandage();
+	private Objet ab=new Bandage();
 	//CONSTRUCTEUR//
 	public Joueur() {
 		this.xx = 40;
@@ -22,9 +33,17 @@ public class Joueur {
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
+		inventaire=new ArrayList<>();
+		inventaire.add(epee);
+		inventaire.add(bandage);
+		inventaire.add(kit);
+		inventaire.add(soin);
+		inventaire.add(ab);
 	}
 
-	
+	public ArrayList<Objet> getInventaire() {
+		return inventaire;
+	}
 	//Methodes de gestion des PV //
 	public void perdrepv() {
 	int c=this.getNbCoeurs()-1;

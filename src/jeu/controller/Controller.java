@@ -2,6 +2,10 @@ package jeu.controller;
 //IMPORT
 import java.net.URL;
 import jeu.modele.*;
+import jeu.modele.objet.Bandage;
+import jeu.modele.objet.Objet;
+import jeu.modele.objet.ObjetSoin;
+import jeu.vue.VueInventaire;
 import jeu.vue.VueMap;
 import jeu.vue.VuePv;
 
@@ -13,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
@@ -30,24 +35,23 @@ public class Controller implements Initializable{
 	//VARIABLES
 	Joueur joueur =new Joueur();//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
-	private ImageView imgJoueur,coeurs;	//image du joueur et du nb de coeurs
+	private ImageView imgJoueur;//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
+    @FXML
+    private HBox inventaireObjet;
+
 	
-	
-	private Circle red;
 
 	//INITIALISATION
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
 		gameLoop.play();
-		red = new Circle(3);
-		red.setFill(Color.RED);
-		red.setTranslateX(joueur.getX());
-		red.setTranslateY(joueur.getY());
-		conteneur.getChildren().add(red);
-		red.translateXProperty().bind(joueur.xProperty());
-		red.translateYProperty().bind(joueur.yProperty());
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap);
+		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur);
+		root.setOnKeyPressed(toucheAppuyer);
+		root.setOnKeyReleased(toucheLacher);
+		System.out.println(this.joueur.getInventaire());
 	}
 	
 	//JOUEUR
@@ -59,13 +63,9 @@ public class Controller implements Initializable{
 	}
 	
 	//GESTION DES TOUCHES
-	@FXML
-	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap);
-		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur);
-		root.setOnKeyPressed(toucheAppuyer);
-		root.setOnKeyReleased(toucheLacher);
-	}
+	
+	
+	
 	
 	//DEPLACEMENT DU JOUEUR
 	public void deplacement() {
@@ -99,10 +99,11 @@ public class Controller implements Initializable{
 		tabMap=VueMap.map(carte);
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		this.gestionDesTouches();
+		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet);
+
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.127), 
+				Duration.seconds(0.050), 
 				// on définit ce qui se passe à chaque frame 
 				// c'est un eventHandler d'ou le lambda
 				(ev ->{			
@@ -119,10 +120,4 @@ public class Controller implements Initializable{
 		gameLoop.getKeyFrames().add(kf);
 	}
 
-	public  void afficherCoeurs() {
-		coeurs = new ImageView(new Image("jeu/modele/image/hearts.png"));
-		coeurs.translateXProperty().setValue(0);
-		coeurs.translateYProperty().setValue(-100);
-		conteneur.getChildren().add(coeurs);  
-	}
 }

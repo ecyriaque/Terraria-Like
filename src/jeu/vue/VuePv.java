@@ -15,6 +15,7 @@ public class VuePv {
 	
 	private ImageView imageActive;
 	private Joueur joueur;
+	
 	public VuePv(Joueur j,Pane root) {
 		this.joueur=j;
 		this.imageActive=new ImageView(tabImage[5]);
