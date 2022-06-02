@@ -21,27 +21,35 @@ public class VueMap {
 		images.add(new Image("jeu/modele/image/map/obsidienne.png")); //3 obsidennes
 		images.add(new Image("jeu/modele/image/map/blanc.png")); //4 nuages
 		images.add(new Image("jeu/modele/image/map/arbre.png")); //5 arbre
+		images.add(new Image("jeu/modele/image/map/metal.png"));
+		images.add(new Image("jeu/modele/image/map/pierre.png"));
 	
 		
 		for(int a=0 ; a<t.length; a++) {
 			switch(t[a]) {
 			case 0 :
-				img = new ImageView(images.get(0));
+				img = new ImageView(images.get(t[a]));
 				break;
 			case 1 :
-				img = new ImageView(images.get(1));
+				img = new ImageView(images.get(t[a]));
 				break;
 			case 2 :
-				img = new ImageView(images.get(2));
+				img = new ImageView(images.get(t[a]));
 				break;
 			case 3 :
-				img = new ImageView(images.get(3));
+				img = new ImageView(images.get(t[a]));
 				break;
 			case 4 :
-				img = new ImageView(images.get(4));
+				img = new ImageView(images.get(t[a]));
 				break;
 			case 5 :
-				img = new ImageView(images.get(5));
+				img = new ImageView(images.get(t[a]));
+				break;
+			case 6 :
+				img = new ImageView(images.get(t[a]));
+				break;
+			case 7 :
+				img = new ImageView(images.get(t[a]));
 				break;
 			}
 			carte.getChildren().add(img);
