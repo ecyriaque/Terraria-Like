@@ -1,6 +1,7 @@
 package jeu.controller;
 //IMPORT
 import java.net.URL;
+
 import jeu.modele.*;
 import jeu.vue.VueMap;
 import jeu.vue.VuePv;
@@ -32,27 +33,17 @@ public class Controller implements Initializable{
 	private Timeline gameLoop;//boucle du jeu
 	private ImageView imgJoueur,coeurs;	//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
-	
-	
-	private Circle red;
 
 	//INITIALISATION
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
 		gameLoop.play();
-		red = new Circle(3);
-		red.setFill(Color.RED);
-		red.setTranslateX(joueur.getX());
-		red.setTranslateY(joueur.getY());
-		conteneur.getChildren().add(red);
-		red.translateXProperty().bind(joueur.xProperty());
-		red.translateYProperty().bind(joueur.yProperty());
 	}
 	
 	//JOUEUR
 	public  void joueur() {	
-		imgJoueur = new ImageView(new Image("jeu/modele/image/vert.png"));
+		imgJoueur = new ImageView(new Image("jeu/modele/image/neutre.png"));
 		imgJoueur.translateXProperty().bind(joueur.xProperty());
 		imgJoueur.translateYProperty().bind(joueur.yProperty());
 		conteneur.getChildren().add(imgJoueur);  
@@ -61,28 +52,25 @@ public class Controller implements Initializable{
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap);
-		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur);
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,imgJoueur);
+		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,imgJoueur);
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
 	}
 	
 	//DEPLACEMENT DU JOUEUR
 	public void deplacement() {
-		if(this.joueur.getGauche()) {
-			imgJoueur.setImage(new Image("jeu/modele/image/vert.png"));		
+		if(this.joueur.getGauche()) {	
 			if(!Collision.collisionGauche(joueur, tabMap)) {
 				joueur.allerAGauche();
 			}
 		}
 		if(this.joueur.getDroite()) {
-			imgJoueur.setImage(new Image("jeu/modele/image/vert.png"));
 			if(!Collision.collisionDroite(joueur, tabMap)) {
 				joueur.allerADroite();
 			}
 		}
 		if(this.joueur.getSaute()) {
-			imgJoueur.setImage(new Image("jeu/modele/image/vert.png"));
 			if(!Collision.collisionHaut(joueur, tabMap)) {
 				joueur.sauter();
 			}		
@@ -102,18 +90,15 @@ public class Controller implements Initializable{
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
-				Duration.seconds(0.127), 
+				Duration.seconds(0.05), 
 				// on définit ce qui se passe à chaque frame 
 				// c'est un eventHandler d'ou le lambda
 				(ev ->{			
 					
-					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6) {
-						joueur.tomber();
-						System.out.println(joueur.getY());
-					}
-					if(Collision.graviter(joueur, tabMap)) {
+					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6) 
+						joueur.tomber();;
+					if(Collision.graviter(joueur, tabMap)) 
 						joueur.setNbSaut(0);
-					}
 					deplacement();
 				}));
 		gameLoop.getKeyFrames().add(kf);

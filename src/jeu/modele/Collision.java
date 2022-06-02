@@ -14,7 +14,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
-		if (ValeurTile==1||ValeurTil2==1||ValeurTil3==1) {
+		if (ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
 			return true;
 		}
 		return false;
@@ -32,7 +32,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
-		if (ValeurTile==1||ValeurTil2==1||ValeurTil3==1) {
+		if(ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
 			return true;
 		}
 		return false;
@@ -50,7 +50,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];
-		if (ValeurTile==1||ValeurTil2==1||ValeurTil3==1) {
+		if (ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
 			return true;
 		}
 		return false;
@@ -70,7 +70,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];
-		if (ValeurTile==1||ValeurTil2==1||ValeurTil3==1) {
+		if (ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
 			return true;
 		}
 		return false;
