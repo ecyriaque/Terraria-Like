@@ -20,7 +20,7 @@ public class VueMap {
 		images.add(new Image("jeu/modele/image/map/sol.png")); //2 sol avec herbes
 		images.add(new Image("jeu/modele/image/map/obsidienne.png")); //3 obsidennes
 		images.add(new Image("jeu/modele/image/map/blanc.png")); //4 nuages
-		images.add(new Image("jeu/modele/image/map/arbre.png")); //5 arbre
+		images.add(new Image("jeu/modele/image/map/bois.png")); //5 arbre
 		images.add(new Image("jeu/modele/image/map/metal.png"));
 		images.add(new Image("jeu/modele/image/map/pierre.png"));
 	

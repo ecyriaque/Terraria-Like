@@ -62,10 +62,12 @@ public class Joueur {
 			this.x.setValue(npos);
 	}
 	public void sauter() {
-		if(nbSaut<6) {
-			int npos = getY()-10;
-			this.y.setValue(npos);
-			nbSaut++;
+		int npos = getY()-10;
+		if(npos > -10) {
+			if(nbSaut<6) {
+				this.y.setValue(npos);
+				nbSaut++;
+			}
 		}
 	}
 	public void tomber() {
