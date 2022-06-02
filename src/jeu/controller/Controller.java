@@ -15,6 +15,7 @@ import javafx.animation.Timeline;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -37,10 +38,22 @@ public class Controller implements Initializable{
 	private Timeline gameLoop;//boucle du jeu
 	private ImageView imgJoueur;//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
-    @FXML
-    private HBox inventaireObjet;
-
 	
+
+	    @FXML
+	    private HBox inventaireObjet;
+
+	    @FXML
+	    private HBox inventaireResource;
+
+	    @FXML
+	    private Label labelBois;
+
+	    @FXML
+	    private Label labelMetal;
+
+	    @FXML
+	    private Label labelPierre;
 
 	//INITIALISATION
 	@Override
@@ -51,7 +64,7 @@ public class Controller implements Initializable{
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur);
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
-		System.out.println(this.joueur.getInventaire());
+		System.out.println(this.joueur.getInventaireObjet());
 	}
 	
 	//JOUEUR
@@ -99,8 +112,8 @@ public class Controller implements Initializable{
 		tabMap=VueMap.map(carte);
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet);
-
+		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal);
+		
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)
 				Duration.seconds(0.050), 

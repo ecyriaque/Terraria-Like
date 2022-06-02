@@ -1,5 +1,6 @@
 package jeu.vue;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -11,19 +12,27 @@ public class VueInventaire {
 
 	private Joueur joueur;
 	private HBox	boxInv;
-	public VueInventaire(Joueur joueur,HBox boxInv) {
+	private Label labelBois,labelPierre,labelMetal;
+	public VueInventaire(Joueur joueur,HBox boxInv,Label labelBois,Label labelPierre,Label labelMetal) {
 		this.joueur=joueur;
 		this.boxInv=boxInv;
-		afficherInventaire();
+		this.labelBois=labelBois;
+		this.labelPierre=labelPierre;
+		this.labelMetal=labelMetal;
+		afficherInventaireObjet();
 	}
 	
-	public void afficherInventaire() {
+	public void afficherInventaireObjet() {
+		joueur.getInventaireResource().get(0).getResource().addListener((obse,old,nouv)-> this.labelBois.setText(nouv.toString()));
+		joueur.getInventaireResource().get(1).getResource().addListener((obse,old,nouv)-> this.labelPierre.setText(nouv.toString()));
+		joueur.getInventaireResource().get(2).getResource().addListener((obse,old,nouv)-> this.labelMetal.setText(nouv.toString()));
+		
 		for (int i = 0; i < 5; i++) {
-			if (joueur.getInventaire().get(i) instanceof Epee) {
+			if (joueur.getInventaireObjet().get(i) instanceof Epee) {
 				ImageView imgJoueur = new ImageView(new Image("jeu/modele/image/epeebois.png"));
 				this.boxInv.getChildren().add(imgJoueur);
 			}
-			else if(joueur.getInventaire().get(i) instanceof Bandage){
+			else if(joueur.getInventaireObjet().get(i) instanceof Bandage){
 				ImageView imgJoueur = new ImageView(new Image("jeu/modele/image/bandage.png"));
 				this.boxInv.getChildren().add(imgJoueur);
 			}
@@ -35,5 +44,8 @@ public class VueInventaire {
 		
 			}
 	}
+	
+	
+	
 	
 }

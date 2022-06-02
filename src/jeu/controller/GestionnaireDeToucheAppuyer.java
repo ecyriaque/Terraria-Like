@@ -36,7 +36,21 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				break;
 			case Y :
 				joueur.gagnerpv();
-				break;         
+				break;
+			case U :
+				joueur.getInventaireResource().get(0).ajouterResource();
+				break;
+			case I :
+				joueur.getInventaireResource().get(1).ajouterResource();
+				break;
+			case O :
+				joueur.getInventaireResource().get(2).ajouterResource();
+				break;
+			case P :
+				joueur.getInventaireResource().get(0).retirerResource();
+				joueur.getInventaireResource().get(1).retirerResource();
+				joueur.getInventaireResource().get(2).retirerResource();
+				break;
 			default:
 				break;
 			}

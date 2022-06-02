@@ -5,9 +5,13 @@ import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.objet.Bandage;
+import jeu.modele.objet.Bois;
 import jeu.modele.objet.Epee;
 import jeu.modele.objet.KitDeSoin;
+import jeu.modele.objet.Metal;
 import jeu.modele.objet.Objet;
+import jeu.modele.objet.Pierre;
+import jeu.modele.objet.Resource;
 
 
 public class Joueur {
@@ -19,30 +23,42 @@ public class Joueur {
 	private int nbSaut =0;
 	private int vitesse;
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
-	private ArrayList<Objet> inventaire;
+	private ArrayList<Objet> inventaireObjet;
+	private ArrayList<Resource> inventaireResource;
 	private Objet epee=new Epee("bois");
 	private Objet soin=new Bandage();
 	private Objet kit=new KitDeSoin();
 	private Objet bandage=new Bandage();
 	private Objet ab=new Bandage();
+	private Resource bois= new Bois();
+	private Resource metal= new Metal();
+	private Resource pierre=new Pierre();
 	//CONSTRUCTEUR//
 	public Joueur() {
-		this.xx = 40;
+		this.xx = 60;
 		this.yy =360;
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
-		inventaire=new ArrayList<>();
-		inventaire.add(epee);
-		inventaire.add(bandage);
-		inventaire.add(kit);
-		inventaire.add(soin);
-		inventaire.add(ab);
+		inventaireObjet=new ArrayList<>();
+		inventaireResource=new ArrayList<>();
+		inventaireObjet.add(epee);
+		inventaireObjet.add(bandage);
+		inventaireObjet.add(kit);
+		inventaireObjet.add(soin);
+		inventaireObjet.add(ab);
+		inventaireResource.add(bois);
+		inventaireResource.add(pierre);
+		inventaireResource.add(metal);
 	}
 
-	public ArrayList<Objet> getInventaire() {
-		return inventaire;
+	public ArrayList<Objet> getInventaireObjet() {
+		return inventaireObjet;
+	}
+	
+	public ArrayList<Resource> getInventaireResource() {
+		return inventaireResource;
 	}
 	//Methodes de gestion des PV //
 	public void perdrepv() {
