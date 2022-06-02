@@ -16,11 +16,11 @@
          </children>
       </Pane>
       <HBox fx:id="inventaireObjet" layoutX="250.0" layoutY="550.0" prefHeight="50.0" prefWidth="300.0" />
-      <HBox fx:id="inventaireResource" layoutX="620.0" prefHeight="50.0" prefWidth="300.0">
+      <HBox fx:id="inventaireResource" layoutX="550.0" layoutY="10.0" prefHeight="50.0" prefWidth="250.0">
          <children>
             <ImageView fx:id="imageBois" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/bois.png" />
+                  <Image url="@../modele/image/resourceInventaire/bois.png" />
                </image></ImageView>
             <Label fx:id="labelBois" ellipsisString="0" text="0">
                <font>
@@ -28,7 +28,7 @@
                </font></Label>
             <ImageView fx:id="imagePierre" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/pierre.png" />
+                  <Image url="@../modele/image/resourceInventaire/pierre.png" />
                </image></ImageView>
             <Label fx:id="labelPierre" text="0">
                <font>
@@ -36,7 +36,7 @@
                </font></Label>
             <ImageView fx:id="imageMetal" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/metal.png" />
+                  <Image url="@../modele/image/resourceInventaire/metal.png" />
                </image></ImageView>
             <Label fx:id="labelMetal" ellipsisString="0" text="0">
                <font>

@@ -44,9 +44,6 @@ public class Controller implements Initializable{
 	    private HBox inventaireObjet;
 
 	    @FXML
-	    private HBox inventaireResource;
-
-	    @FXML
 	    private Label labelBois;
 
 	    @FXML
