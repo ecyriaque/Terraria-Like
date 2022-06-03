@@ -3,6 +3,7 @@ package jeu.controller;
 import java.net.URL;
 
 import jeu.modele.*;
+import jeu.vue.VueInventaire;
 import jeu.vue.VueJoueur;
 import jeu.vue.VueMap;
 import jeu.vue.VuePv;
@@ -11,15 +12,24 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class Controller implements Initializable{
 	//VARIABLES FXML
+    @FXML
+    private Text textCraft;
+    @FXML
+	private Pane menuCraft;
+
 	@FXML
 	private Pane root;//ROOT
 	@FXML
@@ -33,7 +43,24 @@ public class Controller implements Initializable{
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ;
+	
 
+    @FXML
+    private HBox inventaireObjet;
+
+    @FXML
+    private Label labelBois;
+
+    @FXML
+    private Label labelMetal;
+
+    @FXML
+    private Label labelPierre;
+    
+    
+	
+	
+	
 	//INITIALISATION
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -91,6 +118,7 @@ public class Controller implements Initializable{
 		tabMap=VueMap.map(carte);
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
+		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal);
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(
 				// on d√©finit le FPS (nbre de frame par seconde)
@@ -168,4 +196,63 @@ public class Controller implements Initializable{
 		});
 	}
 	
+	
+	  @FXML
+	    void crafterBandage(MouseEvent event) {
+		  joueur.crafterBandage();
+	    }
+	  
+	   @FXML
+	    void crafterEpeePierre(MouseEvent event) {
+		   joueur.crafterEpeePierre();
+	    }
+
+  @FXML
+  void ouuvrirInvcentaire(MouseEvent event) {
+  	menuCraft.setVisible(true);
+  }
+  
+  @FXML
+  void crafterEpeeBois(MouseEvent event) {
+  	joueur.crafterEpeeBois();
+  }
+
+  @FXML
+  void fermerMenuCraft(MouseEvent event) {
+  	menuCraft.setVisible(false);
+  }
+  
+  @FXML
+  void afficherTextBandage(MouseEvent event) {
+  	textCraft.setText("3 de bois pour construire un bandage");
+  	textCraft.setVisible(true);
+  	
+  }
+  
+  @FXML
+  void enleverTextBandage(MouseEvent event) {
+  	textCraft.setVisible(false);
+  }
+  @FXML
+  void afficherTextPierre(MouseEvent event) {
+  	textCraft.setText("3 de pierre pour construire une Èpee en pierre");
+  	textCraft.setVisible(true);
+  	
+  }
+  
+  @FXML
+  void enleverTextPierre(MouseEvent event) {
+  	textCraft.setVisible(false);
+  }
+  @FXML
+  void afficherTextBois(MouseEvent event) {
+  	textCraft.setText("3 de bois pour construire une Èpee");
+  	textCraft.setVisible(true);
+  	
+  }
+  
+  @FXML
+  void enleverTextBois(MouseEvent event) {
+  	textCraft.setVisible(false);
+  }
 }

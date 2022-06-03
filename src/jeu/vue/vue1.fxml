@@ -1,14 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#gestionDesTouches" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controller.Controller">
+<Pane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jeu.controller.Controller">
    <children>
       <Pane fx:id="conteneur" prefHeight="600.0" prefWidth="800.0">
          <children>
             <TilePane fx:id="carte" prefHeight="600.0" prefWidth="800.0" />
          </children>
       </Pane>
+      <HBox fx:id="inventaireObjet" layoutX="250.0" layoutY="550.0" prefHeight="50.0" prefWidth="300.0" />
+      <HBox fx:id="inventaireResource" layoutX="550.0" layoutY="10.0" prefHeight="50.0" prefWidth="250.0">
+         <children>
+            <ImageView fx:id="imageBois" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/resourceInventaire/bois.png" />
+               </image></ImageView>
+            <Label fx:id="labelBois" ellipsisString="0" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <ImageView fx:id="imagePierre" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/resourceInventaire/pierre.png" />
+               </image></ImageView>
+            <Label fx:id="labelPierre" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+            <ImageView fx:id="imageMetal" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/resourceInventaire/metal.png" />
+               </image></ImageView>
+            <Label fx:id="labelMetal" ellipsisString="0" text="0">
+               <font>
+                  <Font size="20.0" />
+               </font></Label>
+         </children>
+      </HBox>
+      <Pane fx:id="menuCraft" layoutX="580.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: violet;" visible="false">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="40.0" onMouseClicked="#crafterEpeeBois" onMouseEntered="#afficherTextBois" onMouseExited="#enleverTextBois" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/epeebois.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="40.0" onMouseClicked="#crafterBandage" onMouseEntered="#afficherTextBandage" onMouseExited="#enleverTextBandage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/bandage.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="80.0" onMouseClicked="#crafterEpeePierre" onMouseEntered="#afficherTextPierre" onMouseExited="#enleverTextPierre" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/epeePierre.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="160.0" onMouseClicked="#fermerMenuCraft" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/croix.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="500.0" layoutY="550.0" onMouseClicked="#ouuvrirInvcentaire" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../modele/image/emilio.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="textCraft" layoutX="600.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fezzfeefzfezezf*" visible="false">
+         <font>
+            <Font size="8.0" />
+         </font></Text>
    </children>
 </Pane>

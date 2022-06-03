@@ -1,7 +1,16 @@
 package jeu.modele;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import jeu.modele.inventaire.Inventaire;
+import jeu.modele.inventaire.objet.Epee;
+import jeu.modele.inventaire.objet.ObjetInventaire;
+import jeu.modele.resource.Bois;
+import jeu.modele.resource.Metal;
+import jeu.modele.resource.Pierre;
+import jeu.modele.resource.Resource;
 
 
 public class Joueur {
@@ -13,7 +22,11 @@ public class Joueur {
 	private int nbSaut =0;
 	private int vitesse;
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
-	
+	private ArrayList<Resource> inventaireResource;
+	private Inventaire inventaireObjet =new Inventaire();
+	private Resource bois= new Bois();
+	private Resource metal= new Metal();
+	private Resource pierre=new Pierre();
 	//CONSTRUCTEUR//
 	public Joueur() {
 		this.xx = 40;
@@ -22,8 +35,88 @@ public class Joueur {
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
+		
+		ObjetInventaire case1=new Epee("vide");
+		ObjetInventaire case2=new Epee("vide");
+		ObjetInventaire case3=new Epee("vide");
+		ObjetInventaire case4=new Epee("vide");
+		ObjetInventaire case5=new Epee("vide");
+		ObjetInventaire case6=new Epee("vide");
+		
+		inventaireObjet.ajouterDansLinventaire(case1);
+		inventaireObjet.ajouterDansLinventaire(case2);
+		inventaireObjet.ajouterDansLinventaire(case3);
+		inventaireObjet.ajouterDansLinventaire(case4);
+		inventaireObjet.ajouterDansLinventaire(case5);
+		inventaireObjet.ajouterDansLinventaire(case6);
+		inventaireResource=new ArrayList<>();
+		inventaireResource.add(bois);
+		inventaireResource.add(pierre);
+		inventaireResource.add(metal);
 	}
 
+public void crafterEpeeBois() {
+		
+		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()!="epeeBois") {
+			System.out.println("pas assez de bois il vous en manque "+(3-inventaireResource.get(0).getResource().getValue()));
+		}
+		
+		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeeBois")
+			System.out.println("deja poseder");
+		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeePierre"){
+			System.out.println("Vous posséder une meilleur épee");
+		}
+		else if(inventaireResource.get(0).getResource().getValue()>=3) {
+			this.getInventaireObjet().getInventaire().get(0).setObjet("epeeBois");
+			inventaireResource.get(0).EnleverResource();
+		}
+		
+	}
+	
+	
+	
+	public void crafterEpeePierre() {
+		
+		if (inventaireResource.get(1).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()!="epeeBois") {
+			
+			
+			System.out.println("pas assez de pierre il vous en manque "+(3-inventaireResource.get(1).getResource().getValue()));
+		
+		}
+		
+		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeePierre")
+			System.out.println("deja poseder");
+		else if(inventaireResource.get(1).getResource().getValue()>=3) {
+			this.getInventaireObjet().getInventaire().get(0).setObjet("epeePierre");
+			inventaireResource.get(1).EnleverResource();
+		}
+		
+	}
+	
+public void crafterBandage() {
+		
+		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(1).getTypeObjetProerty().getValue()!="bandage") {
+			System.out.println("pas assez de bois");
+		}
+		
+		else if(this.getInventaireObjet().getInventaire().get(1).getTypeObjetProerty().getValue()=="bandage")
+			System.out.println("deja poseder");
+		else if(inventaireResource.get(0).getResource().getValue()>=3) {
+			this.getInventaireObjet().getInventaire().get(1).setObjet("bandage");
+			inventaireResource.get(0).EnleverResource();
+		}
+		
+	}
+	
+	public Inventaire getInventaireObjet() {
+		return this.inventaireObjet;
+	}
+	
+	public ArrayList<Resource> getInventaireResource() {
+		return inventaireResource;
+	}
+	
+	
 	
 	//Methodes de gestion des PV //
 	public void perdrepv() {
