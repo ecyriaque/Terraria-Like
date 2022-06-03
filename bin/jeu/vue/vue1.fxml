@@ -64,7 +64,7 @@
             </ImageView>
             <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="160.0" onMouseClicked="#fermerMenuCraft" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../Pictures/croix.png" />
+                  <Image url="@../modele/image/croix.png" />
                </image>
             </ImageView>
          </children>
