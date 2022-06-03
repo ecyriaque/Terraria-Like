@@ -43,7 +43,7 @@ public class Controller implements Initializable{
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ;
-	
+	private HitBox hitBox;
 
     @FXML
     private HBox inventaireObjet;
@@ -144,55 +144,19 @@ public class Controller implements Initializable{
 	
 	public void block() {
 		root.setOnMouseClicked(ev -> {
-			int xtile;
-			int ytile;
-			int prochaineTuile;	
-			int valTab;
-				if(direction) { // droite
-					if(ev.getButton().equals(MouseButton.PRIMARY)) { //placer des blocks
-						xtile=(joueur.getX()+40)/40;
-						ytile=(joueur.getY()+20)/40;
-						prochaineTuile = (xtile+(ytile*20));
-						valTab=tabMap[prochaineTuile];
-						if(valTab!=2 && valTab!=1 && valTab!=8 && valTab!=5 && valTab!=6 && valTab!=7 && valTab!=3) {
-							carte.getChildren().remove(prochaineTuile);
-							tabMap[prochaineTuile] = 5;
-							carte.getChildren().add(prochaineTuile,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
-						}
-					}else if(ev.getButton().equals(MouseButton.SECONDARY)){ // casser des blocks
-						xtile=(joueur.getX()+40)/40;
-						ytile=(joueur.getY()+20)/40;
-						prochaineTuile = xtile+(ytile*20);
-						valTab=tabMap[prochaineTuile];
-						if(valTab!=3 && valTab!=1 && valTab!=2 && valTab!=8 && valTab!=4) {
-							carte.getChildren().remove(prochaineTuile);
-							tabMap[prochaineTuile] = 0;
-							carte.getChildren().add(prochaineTuile,new ImageView(new Image("jeu/modele/image/map/ciel.png")) );
-						}
-					}
-				}else{ // gauche
-					if(ev.getButton().equals(MouseButton.PRIMARY)) { // placer des blocks
-						xtile=(joueur.getX()-1)/40;
-						ytile=joueur.getY()/40;
-						prochaineTuile = xtile+(ytile*20);
-						valTab=tabMap[prochaineTuile];
-						if(valTab!=2 && valTab!=1 && valTab!=8 && valTab!=5 && valTab!=6 && valTab!=7 && valTab!=3) {
-							carte.getChildren().remove(prochaineTuile);
-							tabMap[prochaineTuile] = 5;
-							carte.getChildren().add(prochaineTuile,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
-						}
-					}else if(ev.getButton().equals(MouseButton.SECONDARY)){ // casser des blocks
-						xtile=(joueur.getX()-1)/40;
-						ytile=joueur.getY()/40;
-						prochaineTuile = xtile+(ytile*20);
-						valTab=tabMap[prochaineTuile];
-						if(valTab!=3 && valTab!=1 && valTab!=2 && valTab!=8 && valTab!=4) {
-							carte.getChildren().remove(prochaineTuile);
-							tabMap[prochaineTuile] = 0;
-							carte.getChildren().add(prochaineTuile,new ImageView(new Image("jeu/modele/image/map/ciel.png")) );
-						}
-					}
-				}
+			hitBox = new HitBox(joueur, carte, tabMap);
+			if(direction) { // droite
+				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerDroite()) //placer des blocks
+					hitBox.placerTuileDroite();
+				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserDroite()) // casser des blocks
+					hitBox.casserTuileDroite();
+			}
+			else{ // gauche
+				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerGauche())  // placer des blocks
+					hitBox.placerTuileGauche();
+				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserGauche()) // casser des blocks
+					hitBox.casserTuileGauche();
+			}
 		});
 	}
 	
