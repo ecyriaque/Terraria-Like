@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,28 +22,37 @@
          <children>
             <ImageView fx:id="imageBois" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/resourceInventaire/bois.png" />
+                  <Image url="@../modele/image/map/bois.png" />
                </image></ImageView>
             <Label fx:id="labelBois" ellipsisString="0" text="0">
                <font>
                   <Font size="20.0" />
-               </font></Label>
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin></Label>
             <ImageView fx:id="imagePierre" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/resourceInventaire/pierre.png" />
+                  <Image url="@../modele/image/map/pierre.png" />
                </image></ImageView>
             <Label fx:id="labelPierre" text="0">
                <font>
                   <Font size="20.0" />
-               </font></Label>
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin></Label>
             <ImageView fx:id="imageMetal" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/resourceInventaire/metal.png" />
+                  <Image url="@../modele/image/map/metal.png" />
                </image></ImageView>
             <Label fx:id="labelMetal" ellipsisString="0" text="0">
                <font>
                   <Font size="20.0" />
-               </font></Label>
+               </font>
+               <HBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </HBox.margin></Label>
          </children>
       </HBox>
       <Pane fx:id="menuCraft" layoutX="580.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: violet;" visible="false">
