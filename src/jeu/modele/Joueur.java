@@ -61,16 +61,54 @@ public class Joueur {
 		
 	}
 
-	public void crafterEpee() {
+	public void crafterEpeeBois() {
 		
 		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()!="epeeBois") {
-			System.out.println("pas assez de bois");
+			System.out.println("pas assez de bois il vous en manque "+(3-inventaireResource.get(0).getResource().getValue()));
 		}
 		
 		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeeBois")
 			System.out.println("deja poseder");
+		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeePierre"){
+			System.out.println("Vous posséder une meilleur épee");
+		}
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(0).setObjet("epeeBois");
+			inventaireResource.get(0).EnleverResource();
+		}
+		
+	}
+	
+	
+	
+	public void crafterEpeePierre() {
+		
+		if (inventaireResource.get(1).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()!="epeeBois") {
+			
+			
+			System.out.println("pas assez de pierre il vous en manque "+(3-inventaireResource.get(1).getResource().getValue()));
+		
+		}
+		
+		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeePierre")
+			System.out.println("deja poseder");
+		else if(inventaireResource.get(1).getResource().getValue()>=3) {
+			this.getInventaireObjet().getInventaire().get(0).setObjet("epeePierre");
+			inventaireResource.get(1).EnleverResource();
+		}
+		
+	}
+	
+public void crafterBandage() {
+		
+		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(1).getTypeObjetProerty().getValue()!="bandage") {
+			System.out.println("pas assez de bois");
+		}
+		
+		else if(this.getInventaireObjet().getInventaire().get(1).getTypeObjetProerty().getValue()=="bandage")
+			System.out.println("deja poseder");
+		else if(inventaireResource.get(0).getResource().getValue()>=3) {
+			this.getInventaireObjet().getInventaire().get(1).setObjet("bandage");
 			inventaireResource.get(0).EnleverResource();
 		}
 		

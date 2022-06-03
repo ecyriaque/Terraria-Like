@@ -16,11 +16,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class Controller implements Initializable{
@@ -32,11 +34,12 @@ public class Controller implements Initializable{
 	@FXML
 	private Pane conteneur;//JOUEUR
 	//VARIABLES
-	Joueur joueur =new Joueur();//creation du joueur
+	private Joueur joueur =new Joueur();//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
 	private ImageView imgJoueur;//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
-	
+		@FXML
+		private Pane menuCraft;
 
 	    @FXML
 	    private HBox inventaireObjet;
@@ -49,6 +52,9 @@ public class Controller implements Initializable{
 
 	    @FXML
 	    private Label labelPierre;
+	    
+	    @FXML
+	    private Text textCraft;
 
 	//INITIALISATION
 	@Override
@@ -127,5 +133,64 @@ public class Controller implements Initializable{
 				}));
 		gameLoop.getKeyFrames().add(kf);
 	}
+	
+	
+	  @FXML
+	    void crafterBandage(MouseEvent event) {
+		  joueur.crafterBandage();
+	    }
+	  
+	   @FXML
+	    void crafterEpeePierre(MouseEvent event) {
+		   joueur.crafterEpeePierre();
+	    }
 
+    @FXML
+    void ouuvrirInvcentaire(MouseEvent event) {
+    	menuCraft.setVisible(true);
+    }
+    
+    @FXML
+    void crafterEpeeBois(MouseEvent event) {
+    	joueur.crafterEpeeBois();
+    }
+
+    @FXML
+    void fermerMenuCraft(MouseEvent event) {
+    	menuCraft.setVisible(false);
+    }
+    
+    @FXML
+    void afficherTextBandage(MouseEvent event) {
+    	textCraft.setText("3 de bois pour construire un bandage");
+    	textCraft.setVisible(true);
+    	
+    }
+    
+    @FXML
+    void enleverTextBandage(MouseEvent event) {
+    	textCraft.setVisible(false);
+    }
+    @FXML
+    void afficherTextPierre(MouseEvent event) {
+    	textCraft.setText("3 de pierre pour construire une épee en pierre");
+    	textCraft.setVisible(true);
+    	
+    }
+    
+    @FXML
+    void enleverTextPierre(MouseEvent event) {
+    	textCraft.setVisible(false);
+    }
+    @FXML
+    void afficherTextBois(MouseEvent event) {
+    	textCraft.setText("3 de bois pour construire une épee");
+    	textCraft.setVisible(true);
+    	
+    }
+    
+    @FXML
+    void enleverTextBois(MouseEvent event) {
+    	textCraft.setVisible(false);
+    }
 }

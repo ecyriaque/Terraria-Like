@@ -10,10 +10,12 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private Pane root;
 	private Joueur joueur;
 	private int[]tabMap;
+	private Collision col;
 	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap) {
 		this.root=root;
 		this.joueur=joueur;
 		this.tabMap=tabMap;
+		col=col;
 	}
 	@Override
 	public void handle(KeyEvent arg0) {
@@ -54,11 +56,17 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 			case M :
 				joueur.getInventaireObjet().getInventaire().get(0).setObjet("vide");
 				joueur.getInventaireObjet().getInventaire().get(1).setObjet("vide");
-				System.out.println(joueur.getInventaireObjet().getInventaire().get(0).getTypeObjet());
+				joueur.getInventaireObjet().getInventaire().get(2).setObjet("vide");
+				joueur.getInventaireObjet().getInventaire().get(3).setObjet("vide");
+				joueur.getInventaireObjet().getInventaire().get(4).setObjet("vide");
+				joueur.getInventaireObjet().getInventaire().get(5).setObjet("vide");
+				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
 				break;
 			case L :
-				joueur.crafterEpee();
+			
+				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
 				break;
+			
 			default:
 				break;
 			}

@@ -70,6 +70,7 @@ public class VueInventaire {
 				this.boxInv.getChildren().remove(i);
 				this.boxInv.getChildren().add(i, case1);
 				break;
+			
 			case "bandage":
 				ImageView case2 = new ImageView(new Image("jeu/modele/image/bandage.png"));
 				this.boxInv.getChildren().remove(i);
@@ -86,7 +87,13 @@ public class VueInventaire {
 				ImageView case4= new ImageView(new Image("jeu/modele/image/kitDeSoin.png"));
 				this.boxInv.getChildren().remove(i);
 				this.boxInv.getChildren().add(i, case4);
-				break;	
+				break;
+			case "epeePierre":
+				
+				ImageView case5 = new ImageView(new Image("jeu/modele/image/epeePierre.png"));
+				this.boxInv.getChildren().remove(i);
+				this.boxInv.getChildren().add(i, case5);
+				break;
 
 			default:
 				break;

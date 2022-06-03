@@ -26,4 +26,7 @@ public class ObjetInventaire {
 			this.typeObjetProperty.setValue(npos);
 	}
 	
+	public String toString() {
+		return this.typeobjet;
+	}
 }
