@@ -3,6 +3,7 @@ package jeu.controller;
 import java.net.URL;
 
 import jeu.modele.*;
+import jeu.vue.VueJoueur;
 import jeu.vue.VueMap;
 import jeu.vue.VuePv;
 import java.util.ResourceBundle;
@@ -10,7 +11,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -29,9 +29,10 @@ public class Controller implements Initializable{
 	//VARIABLES
 	private Joueur joueur =new Joueur();//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
-	private ImageView imgJoueur,coeurs;	//image du joueur et du nb de coeurs
+	private ImageView coeurs;	//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
+	private VueJoueur vueJ;
 
 	//INITIALISATION
 	@Override
@@ -43,17 +44,17 @@ public class Controller implements Initializable{
 	
 	//JOUEUR
 	public  void joueur() {	
-		imgJoueur = new ImageView(new Image("jeu/modele/image/neutre.png"));
-		imgJoueur.translateXProperty().bind(joueur.xProperty());
-		imgJoueur.translateYProperty().bind(joueur.yProperty());
-		conteneur.getChildren().add(imgJoueur); 
+		vueJ = new VueJoueur(conteneur, joueur);
+		vueJ.getImgActive().translateXProperty().bind(joueur.xProperty());
+		vueJ.getImgActive().translateYProperty().bind(joueur.yProperty());
+		vueJ.ajouterImageDuJoueur(); 
 	}
 	
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,imgJoueur);
-		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,imgJoueur);
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,vueJ.getImgActive());
+		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
 	}
@@ -165,17 +166,6 @@ public class Controller implements Initializable{
 					}
 				}
 		});
-	}
-	
-	public void  prochainBlock() {
-		int xtile;
-		int ytile;
-		int prochaineTuile;	
-		int valTab;
-		xtile=(joueur.getX()+40)/40;
-		ytile=(joueur.getY()+20)/40;
-		prochaineTuile = (xtile+(ytile*20));
-		valTab=tabMap[prochaineTuile];
 	}
 	
 }
