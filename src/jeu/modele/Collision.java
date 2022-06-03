@@ -7,14 +7,14 @@ public class Collision {
 		int ytile,ytile2,ytile3;
 		int ValeurTile,ValeurTil2, ValeurTil3;
 		
-		xtile=(joueur.getX()+40)/40;
+		xtile=(joueur.getX()+41)/40;
 		ytile=(joueur.getY()+20)/40;
 		ytile3=(joueur.getY()+39)/40;
 		ytile2=joueur.getY()/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
-		if (ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
+		if (ValeurTile!=0&&ValeurTile!=4&&ValeurTile!=8 || ValeurTil2!=0&&ValeurTil2!=4&&ValeurTil2!=8  || ValeurTil3!=0&&ValeurTil3!=4&&ValeurTil3!=8  ) {
 			return true;
 		}
 		return false;
@@ -32,7 +32,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
-		if(ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
+		if(ValeurTile!=0&&ValeurTile!=4&&ValeurTile!=8 || ValeurTil2!=0&&ValeurTil2!=4&&ValeurTil2!=8  || ValeurTil3!=0&&ValeurTil3!=4&&ValeurTil3!=8  ) {
 			return true;
 		}
 		return false;
@@ -50,7 +50,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];
-		if (ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
+		if (ValeurTile!=0&&ValeurTile!=4&&ValeurTile!=8 || ValeurTil2!=0&&ValeurTil2!=4&&ValeurTil2!=8  || ValeurTil3!=0&&ValeurTil3!=4&&ValeurTil3!=8  ) {
 			return true;
 		}
 		return false;
@@ -70,7 +70,7 @@ public class Collision {
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];
-		if (ValeurTile!=0&&ValeurTile!=4 || ValeurTil2!=0&&ValeurTil2!=4 || ValeurTil3!=0&&ValeurTil3!=4 ) {
+		if (ValeurTile!=0&&ValeurTile!=4&&ValeurTile!=8 || ValeurTil2!=0&&ValeurTil2!=4&&ValeurTil2!=8  || ValeurTil3!=0&&ValeurTil3!=4&&ValeurTil3!=8  ) {
 			return true;
 		}
 		return false;

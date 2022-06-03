@@ -16,7 +16,7 @@ public class Joueur {
 	
 	//CONSTRUCTEUR//
 	public Joueur() {
-		this.xx = 40;
+		this.xx = 0;
 		this.yy =360;
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.x = new SimpleIntegerProperty(xx);
@@ -58,12 +58,12 @@ public class Joueur {
 	}
 	public void allerADroite() {
 		int npos = getX()+vitesse;
-		if (npos <770)
+		if (npos < 766)
 			this.x.setValue(npos);
 	}
 	public void sauter() {
 		int npos = getY()-10;
-		if(npos > -10) {
+		if(npos >0 ) {
 			if(nbSaut<6) {
 				this.y.setValue(npos);
 				nbSaut++;
