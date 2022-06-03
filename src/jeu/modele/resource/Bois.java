@@ -1,4 +1,4 @@
-package jeu.modele.objet;
+package jeu.modele.resource;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -19,6 +19,12 @@ public class Bois extends Resource{
 	public  void ajouterResource(){
 		int c;
 		c=this.nbBois.getValue()+1;
+		this.nbBois.setValue(c);
+	}
+	
+	public  void EnleverResource(){
+		int c;
+		c=this.nbBois.getValue()-3;
 		this.nbBois.setValue(c);
 	}
 	

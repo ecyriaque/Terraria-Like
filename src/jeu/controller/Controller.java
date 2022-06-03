@@ -2,9 +2,7 @@ package jeu.controller;
 //IMPORT
 import java.net.URL;
 import jeu.modele.*;
-import jeu.modele.objet.Bandage;
-import jeu.modele.objet.Objet;
-import jeu.modele.objet.ObjetSoin;
+import jeu.modele.inventaire.Inventaire;
 import jeu.vue.VueInventaire;
 import jeu.vue.VueMap;
 import jeu.vue.VuePv;
@@ -61,7 +59,7 @@ public class Controller implements Initializable{
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur);
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
-		System.out.println(this.joueur.getInventaireObjet());
+		
 	}
 	
 	//JOUEUR

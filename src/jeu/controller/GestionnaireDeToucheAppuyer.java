@@ -51,6 +51,14 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				joueur.getInventaireResource().get(1).retirerResource();
 				joueur.getInventaireResource().get(2).retirerResource();
 				break;
+			case M :
+				joueur.getInventaireObjet().getInventaire().get(0).setObjet("vide");
+				joueur.getInventaireObjet().getInventaire().get(1).setObjet("vide");
+				System.out.println(joueur.getInventaireObjet().getInventaire().get(0).getTypeObjet());
+				break;
+			case L :
+				joueur.crafterEpee();
+				break;
 			default:
 				break;
 			}

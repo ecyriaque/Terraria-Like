@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import jeu.modele.objet.Bandage;
-import jeu.modele.objet.Bois;
-import jeu.modele.objet.Epee;
-import jeu.modele.objet.KitDeSoin;
-import jeu.modele.objet.Metal;
-import jeu.modele.objet.Objet;
-import jeu.modele.objet.Pierre;
-import jeu.modele.objet.Resource;
+import jeu.modele.inventaire.Inventaire;
+import jeu.modele.inventaire.objet.Arme;
+import jeu.modele.inventaire.objet.Bandage;
+import jeu.modele.inventaire.objet.Epee;
+import jeu.modele.inventaire.objet.KitDeSoin;
+import jeu.modele.inventaire.objet.ObjetInventaire;
+import jeu.modele.resource.Bois;
+import jeu.modele.resource.Metal;
+import jeu.modele.resource.Pierre;
+import jeu.modele.resource.Resource;
 
 
 public class Joueur {
@@ -23,38 +25,59 @@ public class Joueur {
 	private int nbSaut =0;
 	private int vitesse;
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
-	private ArrayList<Objet> inventaireObjet;
 	private ArrayList<Resource> inventaireResource;
-	private Objet epee=new Epee("bois");
-	private Objet soin=new Bandage();
-	private Objet kit=new KitDeSoin();
-	private Objet bandage=new Bandage();
-	private Objet ab=new Bandage();
+	private Inventaire inventaireObjet =new Inventaire();
 	private Resource bois= new Bois();
 	private Resource metal= new Metal();
 	private Resource pierre=new Pierre();
+
 	//CONSTRUCTEUR//
 	public Joueur() {
+		
 		this.xx = 60;
 		this.yy =360;
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
-		inventaireObjet=new ArrayList<>();
+		
+		ObjetInventaire case1=new Epee("vide");
+		ObjetInventaire case2=new Epee("vide");
+		ObjetInventaire case3=new Epee("vide");
+		ObjetInventaire case4=new Epee("vide");
+		ObjetInventaire case5=new Epee("vide");
+		ObjetInventaire case6=new Epee("vide");
+		
+		inventaireObjet.ajouterDansLinventaire(case1);
+		inventaireObjet.ajouterDansLinventaire(case2);
+		inventaireObjet.ajouterDansLinventaire(case3);
+		inventaireObjet.ajouterDansLinventaire(case4);
+		inventaireObjet.ajouterDansLinventaire(case5);
+		inventaireObjet.ajouterDansLinventaire(case6);
 		inventaireResource=new ArrayList<>();
-		inventaireObjet.add(epee);
-		inventaireObjet.add(bandage);
-		inventaireObjet.add(kit);
-		inventaireObjet.add(soin);
-		inventaireObjet.add(ab);
 		inventaireResource.add(bois);
 		inventaireResource.add(pierre);
 		inventaireResource.add(metal);
+		
 	}
 
-	public ArrayList<Objet> getInventaireObjet() {
-		return inventaireObjet;
+	public void crafterEpee() {
+		
+		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()!="epeeBois") {
+			System.out.println("pas assez de bois");
+		}
+		
+		else if(this.getInventaireObjet().getInventaire().get(0).getTypeObjetProerty().getValue()=="epeeBois")
+			System.out.println("deja poseder");
+		else if(inventaireResource.get(0).getResource().getValue()>=3) {
+			this.getInventaireObjet().getInventaire().get(0).setObjet("epeeBois");
+			inventaireResource.get(0).EnleverResource();
+		}
+		
+	}
+	
+	public Inventaire getInventaireObjet() {
+		return this.inventaireObjet;
 	}
 	
 	public ArrayList<Resource> getInventaireResource() {
@@ -167,4 +190,8 @@ public class Joueur {
 	public void setSaute(boolean saute) {
 		this.saute = saute;
 	}
+
+
+
+
 }

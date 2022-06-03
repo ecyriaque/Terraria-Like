@@ -1,4 +1,4 @@
-package jeu.modele.objet;
+package jeu.modele.resource;
 
 import javafx.beans.property.IntegerProperty;
 
@@ -17,6 +17,8 @@ public abstract class Resource {
 	public abstract void retirerResource();
 	
 	public abstract void ajouterResource();
+	
+	public abstract void EnleverResource();
 	
 	public abstract IntegerProperty getResource();
 

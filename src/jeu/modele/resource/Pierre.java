@@ -1,4 +1,4 @@
-package jeu.modele.objet;
+package jeu.modele.resource;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -25,6 +25,12 @@ public class Pierre extends Resource{
 	public IntegerProperty getResource() {
 		return this.getNbPierre();
 		
+	}
+	
+	public  void EnleverResource(){
+		int c;
+		c=this.nbPierre.getValue()-3;
+		this.nbPierre.setValue(c);
 	}
 	
 	@Override

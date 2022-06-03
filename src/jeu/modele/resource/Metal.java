@@ -1,4 +1,4 @@
-package jeu.modele.objet;
+package jeu.modele.resource;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -26,6 +26,13 @@ public class Metal extends Resource{
 		return this.getNbMetal();
 		
 	}
+	
+	public  void EnleverResource(){
+		int c;
+		c=this.nbMetal.getValue()-3;
+		this.nbMetal.setValue(c);
+	}
+	
 	@Override
 	public void retirerResource() {
 		this.nbMetal.setValue(this.nbMetal.getValue()-1);
