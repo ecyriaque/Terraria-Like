@@ -16,7 +16,7 @@ public class Joueur {
 	
 	//CONSTRUCTEUR//
 	public Joueur() {
-		this.xx = 0;
+		this.xx = 40;
 		this.yy =360;
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.x = new SimpleIntegerProperty(xx);

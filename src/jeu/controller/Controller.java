@@ -32,7 +32,6 @@ public class Controller implements Initializable{
 	private ImageView imgJoueur,coeurs;	//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
-	private ImageView épée;
 
 	//INITIALISATION
 	@Override
@@ -48,11 +47,6 @@ public class Controller implements Initializable{
 		imgJoueur.translateXProperty().bind(joueur.xProperty());
 		imgJoueur.translateYProperty().bind(joueur.yProperty());
 		conteneur.getChildren().add(imgJoueur); 
-		épée = new ImageView(new Image("jeu/modele/image/epeeMetal.png"));
-		épée.translateXProperty().bind(joueur.xProperty().add(33));
-		épée.translateYProperty().bind(joueur.yProperty().add(5));
-		conteneur.getChildren().add(épée); 
-		
 	}
 	
 	//GESTION DES TOUCHES
