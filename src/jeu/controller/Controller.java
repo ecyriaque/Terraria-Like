@@ -80,7 +80,7 @@ public class Controller implements Initializable{
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,vueJ.getImgActive());
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,vueJ.getImgActive(), menuCraft);
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
@@ -207,20 +207,14 @@ public class Controller implements Initializable{
 		   joueur.crafterEpeePierre();
 	    }
 
-  @FXML
-  void ouuvrirInvcentaire(MouseEvent event) {
-  	menuCraft.setVisible(true);
-  }
+
   
   @FXML
   void crafterEpeeBois(MouseEvent event) {
   	joueur.crafterEpeeBois();
   }
 
-  @FXML
-  void fermerMenuCraft(MouseEvent event) {
-  	menuCraft.setVisible(false);
-  }
+
   
   @FXML
   void afficherTextBandage(MouseEvent event) {

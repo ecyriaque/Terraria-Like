@@ -72,18 +72,8 @@
                   <Image url="@../modele/image/epeePierre.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="160.0" layoutY="160.0" onMouseClicked="#fermerMenuCraft" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/croix.png" />
-               </image>
-            </ImageView>
          </children>
       </Pane>
-      <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="500.0" layoutY="550.0" onMouseClicked="#ouuvrirInvcentaire" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../modele/image/emilio.png" />
-         </image>
-      </ImageView>
       <Text fx:id="textCraft" layoutX="600.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fezzfeefzfezezf*" visible="false">
          <font>
             <Font size="8.0" />

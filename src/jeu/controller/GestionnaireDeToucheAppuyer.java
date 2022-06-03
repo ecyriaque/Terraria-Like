@@ -3,6 +3,7 @@ package jeu.controller;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -16,12 +17,14 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private int[]tabMap;
 	private ImageView imgJoueur;
 	private ArrayList<Image> images;
-	
-	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap, ImageView imgJoueur) {
+	boolean visible =false;
+		private Pane menuCraft;
+	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap, ImageView imgJoueur,Pane menuCraft) {
 		this.root=root;
 		this.joueur=joueur;
 		this.tabMap=tabMap;
 		this.imgJoueur = imgJoueur;
+		this.menuCraft=menuCraft;
 		this.images = new ArrayList<>();
 		images.add(new Image("jeu/modele/image/gauche.png"));
 		images.add(new Image("jeu/modele/image/droite.png"));
@@ -57,7 +60,16 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				joueur.getInventaireResource().get(0).ajouterResource();
 				break;
 			case I :
-				joueur.getInventaireResource().get(1).ajouterResource();
+				
+				if (visible==false) {
+					menuCraft.setVisible(true);
+					visible=true;
+				}else if(visible==true) {
+					menuCraft.setVisible(false);
+					visible=false;
+				}
+				
+				
 				break;
 			case O :
 				joueur.getInventaireResource().get(2).ajouterResource();
