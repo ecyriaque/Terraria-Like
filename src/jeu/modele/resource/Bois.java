@@ -17,9 +17,9 @@ public class Bois extends Resource{
 	}
 
 	public  void ajouterResource(){
-		int c;
-		c=this.nbBois.getValue()+1;
-		this.nbBois.setValue(c);
+		int c = this.nbBois.getValue()+1;
+		if(c < 100)
+			this.nbBois.setValue(c);
 	}
 	
 	public  void EnleverResource(){

@@ -17,9 +17,9 @@ public class Pierre extends Resource{
 	}
 
 	public  void ajouterResource(){
-		int c;
-		c=this.nbPierre.getValue()+1;
-		this.nbPierre.setValue(c);
+		int c = this.nbPierre.getValue()+1;
+		if(c < 100)
+			this.nbPierre.setValue(c);
 	}
 	
 	public IntegerProperty getResource() {
