@@ -127,7 +127,7 @@ public class Controller implements Initializable{
 				// on définit ce qui se passe à chaque frame 
 				// c'est un eventHandler d'ou le lambda
 				(ev ->{			
-					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6 || Collision.collisionHaut(joueur, tabMap) && this.joueur.getSaute() || joueur.getY() == 10 ) 
+					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6 || Collision.collisionHaut(joueur, tabMap) && this.joueur.getSaute() && !Collision.graviter(joueur, tabMap)|| joueur.getY() == 10 ) 
 						joueur.tomber();
 					if(Collision.graviter(joueur, tabMap)) 
 						joueur.setNbSaut(0);
