@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.inventaire.Inventaire;
-import jeu.modele.inventaire.objet.ObjetInventaire;
 import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.caseInventaire;
 import jeu.modele.inventaire.objet.arme.EpeeBois;
@@ -45,12 +44,12 @@ public class Joueur {
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
 		
-		caseInventaire case1= new caseInventaire(new ObjetVide());
-		caseInventaire case2=new caseInventaire(new ObjetVide());
-		caseInventaire case3=new caseInventaire(new ObjetVide());
-		caseInventaire case4=new caseInventaire(new ObjetVide());
-		caseInventaire case5=new caseInventaire(new ObjetVide());
-		caseInventaire case6=new caseInventaire(new ObjetVide());
+		caseInventaire case1= new caseInventaire(new ObjetVide(),1);
+		caseInventaire case2=new caseInventaire(new ObjetVide(),2);
+		caseInventaire case3=new caseInventaire(new ObjetVide(),3);
+		caseInventaire case4=new caseInventaire(new ObjetVide(),4);
+		caseInventaire case5=new caseInventaire(new ObjetVide(),5);
+		caseInventaire case6=new caseInventaire(new ObjetVide(),6);
 		
 		inventaireObjet.ajouterDansLinventaire(case1);
 		inventaireObjet.ajouterDansLinventaire(case2);

@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -167,8 +166,8 @@ public class Controller implements Initializable{
 		tabMap=VueMap.map(carte);
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
-		gestionnaireDeCraft gestionCraft=new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage);
+		new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
+		new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage);
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(
 				// on définit le FPS (nbre de frame par seconde)

@@ -1,14 +1,12 @@
 package jeu.vue;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.StringProperty;
+import java.util.Iterator;
+
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import jeu.modele.Joueur;
-import jeu.modele.inventaire.objet.ObjetInventaire;
-//import jeu.modele.objet.Bandage;
 
 
 
@@ -20,19 +18,16 @@ public class VueInventaire {
 	
 	
 	private Joueur joueur;
-	private HBox	boxInv;
 	private Label labelBois,labelPierre,labelMetal;
-	private ImageView case1,case2,case3,case4,case5,case6;
+	private ImageView case1,case2,case3,case5,case6;
 	public VueInventaire(Joueur joueur,HBox boxInv,Label labelBois,Label labelPierre,Label labelMetal,ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6) {
 		this.joueur=joueur;
-		this.boxInv=boxInv;
 		this.labelBois=labelBois;
 		this.labelPierre=labelPierre;
 		this.labelMetal=labelMetal;
 		this.case1=case1;
 		this.case2=case2;
 		this.case3=case3;
-		this.case4=case4;
 		this.case5=case5;
 		this.case6=case6;
 		afficherInventaireObjet();
@@ -46,11 +41,23 @@ public class VueInventaire {
 		for (int i = 0; i < joueur.getInventaireObjet().getInventaire().size(); i++) {
 			int a=i;
 			joueur.getInventaireObjet().getInventaire().get(i).getObjetDeLaCase().getNumProperty().addListener((obse,old,nouv)-> actualiser(nouv));
-
+			joueur.getInventaireObjet().getInventaire().get(i).estSelectionnerProperty().addListener((obse,old,nouv)-> selectionner(nouv,joueur.getInventaireObjet().getInventaire().get(a).getNumCase()));
 		}		
 		
 			
 	}
+	
+	public void selectionner(Boolean nouv,int numCase) {
+			for (int i = 0; i < joueur.getInventaireObjet().getInventaire().size(); i++) {	
+				if (joueur.getInventaireObjet().getInventaire().get(i).getNumCase()!=numCase) {
+					joueur.getInventaireObjet().getInventaire().get(i).deSelectionner();
+				}
+			}
+
+	}
+	
+	
+	
 	
 	public void actualiser(Number nouv) {
 		System.out.println("je suis appeler");

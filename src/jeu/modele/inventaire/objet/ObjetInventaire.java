@@ -2,19 +2,27 @@ package jeu.modele.inventaire.objet;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 
 public class ObjetInventaire {
 
-
+//	0 epeeBois
+//	1 epeePierre
+//	2 epeeMetal
+//	3 hacheBois
+//	4 hachePierre
+//	5 hacheMetal
+//	6 piocheBois
+//	7 piochePierre
+//	8 piocheMetal
+//	9 bandage
+//	10 kitDeSoin
+//	11 carrerVide
+	
 	private String typeobjet;
 	
 	private IntegerProperty numObjetProperty;
-	private int numObjet;
 	public ObjetInventaire(String typeobjet,int numObjet) {
 		this.typeobjet=typeobjet;
-		this.numObjet=numObjet;
 		numObjetProperty=new SimpleIntegerProperty(numObjet);
 
 	}
