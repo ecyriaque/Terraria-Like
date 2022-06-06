@@ -45,17 +45,17 @@ public class VueInventaire {
 		
 		for (int i = 0; i < joueur.getInventaireObjet().getInventaire().size(); i++) {
 			int a=i;
-			joueur.getInventaireObjet().getInventaire().get(i).getNumObjetCase().addListener((obse,old,nouv)-> System.out.println("ça change"));
-			System.out.println("test");
+			joueur.getInventaireObjet().getInventaire().get(i).getObjetDeLaCase().getNumProperty().addListener((obse,old,nouv)-> actualiser(nouv));
+
 		}		
 		
 			
 	}
 	
-	public void actualiser(IntegerProperty obj) {
+	public void actualiser(Number nouv) {
 		System.out.println("je suis appeler");
 		
-			switch (obj.getValue()) {
+			switch (nouv.intValue()) {
 			case 0:
 				case1.setImage(tabImage[0]);
 				
@@ -69,27 +69,27 @@ public class VueInventaire {
 				
 				break;
 			case 3:
-				case1.setImage(tabImage[3]);
+				case2.setImage(tabImage[3]);
 				
 				break;
 			case 4:
-				case1.setImage(tabImage[4]);
+				case2.setImage(tabImage[4]);
 				
 				break;
 			case 5:
-				case1.setImage(tabImage[5]);
+				case2.setImage(tabImage[5]);
 				
 				break;
 			case 6:
-				case1.setImage(tabImage[6]);
+				case3.setImage(tabImage[6]);
 				
 				break;
 			case 7:
-				case1.setImage(tabImage[7]);
+				case3.setImage(tabImage[7]);
 				
 				break;
 			case 8:
-				case1.setImage(tabImage[8]);
+				case3.setImage(tabImage[8]);
 				
 				break;
 			case 9:
@@ -104,13 +104,13 @@ public class VueInventaire {
 				break;
 				
 			case 10:
-				case5.setImage(tabImage[10]);
+				case6.setImage(tabImage[10]);
 				break;	
 
 			default:
 				break;
 			}
-			
+			System.out.println(joueur.getInventaireObjet().getInventaire().toString());
 		}
 	
 	

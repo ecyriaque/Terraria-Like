@@ -1,4 +1,4 @@
-package jeu.modele.inventaire.objet;
+package jeu.modele.inventaire.objet.arme;
 
 public class PiochePierre extends Arme{
 
