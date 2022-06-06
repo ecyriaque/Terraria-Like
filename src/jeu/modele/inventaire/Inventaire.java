@@ -3,22 +3,24 @@ package jeu.modele.inventaire;
 import java.util.ArrayList;
 
 import jeu.modele.inventaire.objet.Arme;
-import jeu.modele.inventaire.objet.Epee;
 import jeu.modele.inventaire.objet.ObjetInventaire;
+import jeu.modele.inventaire.objet.caseInventaire;
 
 public class Inventaire {
-	private ArrayList<ObjetInventaire> inventaire;
+	private ArrayList<caseInventaire> inventaire;
 	public Inventaire() {
-		inventaire =new ArrayList<ObjetInventaire>();
+		inventaire =new ArrayList<caseInventaire>();
 		
 		
 	}
 	
-	public void ajouterDansLinventaire(ObjetInventaire obj) {
+	public void ajouterDansLinventaire(caseInventaire obj) {
 		this.inventaire.add(obj);
 	}
 	
-	public ArrayList<ObjetInventaire> getInventaire() {
+	
+	
+	public ArrayList<caseInventaire> getInventaire() {
 		return this.inventaire;
 	}
 

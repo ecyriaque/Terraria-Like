@@ -1,9 +1,11 @@
 package jeu.modele.inventaire.objet;
 
-public class Bandage extends ObjetSoin{
+public class HacheBois extends Arme{
 
-	public Bandage() {
-		super("bandage",9);
+	
+	
+	public HacheBois() {
+		super("hacheBois",3);
 		// TODO Auto-generated constructor stub
 	}
 

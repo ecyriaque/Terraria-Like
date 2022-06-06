@@ -1,32 +1,41 @@
 package jeu.modele.inventaire.objet;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ObjetInventaire {
 
-	private StringProperty typeObjetProperty;
+
 	private String typeobjet;
-	public ObjetInventaire(String typeobjet) {
+	
+	private IntegerProperty numObjetProperty;
+	private int numObjet;
+	public ObjetInventaire(String typeobjet,int numObjet) {
 		this.typeobjet=typeobjet;
-		typeObjetProperty=new SimpleStringProperty(typeobjet);
+		this.numObjet=numObjet;
+		numObjetProperty=new SimpleIntegerProperty(numObjet);
+
 	}
 
 	public String getTypeObjet() {
 		return typeobjet;
 	}
 	
-	public StringProperty getTypeObjetProerty() {
-		return typeObjetProperty;
-	}
 	
-	public void setObjet(String s) {
-		String npos = s;
-			this.typeobjet=npos;
-			this.typeObjetProperty.setValue(npos);
-	}
 	
 	public String toString() {
 		return this.typeobjet;
 	}
+	
+	public ObjetInventaire getObjetInventaire() {
+		return this;
+		
+	}
+	
+	public IntegerProperty getNumProperty() {
+		return this.numObjetProperty;
+	}
+	
 }

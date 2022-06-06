@@ -58,8 +58,57 @@ public class Controller implements Initializable{
     private Label labelPierre;
     
     
+    @FXML
+    private ImageView case1;
+
+    @FXML
+    private ImageView case2;
+
+    @FXML
+    private ImageView case3;
+
+    @FXML
+    private ImageView case4;
+
+    @FXML
+    private ImageView case5;
+
+    @FXML
+    private ImageView case6;
 	
-	
+
+    @FXML
+    private ImageView ImageCraftBandage;
+
+    @FXML
+    private ImageView ImageCraftEpeeBois;
+
+    @FXML
+    private ImageView ImageCraftEpeeMetal;
+
+    @FXML
+    private ImageView ImageCraftEpeePierre;
+
+    @FXML
+    private ImageView ImageCraftHacheBois;
+
+    @FXML
+    private ImageView ImageCraftHacheMetal;
+
+    @FXML
+    private ImageView ImageCraftHachePierre;
+
+    @FXML
+    private ImageView ImageCraftKitDeSoin;
+
+    @FXML
+    private ImageView ImageCraftPiocheBois;
+
+    @FXML
+    private ImageView ImageCraftPiocheMetal;
+
+    @FXML
+    private ImageView ImageCraftPiochePierre;
 	
 	//INITIALISATION
 	@Override
@@ -118,7 +167,8 @@ public class Controller implements Initializable{
 		tabMap=VueMap.map(carte);
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal);
+		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
+		gestionnaireDeCraft gestionCraft=new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage);
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(
 				// on d√©finit le FPS (nbre de frame par seconde)
@@ -161,56 +211,5 @@ public class Controller implements Initializable{
 	}
 	
 	
-	  @FXML
-	    void crafterBandage(MouseEvent event) {
-		  joueur.crafterBandage();
-	    }
-	  
-	   @FXML
-	    void crafterEpeePierre(MouseEvent event) {
-		   joueur.crafterEpeePierre();
-	    }
-
-
-  
-  @FXML
-  void crafterEpeeBois(MouseEvent event) {
-  	joueur.crafterEpeeBois();
-  }
-
-
-  
-  @FXML
-  void afficherTextBandage(MouseEvent event) {
-  	textCraft.setText("3 de bois pour construire un bandage");
-  	textCraft.setVisible(true);
-  	
-  }
-  
-  @FXML
-  void enleverTextBandage(MouseEvent event) {
-  	textCraft.setVisible(false);
-  }
-  @FXML
-  void afficherTextPierre(MouseEvent event) {
-  	textCraft.setText("3 de pierre pour construire une Èpee en pierre");
-  	textCraft.setVisible(true);
-  	
-  }
-  
-  @FXML
-  void enleverTextPierre(MouseEvent event) {
-  	textCraft.setVisible(false);
-  }
-  @FXML
-  void afficherTextBois(MouseEvent event) {
-  	textCraft.setText("3 de bois pour construire une Èpee");
-  	textCraft.setVisible(true);
-  	
-  }
-  
-  @FXML
-  void enleverTextBois(MouseEvent event) {
-  	textCraft.setVisible(false);
-  }
+	
 }

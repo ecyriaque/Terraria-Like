@@ -1,11 +1,11 @@
 package jeu.modele.inventaire.objet;
 
-public class Epee extends Arme{
+public class HachePierre extends Arme{
 
 	
 	
-	public Epee(String materiel) {
-		super(materiel);
+	public HachePierre() {
+		super("hachePierre",4);
 		// TODO Auto-generated constructor stub
 	}
 

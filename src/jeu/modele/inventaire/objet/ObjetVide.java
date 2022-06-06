@@ -1,9 +1,9 @@
 package jeu.modele.inventaire.objet;
 
-public class Bandage extends ObjetSoin{
+public class ObjetVide extends ObjetInventaire{
 
-	public Bandage() {
-		super("bandage",9);
+	public ObjetVide() {
+		super("vide", 11);
 		// TODO Auto-generated constructor stub
 	}
 
