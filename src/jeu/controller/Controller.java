@@ -43,6 +43,7 @@ public class Controller implements Initializable{
 	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ;
 	private HitBox hitBox;
+	private VueMap vueMap;
 
     @FXML
     private HBox inventaireObjet;
@@ -168,7 +169,9 @@ public class Controller implements Initializable{
 		int taille = 20;
 		carte.setMaxSize(pxl*taille, pxl*taille);
 		block();
-		tabMap=VueMap.map(carte);
+		vueMap = new VueMap(carte);
+		vueMap.afficherMap();
+		tabMap=vueMap.getTabMap();
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
 		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);

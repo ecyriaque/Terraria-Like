@@ -19,6 +19,7 @@ public class Metal extends Resource{
 	public  void ajouterResource(){
 		int c;
 		c=this.nbMetal.getValue()+1;
+		if (this.nbMetal.getValue() < 99)
 		this.nbMetal.setValue(c);
 	}
 	

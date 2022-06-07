@@ -106,10 +106,6 @@ public class VueInventaire {
 			case 9:
 				case5.setImage(tabImage[9]);
 				break;
-			
-				
-				
-		
 				
 			case 10:
 				case6.setImage(tabImage[10]);
