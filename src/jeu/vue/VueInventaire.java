@@ -8,12 +8,18 @@ import jeu.modele.Joueur;
 
 public class VueInventaire {
 		
-	private Image[] tabImage  = {new Image("jeu/modele/image/utilitaires/epeeBois.png"),new Image("jeu/modele/image/utilitaires/epeePierre.png"),new Image("jeu/modele/image/utilitaires/epeeMetal.png"),
-			new Image("jeu/modele/image/utilitaires/hacheBois.png"),new Image("jeu/modele/image/utilitaires/hachePierre.png"),new Image("jeu/modele/image/utilitaires/hacheMetal.png"),new Image("jeu/modele/image/utilitaires/piocheBois.png"),new Image("jeu/modele/image/utilitaires/piochePierre.png"),new Image("jeu/modele/image/utilitaires/piocheMetal.png"),new Image("jeu/modele/image/utilitaires/bandage.png"),new Image("jeu/modele/image/utilitaires/kitDeSoin.png"),new Image("jeu/modele/image/utilitaires/carrerVide.png"),};	
+	private Image[] tabImage  = {new Image("jeu/modele/image/utilitaires/epeeBois.png"),new Image("jeu/modele/image/utilitaires/epeePierre.png"),
+			new Image("jeu/modele/image/utilitaires/epeeMetal.png"),new Image("jeu/modele/image/utilitaires/hacheBois.png"),
+			new Image("jeu/modele/image/utilitaires/hachePierre.png"),new Image("jeu/modele/image/utilitaires/hacheMetal.png"),
+			new Image("jeu/modele/image/utilitaires/piocheBois.png"),new Image("jeu/modele/image/utilitaires/piochePierre.png"),
+			new Image("jeu/modele/image/utilitaires/piocheMetal.png"),new Image("jeu/modele/image/utilitaires/bandage.png"),
+			new Image("jeu/modele/image/utilitaires/kitDeSoin.png"),new Image("jeu/modele/image/utilitaires/pistolet.png"),
+			new Image("jeu/modele/image/utilitaires/carrerVide.png")};	
 	private Joueur joueur;
 	private Label labelBois,labelPierre,labelMetal,labelNbDeBandage,labelNbDeKitDeSoin;
 	private ImageView case1,case2,case3,case4,case5,case6;
-	public VueInventaire(Joueur joueur,HBox boxInv,Label labelNbDeBandage,Label labelNbDeKitDeSoin,Label labelBois,Label labelPierre,Label labelMetal,ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6) {
+	public VueInventaire(Joueur joueur,HBox boxInv,Label labelNbDeBandage,Label labelNbDeKitDeSoin,Label labelBois,Label labelPierre,Label labelMetal,
+			ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6) {
 		this.joueur=joueur;
 		this.labelBois=labelBois;
 		this.labelPierre=labelPierre;
@@ -84,14 +90,17 @@ public class VueInventaire {
 				break;				
 			case 10:
 				case6.setImage(tabImage[10]);
-				break;	
-			default:
-				case5.setImage(tabImage[11]);
+				break;
+			case 11 : 
 				case4.setImage(tabImage[11]);
-				case3.setImage(tabImage[11]);
-				case2.setImage(tabImage[11]);
-				case1.setImage(tabImage[11]);
-				case6.setImage(tabImage[11]);
+				break;
+			default:
+				case1.setImage(tabImage[12]);
+				case2.setImage(tabImage[12]);
+				case3.setImage(tabImage[12]);
+				case4.setImage(tabImage[12]);
+				case5.setImage(tabImage[12]);
+				case6.setImage(tabImage[12]);
 				break;
 			}
 			System.out.println(joueur.getInventaireObjet().getInventaire().toString());

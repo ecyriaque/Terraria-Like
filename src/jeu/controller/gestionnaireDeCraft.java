@@ -6,11 +6,11 @@ import jeu.modele.Joueur;
 
 public class gestionnaireDeCraft {
 
-	private ImageView ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage;
+	private ImageView ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage, ImageCraftPistolet;
 	private Joueur joueur;
 	private Text textCraft;
 
-	public gestionnaireDeCraft(Joueur joueur,Text textCraft,ImageView imageCraftEpeeBois, ImageView imageCraftEpeePierre,ImageView imageCraftEpeeMetal, ImageView imageCraftHacheBois, ImageView imageCraftHachePierre,ImageView imageCraftHacheMetal, ImageView imageCraftPiocheBois, ImageView imageCraftPiochePierre,ImageView imageCraftPiocheMetal, ImageView imageCraftKitDeSoin, ImageView imageCraftBandage) {
+	public gestionnaireDeCraft(Joueur joueur,Text textCraft,ImageView imageCraftEpeeBois, ImageView imageCraftEpeePierre,ImageView imageCraftEpeeMetal, ImageView imageCraftHacheBois, ImageView imageCraftHachePierre,ImageView imageCraftHacheMetal, ImageView imageCraftPiocheBois, ImageView imageCraftPiochePierre,ImageView imageCraftPiocheMetal, ImageView imageCraftKitDeSoin, ImageView imageCraftBandage, ImageView imageCraftPistolet) {
 		this.joueur=joueur;
 		this.textCraft=textCraft;
 		this.ImageCraftEpeeBois = imageCraftEpeeBois;
@@ -24,6 +24,7 @@ public class gestionnaireDeCraft {
 		this.ImageCraftPiocheMetal = imageCraftPiocheMetal;
 		this.ImageCraftKitDeSoin = imageCraftKitDeSoin;
 		this.ImageCraftBandage = imageCraftBandage;
+		this.ImageCraftPistolet = imageCraftPistolet; 
 		crafter();
 	}
 	
@@ -77,6 +78,10 @@ public class gestionnaireDeCraft {
 		ImageCraftBandage.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftBandage));
 		ImageCraftBandage.setOnMouseExited(arg0 -> textCraft.setVisible(false));
 		
+		//Pistolet
+		ImageCraftPistolet.setOnMouseClicked(arg0 -> joueur.crafterPistolet());
+		ImageCraftPistolet.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPistolet));
+		ImageCraftPistolet.setOnMouseExited(arg0 -> textCraft.setVisible(false));
 	}
 	
 	public void textPourCraft(ImageView img) {
@@ -107,6 +112,9 @@ public class gestionnaireDeCraft {
 		//Kit de soin
 		}else if (img==ImageCraftKitDeSoin) {
 			textCraft.setText("6 de bois pour construire un kitDeSoin");
+		//Pistolet
+		}else if (img==ImageCraftPistolet) {
+			textCraft.setText("10 de metals pour construire un Pistolet");
 		}
 		textCraft.setVisible(true);
 	}

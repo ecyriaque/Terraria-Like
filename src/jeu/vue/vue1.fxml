@@ -178,6 +178,11 @@
                   <Image url="@../modele/image/utilitaires/bandage.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="ImageCraftPistolet" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../modele/image/utilitaires/pistolet.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <Text fx:id="textCraft" layoutX="580.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rien" visible="false">

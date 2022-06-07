@@ -2,24 +2,14 @@ package jeu.modele;
 
 import java.util.ArrayList;
 
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.inventaire.Inventaire;
-import jeu.modele.inventaire.objet.ObjetInventaire;
-import jeu.modele.inventaire.objet.ObjetSoin;
 import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.caseInventaire;
-import jeu.modele.inventaire.objet.arme.EpeeBois;
-import jeu.modele.inventaire.objet.arme.EpeeMetal;
-import jeu.modele.inventaire.objet.arme.EpeePierre;
-import jeu.modele.inventaire.objet.arme.HacheBois;
-import jeu.modele.inventaire.objet.arme.HacheMetal;
-import jeu.modele.inventaire.objet.arme.HachePierre;
-import jeu.modele.inventaire.objet.arme.PiocheBois;
-import jeu.modele.inventaire.objet.arme.PiocheMetal;
-import jeu.modele.inventaire.objet.arme.PiochePierre;
-import jeu.modele.inventaire.objet.objetSoin.Bandage;
-import jeu.modele.inventaire.objet.objetSoin.KitDeSoin;
+import jeu.modele.inventaire.objet.arme.*;
+import jeu.modele.inventaire.objet.objetSoin.*;
 import jeu.modele.resource.Bois;
 import jeu.modele.resource.Metal;
 import jeu.modele.resource.Pierre;
@@ -258,9 +248,9 @@ public class Joueur {
 
 	//KITS DE SOINS
 	public void crafterKitDeSoin() {
-		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()!=10) 
+		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()!=10) 
 			System.out.println("pas assez de bois");
-		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==10) {
+		else if(this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()==10) {
 			ajtNbKitdeSoin();
 			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
 		}
@@ -268,6 +258,20 @@ public class Joueur {
 			this.getInventaireObjet().getInventaire().get(5).setObjetDeLaCase(new KitDeSoin());
 			ajtNbKitdeSoin();
 			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
+		}
+	}
+	
+	public void crafterPistolet() {
+		if (inventaireResource.get(2).getResource().getValue()<10 && this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()!=11) 
+			System.out.println("pas assez de metals");
+		else if(this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()==11) 
+			System.out.println("vous avez deja un pistolet");
+		else if(inventaireResource.get(2).getResource().getValue()>=10) {
+			this.getInventaireObjet().getInventaire().get(3).setObjetDeLaCase(new Pistolet());
+			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).retirerResource();
 		}
 	}
 
