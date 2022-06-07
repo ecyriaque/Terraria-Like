@@ -1,5 +1,4 @@
 package jeu.modele.resource;
-
 import javafx.beans.property.IntegerProperty;
 
 public abstract class Resource {

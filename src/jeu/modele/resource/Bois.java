@@ -1,6 +1,7 @@
 package jeu.modele.resource;
 
 import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Bois extends Resource{
