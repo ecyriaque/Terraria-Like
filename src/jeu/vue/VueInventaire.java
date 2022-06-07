@@ -13,8 +13,8 @@ import jeu.modele.Joueur;
 public class VueInventaire {
 	
 	
-	private Image[] tabImage= {new Image("jeu/modele/image/epeeBois.png"),new Image("jeu/modele/image/epeePierre.png"),new Image("jeu/modele/image/epeeMetal.png"),
-			new Image("jeu/modele/image/hacheBois.png"),new Image("jeu/modele/image/hachePierre.png"),new Image("jeu/modele/image/hacheMetal.png"),new Image("jeu/modele/image/piocheBois.png"),new Image("jeu/modele/image/piochePierre.png"),new Image("jeu/modele/image/piocheMetal.png"),new Image("jeu/modele/image/bandage.png"),new Image("jeu/modele/image/kitDeSoin.png"),new Image("jeu/modele/image/carrerVide.png"),};
+	private Image[] tabImage= {new Image("jeu/modele/image/arme/epeeBois.png"),new Image("jeu/modele/image/arme/epeePierre.png"),new Image("jeu/modele/image/arme/epeeMetal.png"),
+			new Image("jeu/modele/image/arme/hacheBois.png"),new Image("jeu/modele/image/arme/hachePierre.png"),new Image("jeu/modele/image/arme/hacheMetal.png"),new Image("jeu/modele/image/arme/piocheBois.png"),new Image("jeu/modele/image/arme/piochePierre.png"),new Image("jeu/modele/image/arme/piocheMetal.png"),new Image("jeu/modele/image/bandage.png"),new Image("jeu/modele/image/kitDeSoin.png"),new Image("jeu/modele/image/carrerVide.png"),};
 	
 	
 	private Joueur joueur;

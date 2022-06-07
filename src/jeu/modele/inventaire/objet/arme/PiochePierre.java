@@ -3,7 +3,7 @@ package jeu.modele.inventaire.objet.arme;
 public class PiochePierre extends Arme{
 
 	public PiochePierre() {
-		super("piochePierre",8);
+		super("piochePierre",7);
 		
 	}
 

@@ -62,6 +62,19 @@ public class gestionnaireDeCraft {
 		ImageCraftHacheMetal.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftHacheMetal));
 		ImageCraftHacheMetal.setOnMouseExited(arg0 -> textCraft.setVisible(false));
 		
+		ImageCraftPiocheBois.setOnMouseClicked(arg0 -> joueur.crafterPiocheBois());
+		ImageCraftPiocheBois.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPiocheBois));
+		ImageCraftPiocheBois.setOnMouseExited(arg0 -> textCraft.setVisible(false));
+		
+		
+		ImageCraftPiochePierre.setOnMouseClicked(arg0 -> joueur.crafterPiochePierre());
+		ImageCraftPiochePierre.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPiochePierre));
+		ImageCraftPiochePierre.setOnMouseExited(arg0 -> textCraft.setVisible(false));
+		
+		ImageCraftPiocheMetal.setOnMouseClicked(arg0 -> joueur.crafterPiocheMetal());
+		ImageCraftPiocheMetal.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPiocheMetal));
+		ImageCraftPiocheMetal.setOnMouseExited(arg0 -> textCraft.setVisible(false));
+		
 		
 		ImageCraftKitDeSoin.setOnMouseClicked(arg0 -> joueur.crafterKitDeSoin());
 		ImageCraftKitDeSoin.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftKitDeSoin));
