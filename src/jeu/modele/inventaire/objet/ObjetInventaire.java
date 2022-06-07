@@ -17,29 +17,24 @@ public class ObjetInventaire {
 //	9 bandage
 //	10 kitDeSoin
 //	11 carrerVide
-	
 	private String typeobjet;
-	
 	private IntegerProperty numObjetProperty;
+	
 	public ObjetInventaire(String typeobjet,int numObjet) {
 		this.typeobjet=typeobjet;
 		numObjetProperty=new SimpleIntegerProperty(numObjet);
-
 	}
 
 	public String getTypeObjet() {
 		return typeobjet;
 	}
-	
-	
-	
+
 	public String toString() {
 		return this.typeobjet;
 	}
 	
 	public ObjetInventaire getObjetInventaire() {
-		return this;
-		
+		return this;	
 	}
 	
 	public IntegerProperty getNumProperty() {

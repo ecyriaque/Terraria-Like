@@ -24,8 +24,7 @@ public class Pierre extends Resource{
 	}
 	
 	public IntegerProperty getResource() {
-		return this.getNbPierre();
-		
+		return this.getNbPierre();	
 	}
 	
 	public  void EnleverResource(){
@@ -36,7 +35,6 @@ public class Pierre extends Resource{
 	
 	@Override
 	public void retirerResource() {
-		this.nbPierre.setValue(this.nbPierre.getValue()-1);
-		
+		this.nbPierre.setValue(this.nbPierre.getValue()-1);	
 	}
 }

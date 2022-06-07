@@ -24,8 +24,7 @@ public class Metal extends Resource{
 	}
 	
 	public IntegerProperty getResource() {
-		return this.getNbMetal();
-		
+		return this.getNbMetal();	
 	}
 	
 	public  void EnleverResource(){
@@ -36,7 +35,6 @@ public class Metal extends Resource{
 	
 	@Override
 	public void retirerResource() {
-		this.nbMetal.setValue(this.nbMetal.getValue()-1);
-		
+		this.nbMetal.setValue(this.nbMetal.getValue()-1);	
 	}
 }

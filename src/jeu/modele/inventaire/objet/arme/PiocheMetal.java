@@ -4,7 +4,6 @@ public class PiocheMetal extends Arme{
 
 	public PiocheMetal() {
 		super("piocheMetal",8);
-		
 	}
 
 }

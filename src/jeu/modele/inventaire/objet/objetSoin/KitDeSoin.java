@@ -6,7 +6,6 @@ public class KitDeSoin extends ObjetSoin{
 
 	public KitDeSoin() {
 		super("kitDeSoin",10);
-		
 	}
 
 }

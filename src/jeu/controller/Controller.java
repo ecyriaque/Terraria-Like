@@ -1,7 +1,6 @@
 package jeu.controller;
 //IMPORT
 import java.net.URL;
-
 import jeu.modele.*;
 import jeu.vue.VueInventaire;
 import jeu.vue.VueJoueur;
@@ -46,7 +45,6 @@ public class Controller implements Initializable{
 	//VARIABLES
 	private Joueur joueur =new Joueur();//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
-	private ImageView coeurs;	//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ; //Vue du joueur
@@ -126,14 +124,6 @@ public class Controller implements Initializable{
 					deplacement();
 				}));
 		gameLoop.getKeyFrames().add(kf);
-	}
-
-	//Affichage des pvs du personnage
-	public  void afficherCoeurs() {
-		coeurs = new ImageView(new Image("jeu/modele/image/hearts.png"));
-		coeurs.translateXProperty().setValue(0);
-		coeurs.translateYProperty().setValue(-100);
-		conteneur.getChildren().add(coeurs);  
 	}
 	
 	//Placer/Casser les blocks de la map

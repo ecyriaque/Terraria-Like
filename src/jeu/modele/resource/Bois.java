@@ -31,13 +31,11 @@ public class Bois extends Resource{
 	}
 	
 	public IntegerProperty getResource() {
-		return this.getNbBois();
-		
+		return this.getNbBois();	
 	}
 
 	@Override
 	public void retirerResource() {
-		this.nbBois.setValue(this.nbBois.getValue()-1);
-		
+		this.nbBois.setValue(this.nbBois.getValue()-1);	
 	}
 }
