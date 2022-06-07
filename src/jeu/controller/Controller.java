@@ -1,7 +1,6 @@
 package jeu.controller;
 //IMPORT
 import java.net.URL;
-
 import jeu.modele.*;
 import jeu.vue.VueInventaire;
 import jeu.vue.VueJoueur;
@@ -44,6 +43,7 @@ public class Controller implements Initializable{
 	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ; // vue du joueur
 	private HitBox hitBox;
+	private VueMap vueMap;
 
 
 	@FXML
@@ -67,6 +67,7 @@ public class Controller implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		initAnimation();
 		gameLoop.play();
+		
 
 	}
 
@@ -116,10 +117,12 @@ public class Controller implements Initializable{
 		int taille = 20;
 		carte.setMaxSize(pxl*taille, pxl*taille);
 		block();
-		tabMap=VueMap.map(carte);
 		joueur();
+		vueMap = new VueMap(carte);
+		vueMap.afficherMap();
+		tabMap=vueMap.getTabMap();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		VueInventaire vueInventaire = new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal);
+		new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal);
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(
 				// on d√©finit le FPS (nbre de frame par seconde)
@@ -200,7 +203,7 @@ public class Controller implements Initializable{
 	}
 	@FXML
 	void afficherTextPierre(MouseEvent event) {
-		textCraft.setText("3 de pierre pour construire une Èpee en pierre");
+		textCraft.setText("3 de pierre pour construire une epee en pierre");
 		textCraft.setVisible(true);
 
 	}
@@ -211,7 +214,7 @@ public class Controller implements Initializable{
 	}
 	@FXML
 	void afficherTextBois(MouseEvent event) {
-		textCraft.setText("3 de bois pour construire une Èpee");
+		textCraft.setText("3 de bois pour construire une epee");
 		textCraft.setVisible(true);
 
 	}

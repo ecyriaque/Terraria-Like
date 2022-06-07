@@ -1,6 +1,5 @@
 package jeu.vue;
 
-import javafx.beans.property.StringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -35,7 +34,7 @@ public class VueInventaire {
 			switch (joueur.getInventaireObjet().getInventaire().get(i).getTypeObjet()) {
 			case "epeeBois":
 				
-				ImageView case1 = new ImageView(new Image("jeu/modele/image/epeebois.png"));
+				ImageView case1 = new ImageView(new Image("jeu/modele/image/pistolet.png"));
 				this.boxInv.getChildren().add(case1);
 				break;
 			case "bandage":
@@ -66,7 +65,7 @@ public class VueInventaire {
 			switch (joueur.getInventaireObjet().getInventaire().get(i).getTypeObjet()) {
 			case "epeeBois":
 				
-				ImageView case1 = new ImageView(new Image("jeu/modele/image/epeebois.png"));
+				ImageView case1 = new ImageView(new Image("jeu/modele/image/pistolet.png"));
 				this.boxInv.getChildren().remove(i);
 				this.boxInv.getChildren().add(i, case1);
 				break;

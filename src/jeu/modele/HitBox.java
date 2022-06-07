@@ -7,9 +7,13 @@ import javafx.scene.layout.TilePane;
 public class HitBox {
 	
 	//Variables
+	private int xtileDroitePlacer;
+	private int xtileGauchePlacer;
+	private int ytile;
+	private int prochaineTuileDroitePlacer;
+	private int prochaineTuileGauchePlacer;	
 	private int xtileDroite;
 	private int xtileGauche;
-	private int ytile;
 	private int prochaineTuileDroite;
 	private int prochaineTuileGauche;	
 	private int valTabDroite;
@@ -24,17 +28,25 @@ public class HitBox {
 		this.map = tabMap;
 		this.joueur = joueur;
 		this.ytile = (joueur.getY()+20)/40;
-		this.xtileDroite = (joueur.getX()+40)/40;
+		
+		this.xtileDroitePlacer = ((joueur.getX()+79)/40);
+		this.prochaineTuileDroitePlacer =  (xtileDroitePlacer+(ytile*20));
+		this.valTabDroite = tabMap[prochaineTuileDroitePlacer];
+		
+		this.xtileGauchePlacer = ((joueur.getX()-40)/40);
+		this.prochaineTuileGauchePlacer =  (xtileGauchePlacer+(ytile*20));
+		this.valTabGauche = tabMap[prochaineTuileGauchePlacer];
+		
+		this.xtileDroite = ((joueur.getX()+40)/40);
 		this.prochaineTuileDroite =  (xtileDroite+(ytile*20));
-		this.valTabDroite = tabMap[prochaineTuileDroite];
+		
 		this.xtileGauche = ((joueur.getX()-1)/40);
 		this.prochaineTuileGauche =  (xtileGauche+(ytile*20));
-		this.valTabGauche = tabMap[prochaineTuileGauche];
 	}
 	
 	//DROITE
 	public boolean peutPlacerDroite() {
-		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0   )
+		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0  && !joueur.getSaute() )
 			return (valTabDroite!=1 && valTabDroite!=2 && valTabDroite!=3 && valTabDroite!=4 && valTabDroite!=5 && valTabDroite!=6 && valTabDroite!=7);
 		return false;
 	}
@@ -42,9 +54,9 @@ public class HitBox {
 		return (valTabDroite!=0 && valTabDroite!=1 && valTabDroite!=2 && valTabDroite!=3 && valTabDroite!=7);
 	}
 	public void placerTuileDroite() {
-		c.getChildren().remove(this.prochaineTuileDroite);
-		map[this.prochaineTuileDroite] = 4;
-		c.getChildren().add(this.prochaineTuileDroite,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
+		c.getChildren().remove(this.prochaineTuileDroitePlacer);
+		map[this.prochaineTuileDroitePlacer] = 4;
+		c.getChildren().add(this.prochaineTuileDroitePlacer,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
 		joueur.getInventaireResource().get(0).retirerResource();
 	}
 	public void casserTuileDroite() {
@@ -56,7 +68,7 @@ public class HitBox {
 	
 	//GAUCHE
 	public boolean peutPlacerGauche() {
-		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0 )
+		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0 && !joueur.getSaute())
 			return (valTabGauche!=1 && valTabGauche!=2 && valTabGauche!=3 && valTabGauche!=4 && valTabGauche!=5 && valTabGauche!=6 && valTabGauche!=7);
 		return false;
 	}
@@ -64,9 +76,9 @@ public class HitBox {
 		return (valTabGauche!=0 && valTabGauche!=1 && valTabGauche!=2 && valTabGauche!=3 && valTabGauche!=7);
 	}
 	public void placerTuileGauche() {
-		c.getChildren().remove(this.prochaineTuileGauche);
-		map[this.prochaineTuileGauche] = 4;
-		c.getChildren().add(this.prochaineTuileGauche,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
+		c.getChildren().remove(this.prochaineTuileGauchePlacer);
+		map[this.prochaineTuileGauchePlacer] = 4;
+		c.getChildren().add(this.prochaineTuileGauchePlacer,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
 		joueur.getInventaireResource().get(0).retirerResource();
 	}
 	public void casserTuileGauche() {
@@ -78,19 +90,19 @@ public class HitBox {
 	
 	//Getters
 	public int getXtileDroite() {
-		return xtileDroite;
+		return xtileDroitePlacer;
 	}
 	public int getXtileGauche() {
-		return xtileGauche;
+		return xtileGauchePlacer;
 	}
 	public int getYtile() {
 		return ytile;
 	}
 	public int getProchaineTuileDroite() {
-		return prochaineTuileDroite;
+		return prochaineTuileDroitePlacer;
 	}
 	public int getProchaineTuileGauche() {
-		return prochaineTuileGauche;
+		return prochaineTuileGauchePlacer;
 	}
 	public int getValTabDroite() {
 		return valTabDroite;
@@ -107,20 +119,20 @@ public class HitBox {
 	
 	
 	//Setters
-	public void setXtileDroite(int xtileDroite) {
-		this.xtileDroite = xtileDroite;
+	public void setXtileDroitePlacer(int xtileDroite) {
+		this.xtileDroitePlacer = xtileDroite;
 	}
-	public void setXtileGauche(int xtileGauche) {
-		this.xtileGauche = xtileGauche;
+	public void setXtileGauchePlacer(int xtileGauche) {
+		this.xtileGauchePlacer = xtileGauche;
 	}
 	public void setYtile(int ytile) {
 		this.ytile = ytile;
 	}
-	public void setProchaineTuileDroite(int prochaineTuileDroite) {
-		this.prochaineTuileDroite = prochaineTuileDroite;
+	public void setProchaineTuileDroitePlacer(int prochaineTuileDroite) {
+		this.prochaineTuileDroitePlacer = prochaineTuileDroite;
 	}
-	public void setProchaineTuileGauche(int prochaineTuileGauche) {
-		this.prochaineTuileGauche = prochaineTuileGauche;
+	public void setProchaineTuileGauchePlacer(int prochaineTuileGauche) {
+		this.prochaineTuileGauchePlacer = prochaineTuileGauche;
 	}
 	public void setValTabDroite(int valTabDroite) {
 		this.valTabDroite = valTabDroite;
