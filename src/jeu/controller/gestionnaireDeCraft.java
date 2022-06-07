@@ -28,14 +28,10 @@ public class gestionnaireDeCraft {
 	}
 	
 	public void crafter( ) {
-		
-		
-		
-		
+		//Epee
 		ImageCraftEpeeBois.setOnMouseClicked(arg0 -> joueur.crafterEpeeBois());
 		ImageCraftEpeeBois.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftEpeeBois));
 		ImageCraftEpeeBois.setOnMouseExited(arg0 -> textCraft.setVisible(false));
-		
 		
 		ImageCraftEpeePierre.setOnMouseClicked(arg0 -> joueur.crafterEpeePierre());
 		ImageCraftEpeePierre.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftEpeePierre));
@@ -45,6 +41,7 @@ public class gestionnaireDeCraft {
 		ImageCraftEpeeMetal.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftEpeeMetal));
 		ImageCraftEpeeMetal.setOnMouseExited(arg0 -> textCraft.setVisible(false));
 		
+		//Hache
 		ImageCraftHacheBois.setOnMouseClicked(arg0 -> joueur.crafterHacheBois());
 		ImageCraftHacheBois.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftHacheBois));
 		ImageCraftHacheBois.setOnMouseExited(arg0 -> textCraft.setVisible(false));
@@ -53,19 +50,14 @@ public class gestionnaireDeCraft {
 		ImageCraftHachePierre.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftHachePierre));
 		ImageCraftHachePierre.setOnMouseExited(arg0 -> textCraft.setVisible(false));
 		
-		ImageCraftBandage.setOnMouseClicked(arg0 -> joueur.crafterBandage());
-		ImageCraftBandage.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftBandage));
-		ImageCraftBandage.setOnMouseExited(arg0 -> textCraft.setVisible(false));
-		
-		
 		ImageCraftHacheMetal.setOnMouseClicked(arg0 -> joueur.crafterHacheMetal());
 		ImageCraftHacheMetal.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftHacheMetal));
 		ImageCraftHacheMetal.setOnMouseExited(arg0 -> textCraft.setVisible(false));
 		
+		//Pioche
 		ImageCraftPiocheBois.setOnMouseClicked(arg0 -> joueur.crafterPiocheBois());
 		ImageCraftPiocheBois.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPiocheBois));
 		ImageCraftPiocheBois.setOnMouseExited(arg0 -> textCraft.setVisible(false));
-		
 		
 		ImageCraftPiochePierre.setOnMouseClicked(arg0 -> joueur.crafterPiochePierre());
 		ImageCraftPiochePierre.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPiochePierre));
@@ -74,28 +66,45 @@ public class gestionnaireDeCraft {
 		ImageCraftPiocheMetal.setOnMouseClicked(arg0 -> joueur.crafterPiocheMetal());
 		ImageCraftPiocheMetal.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftPiocheMetal));
 		ImageCraftPiocheMetal.setOnMouseExited(arg0 -> textCraft.setVisible(false));
-		
-		
+	
+		//Kit de soin
 		ImageCraftKitDeSoin.setOnMouseClicked(arg0 -> joueur.crafterKitDeSoin());
 		ImageCraftKitDeSoin.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftKitDeSoin));
 		ImageCraftKitDeSoin.setOnMouseExited(arg0 -> textCraft.setVisible(false));
+		
+		//Bandage
+		ImageCraftBandage.setOnMouseClicked(arg0 -> joueur.crafterBandage());
+		ImageCraftBandage.setOnMouseEntered(arg0 -> textPourCraft(ImageCraftBandage));
+		ImageCraftBandage.setOnMouseExited(arg0 -> textCraft.setVisible(false));
+		
 	}
 	
 	public void textPourCraft(ImageView img) {
+		//Epee
 		if (img==ImageCraftEpeeBois) {
-			textCraft.setText("3 de bois pour construire une épee en bois");
+			textCraft.setText("3 de bois pour construire une epee en bois");
 		}else if (img==ImageCraftEpeePierre) {
-			textCraft.setText("3 de pierre pour construire une épee en piere");
+			textCraft.setText("3 de pierres pour construire une epee en piere");
 		}else if (img==ImageCraftEpeeMetal) {
-			textCraft.setText("3 de metal pour construire une épee en metal");
+			textCraft.setText("3 de metal pour construire une epee en metal");
+		//Hache
 		}else if (img==ImageCraftHacheBois) {
 			textCraft.setText("3 de bois pour construire une hache en bois");
 		}else if (img==ImageCraftHachePierre) {
-			textCraft.setText("3 de bois pour construire une hache en pierre");
+			textCraft.setText("3 de pierres pour construire une hache en pierre");
 		}else if (img==ImageCraftHacheMetal) {
-			textCraft.setText("3 de bois pour construire une hache en metal");
+			textCraft.setText("3 de metals pour construire une hache en metal");
+		//Pioche
+		}else if (img==ImageCraftPiocheBois) {
+			textCraft.setText("3 de bois pour construire une pioche en bois");
+		}else if (img==ImageCraftPiochePierre) {
+			textCraft.setText("3 de pierres pour construire une pioche en pierre");
+		}else if (img==ImageCraftPiocheMetal) {
+			textCraft.setText("3 de metals pour construire une pioche en metal");
+		//Bandage
 		}else if (img==ImageCraftBandage) {
 			textCraft.setText("3 de bois pour construire un bandage");
+		//Kit de soin
 		}else if (img==ImageCraftKitDeSoin) {
 			textCraft.setText("6 de bois pour construire un kitDeSoin");
 		}

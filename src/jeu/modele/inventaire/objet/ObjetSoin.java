@@ -6,7 +6,6 @@ public class ObjetSoin extends ObjetInventaire{
 	
 	public ObjetSoin(String typeobjet,int numObjet) {
 		super(typeobjet,numObjet);
-		// TODO Auto-generated constructor stub
 	}
 
 	public void addUnObjet() {

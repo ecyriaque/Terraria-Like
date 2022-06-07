@@ -28,92 +28,31 @@ public class Controller implements Initializable{
     private Text textCraft;
     @FXML
 	private Pane menuCraft;
-
 	@FXML
 	private Pane root;//ROOT
 	@FXML
 	private TilePane carte;//MAP
 	@FXML
 	private Pane conteneur;//JOUEUR
+	@FXML
+	private HBox inventaireObjet;
+	@FXML
+	private Label labelBois, labelMetal, labelPierre, labelNbDeBandage, labelNbDeKitDeSoin;
+	@FXML
+	private ImageView case1, case2, case3, case4, case5, case6;
+	@FXML
+	private ImageView ImageCraftBandage, ImageCraftEpeeBois, ImageCraftEpeeMetal, ImageCraftEpeePierre, ImageCraftHacheBois, ImageCraftHacheMetal, ImageCraftHachePierre, ImageCraftKitDeSoin, ImageCraftPiocheBois, ImageCraftPiocheMetal, ImageCraftPiochePierre;
+	
 	//VARIABLES
 	private Joueur joueur =new Joueur();//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
 	private ImageView coeurs;	//image du joueur et du nb de coeurs
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
-	private VueJoueur vueJ;
-	private HitBox hitBox;
-	private VueMap vueMap;
-
-    @FXML
-    private HBox inventaireObjet;
-
-    @FXML
-    private Label labelBois;
-
-    @FXML
-    private Label labelMetal;
-
-    @FXML
-    private Label labelPierre;
-    
-    @FXML
-    private Label labelNbDeBandage;
-
-    @FXML
-    private Label labelNbDeKitDeSoin;
-    
-    @FXML
-    private ImageView case1;
-
-    @FXML
-    private ImageView case2;
-
-    @FXML
-    private ImageView case3;
-
-    @FXML
-    private ImageView case4;
-
-    @FXML
-    private ImageView case5;
-
-    @FXML
-    private ImageView case6;
-	
-
-    @FXML
-    private ImageView ImageCraftBandage;
-
-    @FXML
-    private ImageView ImageCraftEpeeBois;
-
-    @FXML
-    private ImageView ImageCraftEpeeMetal;
-
-    @FXML
-    private ImageView ImageCraftEpeePierre;
-
-    @FXML
-    private ImageView ImageCraftHacheBois;
-
-    @FXML
-    private ImageView ImageCraftHacheMetal;
-
-    @FXML
-    private ImageView ImageCraftHachePierre;
-
-    @FXML
-    private ImageView ImageCraftKitDeSoin;
-
-    @FXML
-    private ImageView ImageCraftPiocheBois;
-
-    @FXML
-    private ImageView ImageCraftPiocheMetal;
-
-    @FXML
-    private ImageView ImageCraftPiochePierre;
+	private VueJoueur vueJ; //Vue du joueur
+	private HitBox hitBox; // Placer/Casser 
+	private VueMap vueMap; //Vue de la Map
+   
 	
 	//INITIALISATION
 	@Override
@@ -178,10 +117,7 @@ public class Controller implements Initializable{
 		new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage);
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(
-				// on définit le FPS (nbre de frame par seconde)
 				Duration.seconds(0.05), 
-				// on définit ce qui se passe à chaque frame 
-				// c'est un eventHandler d'ou le lambda
 				(ev ->{			
 					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6 || Collision.collisionHaut(joueur, tabMap) && this.joueur.getSaute() ) 
 						joueur.tomber();
@@ -192,6 +128,7 @@ public class Controller implements Initializable{
 		gameLoop.getKeyFrames().add(kf);
 	}
 
+	//Affichage des pvs du personnage
 	public  void afficherCoeurs() {
 		coeurs = new ImageView(new Image("jeu/modele/image/hearts.png"));
 		coeurs.translateXProperty().setValue(0);
@@ -199,6 +136,7 @@ public class Controller implements Initializable{
 		conteneur.getChildren().add(coeurs);  
 	}
 	
+	//Placer/Casser les blocks de la map
 	public void block() {
 		root.setOnMouseClicked(ev -> {
 			hitBox = new HitBox(joueur, carte, tabMap);
@@ -216,7 +154,5 @@ public class Controller implements Initializable{
 			}
 		});
 	}
-	
-	
 	
 }
