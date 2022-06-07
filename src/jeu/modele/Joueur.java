@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.inventaire.Inventaire;
+import jeu.modele.inventaire.objet.ObjetInventaire;
+import jeu.modele.inventaire.objet.ObjetSoin;
 import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.caseInventaire;
 import jeu.modele.inventaire.objet.arme.EpeeBois;
@@ -35,6 +37,7 @@ public class Joueur {
 	private Resource bois= new Bois();
 	private Resource metal= new Metal();
 	private Resource pierre=new Pierre();
+	private IntegerProperty nbBandageProperty,nbKitdeSoinProperty;
 	//CONSTRUCTEUR//
 	public Joueur() {
 		this.xx = 40;
@@ -43,6 +46,9 @@ public class Joueur {
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
+		this.nbBandageProperty=new SimpleIntegerProperty(0);
+		this.nbKitdeSoinProperty=new SimpleIntegerProperty(0);
+		
 		
 		caseInventaire case1= new caseInventaire(new ObjetVide(),1);
 		caseInventaire case2=new caseInventaire(new ObjetVide(),2);
@@ -50,6 +56,8 @@ public class Joueur {
 		caseInventaire case4=new caseInventaire(new ObjetVide(),4);
 		caseInventaire case5=new caseInventaire(new ObjetVide(),5);
 		caseInventaire case6=new caseInventaire(new ObjetVide(),6);
+		
+	
 		
 		inventaireObjet.ajouterDansLinventaire(case1);
 		inventaireObjet.ajouterDansLinventaire(case2);
@@ -324,13 +332,20 @@ public class Joueur {
 			
 			if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()!=9) {
 				System.out.println("pas assez de bois");
+				
 			}
 			
-			else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==9)
-				System.out.println("deja poseder");
+			else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==9) {
+				
+					ajtNbBandage();
+				System.out.println("1 bandage ajouter voici votre nombre de bandage "+this.nbBandageProperty.getValue());
+					}
+			
 			else if(inventaireResource.get(0).getResource().getValue()>=3) {
 				this.getInventaireObjet().getInventaire().get(4).setObjetDeLaCase(new Bandage());
 				inventaireResource.get(0).EnleverResource();
+				ajtNbBandage();
+				System.out.println("1 bandage ajouter voici votre nombre de bandage "+this.nbBandageProperty.getValue());
 			}
 			
 		}
@@ -341,16 +356,51 @@ public class Joueur {
 			System.out.println("pas assez de bois");
 		}
 		
-		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==10)
+		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==10) {
 			System.out.println("deja poseder");
-		else if(inventaireResource.get(0).getResource().getValue()>=6) {
+			ajtNbKitdeSoin();
+			System.out.println("1 kitDesoin ajouter voici votre nombre de kit de soin "+this.nbKitdeSoinProperty.getValue());
+		}
+		else if(inventaireResource.get(0).getResource().getValue()>=6 ) {
 			this.getInventaireObjet().getInventaire().get(5).setObjetDeLaCase(new KitDeSoin());
 			inventaireResource.get(0).EnleverResource();
 			inventaireResource.get(0).EnleverResource();
+			ajtNbKitdeSoin();
+			System.out.println("1 kitDesoin ajouter voici votre nombre de kit de soin "+this.nbKitdeSoinProperty.getValue());
 		}
 		
 	}
+
+	public void ajtNbKitdeSoin() {
 	
+		this.nbKitdeSoinProperty.setValue(nbKitdeSoinProperty.getValue()+1);
+		
+	}
+	public void ajtNbBandage() {
+		int a;
+		a = nbBandageProperty.getValue()+1;
+		this.nbBandageProperty.setValue(nbBandageProperty.getValue()+1);
+	}
+
+
+
+
+
+	public IntegerProperty getNbKitdeSoinProperty() {
+		return nbKitdeSoinProperty;
+	}
+
+
+
+
+
+	public IntegerProperty getNbBandageProperty() {
+		return nbBandageProperty;
+	}
 	
+	public void mettreAzero() {
+		this.nbBandageProperty.setValue(0);
+		this.nbKitdeSoinProperty.setValue(0);
+	}
 	
 }

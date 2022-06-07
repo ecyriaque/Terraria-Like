@@ -18,16 +18,19 @@ public class VueInventaire {
 	
 	
 	private Joueur joueur;
-	private Label labelBois,labelPierre,labelMetal;
-	private ImageView case1,case2,case3,case5,case6;
-	public VueInventaire(Joueur joueur,HBox boxInv,Label labelBois,Label labelPierre,Label labelMetal,ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6) {
+	private Label labelBois,labelPierre,labelMetal,labelNbDeBandage,labelNbDeKitDeSoin;
+	private ImageView case1,case2,case3,case4,case5,case6;
+	public VueInventaire(Joueur joueur,HBox boxInv,Label labelNbDeBandage,Label labelNbDeKitDeSoin,Label labelBois,Label labelPierre,Label labelMetal,ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6) {
 		this.joueur=joueur;
 		this.labelBois=labelBois;
 		this.labelPierre=labelPierre;
 		this.labelMetal=labelMetal;
+		this.labelNbDeBandage=labelNbDeBandage;
+		this.labelNbDeKitDeSoin=labelNbDeKitDeSoin;
 		this.case1=case1;
 		this.case2=case2;
 		this.case3=case3;
+		this.case4=case4;
 		this.case5=case5;
 		this.case6=case6;
 		afficherInventaireObjet();
@@ -38,6 +41,8 @@ public class VueInventaire {
 		joueur.getInventaireResource().get(1).getResource().addListener((obse,old,nouv)-> this.labelPierre.setText(nouv.toString()));
 		joueur.getInventaireResource().get(2).getResource().addListener((obse,old,nouv)-> this.labelMetal.setText(nouv.toString()));
 		
+		joueur.getNbBandageProperty().addListener((obse,old,nouv)-> this.labelNbDeBandage.setText(nouv.toString()));
+		joueur.getNbKitdeSoinProperty().addListener((obse,old,nouv)-> this.labelNbDeKitDeSoin.setText(nouv.toString()));
 		for (int i = 0; i < joueur.getInventaireObjet().getInventaire().size(); i++) {
 			int a=i;
 			joueur.getInventaireObjet().getInventaire().get(i).getObjetDeLaCase().getNumProperty().addListener((obse,old,nouv)-> actualiser(nouv));
@@ -105,16 +110,24 @@ public class VueInventaire {
 			
 				
 				
-			case 11:
-				
-				case5.setImage(tabImage[11]);
-				break;
+		
 				
 			case 10:
 				case6.setImage(tabImage[10]);
 				break;	
+				
+			case 11:
+				
+				
+				
 
 			default:
+				case5.setImage(tabImage[11]);
+				case4.setImage(tabImage[11]);
+				case3.setImage(tabImage[11]);
+				case2.setImage(tabImage[11]);
+				case1.setImage(tabImage[11]);
+				case6.setImage(tabImage[11]);
 				break;
 			}
 			System.out.println(joueur.getInventaireObjet().getInventaire().toString());

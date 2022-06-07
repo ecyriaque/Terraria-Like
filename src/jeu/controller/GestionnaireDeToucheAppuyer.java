@@ -10,6 +10,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import jeu.modele.Collision;
 import jeu.modele.Joueur;
+import jeu.modele.inventaire.objet.ObjetVide;
+import jeu.modele.inventaire.objet.objetSoin.KitDeSoin;
 
 public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private Pane root;
@@ -82,15 +84,16 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				joueur.getInventaireResource().get(1).retirerResource();
 				joueur.getInventaireResource().get(2).retirerResource();
 				break;
-//			case M :
-//				joueur.getInventaireObjet().getInventaire().get(0).setObjet("vide");
-//				joueur.getInventaireObjet().getInventaire().get(1).setObjet("vide");
-//				joueur.getInventaireObjet().getInventaire().get(2).setObjet("vide");
-//				joueur.getInventaireObjet().getInventaire().get(3).setObjet("vide");
-//				joueur.getInventaireObjet().getInventaire().get(4).setObjet("vide");
-//				joueur.getInventaireObjet().getInventaire().get(5).setObjet("vide");
-//				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
-//				break;
+			case M :
+				joueur.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new ObjetVide());
+				joueur.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new ObjetVide());
+				joueur.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new ObjetVide());
+				joueur.getInventaireObjet().getInventaire().get(3).setObjetDeLaCase(new ObjetVide());
+				joueur.getInventaireObjet().getInventaire().get(4).setObjetDeLaCase(new ObjetVide());
+				joueur.getInventaireObjet().getInventaire().get(5).setObjetDeLaCase(new ObjetVide());
+				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
+				joueur.mettreAzero();
+				break;
 			case L :
 			
 				System.out.println(joueur.getInventaireObjet().getInventaire().toString());

@@ -56,6 +56,11 @@ public class Controller implements Initializable{
     @FXML
     private Label labelPierre;
     
+    @FXML
+    private Label labelNbDeBandage;
+
+    @FXML
+    private Label labelNbDeKitDeSoin;
     
     @FXML
     private ImageView case1;
@@ -166,7 +171,7 @@ public class Controller implements Initializable{
 		tabMap=VueMap.map(carte);
 		joueur();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		new VueInventaire(joueur, inventaireObjet,labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
+		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
 		new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage);
 		this.gestionDesTouches();
 		KeyFrame kf = new KeyFrame(

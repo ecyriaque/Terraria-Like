@@ -13,4 +13,8 @@ public class ObjetSoin extends ObjetInventaire{
 		nbDobjet++;
 	}
 	
+	public int getNbDobjet(){
+		return this.nbDobjet;
+	}
+	
 }
