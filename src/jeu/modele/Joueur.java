@@ -121,8 +121,7 @@ public class Joueur {
 	}
 
 
-
-	//////////////METHODE CRAFT//////////////////
+	//////////////METHODES CRAFT//////////////////
 	
 	//EPEE
 	public void crafterEpeeBois() {
@@ -247,14 +246,13 @@ public class Joueur {
 		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()!=9) 
 			System.out.println("pas assez de bois");
 		else if(this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()==9) {
-			ajtNbBandage();
-			System.out.println("1 bandage ajouter, voici votre nombre de bandage "+this.nbBandageProperty.getValue());
+			ajtNbBandage();	
+			System.out.println("bandage :"+this.nbBandageProperty.getValue());
 		}
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(4).setObjetDeLaCase(new Bandage());
-			inventaireResource.get(0).EnleverResource();
 			ajtNbBandage();
-			System.out.println("1 bandage ajouter, voici votre nombre de bandage "+this.nbBandageProperty.getValue());
+			System.out.println("bandage :"+this.nbBandageProperty.getValue());
 		}
 	}
 
@@ -263,30 +261,32 @@ public class Joueur {
 		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()!=10) 
 			System.out.println("pas assez de bois");
 		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==10) {
-			System.out.println("deja poseder");
 			ajtNbKitdeSoin();
-			System.out.println("1 kitDesoin ajouter, voici votre nombre de kit de soin "+this.nbKitdeSoinProperty.getValue());
+			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
 		}
 		else if(inventaireResource.get(0).getResource().getValue()>=6 ) {
 			this.getInventaireObjet().getInventaire().get(5).setObjetDeLaCase(new KitDeSoin());
-			inventaireResource.get(0).EnleverResource();
-			inventaireResource.get(0).EnleverResource();
 			ajtNbKitdeSoin();
-			System.out.println("1 kitDesoin ajouter, voici votre nombre de kit de soin "+this.nbKitdeSoinProperty.getValue());
+			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
 		}
 	}
 
 	////////Methodes ajout/supp soin////////
 	public void ajtNbKitdeSoin() {
 		int nbKDS = this.nbKitdeSoinProperty.getValue();
-		if(nbKDS < 2)
+		if(nbKDS < 2) {
 			this.nbKitdeSoinProperty.setValue(nbKitdeSoinProperty.getValue()+1);
+			inventaireResource.get(0).EnleverResource();
+			inventaireResource.get(0).EnleverResource();
+		}
 	}
 	
 	public void ajtNbBandage() {
 		int nbBandages = nbBandageProperty.getValue()+1;
-		if(nbBandages<6)
+		if(nbBandages<6) {
 			this.nbBandageProperty.setValue(nbBandages);
+			inventaireResource.get(0).EnleverResource();
+		}
 	}
 
 	public void mettreAzero() {
