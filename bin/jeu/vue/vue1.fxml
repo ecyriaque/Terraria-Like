@@ -101,7 +101,7 @@
          <children>
             <ImageView fx:id="ImageCraftEpeeBois" cache="true" fitHeight="40.0" fitWidth="40.0" layoutX="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../modele/image/epeebois.png" />
+                  <Image url="@../modele/image/epeeBois.png" />
                </image>
             </ImageView>
             <ImageView fx:id="ImageCraftEpeePierre" fitHeight="40.0" fitWidth="40.0" layoutX="80.0" pickOnBounds="true" preserveRatio="true">
