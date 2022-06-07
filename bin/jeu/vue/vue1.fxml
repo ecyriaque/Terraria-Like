@@ -121,7 +121,7 @@
                </HBox.margin></Label>
          </children>
       </HBox>
-      <Pane fx:id="menuCraft" layoutX="580.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: violet;" visible="false">
+      <Pane fx:id="menuCraft" layoutX="580.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Grey;" visible="false">
          <children>
             <ImageView fx:id="ImageCraftEpeeBois" cache="true" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -180,9 +180,9 @@
             </ImageView>
          </children>
       </Pane>
-      <Text fx:id="textCraft" layoutX="600.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fezzfeefzfezezf*" visible="false">
+      <Text fx:id="textCraft" layoutX="580.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rien" visible="false">
          <font>
-            <Font size="8.0" />
+            <Font size="10.0" />
          </font></Text>
    </children>
 </Pane>
