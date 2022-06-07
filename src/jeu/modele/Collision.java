@@ -9,8 +9,8 @@ public class Collision {
 		
 		xtile=(joueur.getX()+41)/40;
 		ytile=(joueur.getY()+20)/40;
-		ytile3=(joueur.getY()+39)/40;
-		ytile2=joueur.getY()/40;
+		ytile3=(joueur.getY()+35)/40;
+		ytile2=(joueur.getY()+5)/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
@@ -26,7 +26,7 @@ public class Collision {
 		int ValeurTile,ValeurTil2, ValeurTil3;
 		
 		xtile=(joueur.getX()-1)/40;
-		ytile=joueur.getY()/40;
+		ytile=(joueur.getY()+1)/40;
 		ytile2=(joueur.getY()+20)/40;
 		ytile3=(joueur.getY()+39)/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
