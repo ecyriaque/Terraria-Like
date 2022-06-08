@@ -18,7 +18,7 @@ public class GestionnaireDeToucheLacher implements EventHandler<KeyEvent>{
 		this.root=root;
 		this.joueur=joueur;
 		this.imgJoueur = imgJoueur;
-		this.imageNeutre = new Image ("jeu/modele/image/neutre.png");
+		this.imageNeutre = new Image ("jeu/modele/image/personnage/neutre.png");
 	}
 	@Override
 	public void handle(KeyEvent arg0) {

@@ -28,9 +28,9 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 		this.imgJoueur = imgJoueur;
 		this.menuCraft=menuCraft;
 		this.images = new ArrayList<>();
-		images.add(new Image("jeu/modele/image/gauche.png"));
-		images.add(new Image("jeu/modele/image/droite.png"));
-		images.add(new Image("jeu/modele/image/saut.png"));
+		images.add(new Image("jeu/modele/image/personnage/gauche.png"));
+		images.add(new Image("jeu/modele/image/personnage/droite.png"));
+		images.add(new Image("jeu/modele/image/personnage/saut.png"));
 	}
 	@Override
 	public void handle(KeyEvent arg0) {

@@ -17,7 +17,7 @@
             <TilePane fx:id="carte" prefHeight="600.0" prefWidth="800.0" />
          </children>
       </Pane>
-      <HBox fx:id="inventaireObjet" layoutX="250.0" layoutY="550.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: blue;">
+      <HBox fx:id="inventaireObjet" layoutX="40.0" layoutY="550.0" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: blue;">
          <children>
             <ImageView fx:id="case1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -121,73 +121,73 @@
                </HBox.margin></Label>
          </children>
       </HBox>
-      <Pane fx:id="menuCraft" layoutX="580.0" layoutY="200.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: Grey;" visible="false">
+      <Pane fx:id="menuCraft" layoutX="390.0" layoutY="440.0" opacity="0.66" prefHeight="150.0" prefWidth="400.0" style="-fx-background-color: Grey;" visible="false">
          <children>
-            <ImageView fx:id="ImageCraftEpeeBois" cache="true" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftEpeeBois" cache="true" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/epeeBois.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftEpeePierre" fitHeight="40.0" fitWidth="40.0" layoutX="80.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftEpeePierre" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/epeePierre.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftEpeeMetal" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftEpeeMetal" fitHeight="40.0" fitWidth="40.0" layoutX="5.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/epeeMetal.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftHacheBois" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftHacheBois" fitHeight="40.0" fitWidth="40.0" layoutX="65.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/hacheBois.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftHachePierre" fitHeight="40.0" fitWidth="40.0" layoutX="80.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftHachePierre" fitHeight="40.0" fitWidth="40.0" layoutX="65.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/hachePierre.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftHacheMetal" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftHacheMetal" fitHeight="40.0" fitWidth="40.0" layoutX="65.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/hacheMetal.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftPiocheBois" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftPiocheBois" fitHeight="40.0" fitWidth="40.0" layoutX="125.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/piocheBois.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftPiochePierre" fitHeight="40.0" fitWidth="40.0" layoutX="80.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftPiochePierre" fitHeight="40.0" fitWidth="40.0" layoutX="125.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/piochePierre.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftPiocheMetal" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftPiocheMetal" fitHeight="40.0" fitWidth="40.0" layoutX="125.0" layoutY="105.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/piocheMetal.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftKitDeSoin" fitHeight="40.0" fitWidth="40.0" layoutX="10.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftKitDeSoin" fitHeight="40.0" fitWidth="40.0" layoutX="235.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/kitDeSoin.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftBandage" fitHeight="40.0" fitWidth="40.0" layoutX="80.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftBandage" fitHeight="40.0" fitWidth="40.0" layoutX="185.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/bandage.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="ImageCraftPistolet" fitHeight="40.0" fitWidth="40.0" layoutX="140.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="ImageCraftPistolet" fitHeight="40.0" fitWidth="40.0" layoutX="285.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/utilitaires/pistolet.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Text fx:id="textCraft" layoutX="580.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rien" visible="false">
+      <Text fx:id="textCraft" layoutX="580.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rien" visible="false">
          <font>
-            <Font size="10.0" />
+            <Font size="40.0" />
          </font></Text>
    </children>
 </Pane>

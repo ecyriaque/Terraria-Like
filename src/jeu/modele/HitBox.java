@@ -31,8 +31,9 @@ public class HitBox {
 	private int[] map;
 	private Joueur joueur;
 	
+	
 	//Construceur
-	public HitBox(Joueur joueur, TilePane carte, int[] tabMap) {
+	public HitBox(Joueur joueur, TilePane carte, int[] tabMap  ) {
 		this.c = carte;
 		this.map = tabMap;
 		this.joueur = joueur;
@@ -53,11 +54,12 @@ public class HitBox {
 		this.xtileGaucheCasser = ((joueur.getX()-1)/40);
 		this.prochaineTuileGaucheCasser =  (xtileGaucheCasser+(ytile*20));
 		this.valTabGaucheCasser = tabMap[prochaineTuileGaucheCasser];	
+		
 	}
 	
 	//DROITE
 	public boolean peutPlacerDroite() {
-		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0  && !joueur.getSaute() )
+		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0  && Collision.graviter(joueur, map) )
 			return (valTabDroitePlacer!=1 && valTabDroitePlacer!=2 && valTabDroitePlacer!=3 && valTabDroitePlacer!=4 && valTabDroitePlacer!=5 && valTabDroitePlacer!=6);
 		return false;
 	}
@@ -81,7 +83,7 @@ public class HitBox {
 	
 	//GAUCHE
 	public boolean peutPlacerGauche() {
-		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0 && !joueur.getSaute())
+		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0 &&  Collision.graviter(joueur, map))
 			return (valTabGauchePlacer!=1 && valTabGauchePlacer!=2 && valTabGauchePlacer!=3 && valTabGauchePlacer!=4 && valTabGauchePlacer!=5 && valTabGauchePlacer!=6);
 		return false;
 	}

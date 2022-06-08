@@ -13,7 +13,7 @@ public class VueJoueur {
 	
 	//constructeur
 	public VueJoueur (Pane conteneur, Joueur joueur) {
-		this.imgActive = new ImageView(new Image("jeu/modele/image/neutre.png"));
+		this.imgActive = new ImageView(new Image("jeu/modele/image/personnage/neutre.png"));
 		this.conteneur = conteneur;
 	}
 	
