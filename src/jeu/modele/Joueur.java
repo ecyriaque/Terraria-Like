@@ -19,23 +19,27 @@ import jeu.modele.resource.Resource;
 public class Joueur {
 	//variables//
 	private int xx,yy;
-	private IntegerProperty x,y;
-	private IntegerProperty nbCoeursProperty;
-	protected Map env;
-	private int nbSaut =0;
-	private int vitesse;
+	private IntegerProperty x,y; //position du joueur
+	private IntegerProperty nbCoeursProperty; // nombre de coeur du perso (0 a 5)
+	protected Map map; //map
+	private int nbSaut=0; //nb saut 
+	private int vitesse; //vitesse de deplacement du perso
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
-	private ArrayList<Resource> inventaireResource;
+	private ArrayList<Resource> inventaireResource; 
 	private Inventaire inventaireObjet =new Inventaire();
 	private Resource bois= new Bois();
 	private Resource metal= new Metal();
 	private Resource pierre=new Pierre();
-	private IntegerProperty nbBandageProperty,nbKitdeSoinProperty;
+	private IntegerProperty nbBandageProperty,nbKitdeSoinProperty; //nombre de bandage et de kit de soin
+	private IntegerProperty nbBouclierProperty; // nombre bouclier du perso (0 a 3)
+
+	
 	//CONSTRUCTEUR//
 	public Joueur() {
 		this.xx = 40;
 		this.yy =360;
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
+		this.nbBouclierProperty = new SimpleIntegerProperty(0);
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(yy);
 		this.vitesse = 8;
@@ -62,18 +66,30 @@ public class Joueur {
 	}
 
 	/////////////Methodes de gestion des PV ///////////////
-	public void perdrepv() {
-		int c=this.getNbCoeurs()-1;
+	public void perdrePv() {
+		int nbCoeur =this.getNbCoeurs()-1;
 		if(getNbCoeurs()>=1) 
-			this.nbCoeursProperty.setValue(c);
+			this.nbCoeursProperty.setValue(nbCoeur);
 	}
-	public void gagnerpv() {
-		int c=this.getNbCoeurs()+1;
+	public void gagnerPv() {
+		int nbCoeur =this.getNbCoeurs()+1;
 		if(getNbCoeurs()<5)
-			this.nbCoeursProperty.setValue(c);
+			this.nbCoeursProperty.setValue(nbCoeur);
+	}
+	
+	/////////////Methodes de gestion de Bouclier ///////////////
+	public void perdreBouclier() {
+		int nbBouclier = this.getNbBouclier()-1;
+		if(getNbBouclier()>=1) 
+			this.nbBouclierProperty.setValue(nbBouclier);
 	}
 
-
+	public void gagnerBouclier() {
+		int nbBouclier = this.getNbBouclier()+1;
+		if(getNbBouclier()<3) 
+			this.nbBouclierProperty.setValue(nbBouclier);
+	}
+	
 	///////////// Les integersProperty /////////////
 	public final IntegerProperty xProperty(){
 		return this.x;
@@ -84,7 +100,9 @@ public class Joueur {
 	public final IntegerProperty nbCoeurProperty() {
 		return this.nbCoeursProperty;
 	}
-
+	public final IntegerProperty getNbBouclierProperty() {
+		return this.nbBouclierProperty;
+	}
 
 	///////// Les methodes de deplacement //////////
 	public void allerAGauche() {
@@ -121,7 +139,7 @@ public class Joueur {
 			System.out.println("deja poseder");
 		}
 		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==1 || this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==2){
-			System.out.println("Vous posséder une meilleur épee");
+			System.out.println("Vous posseder une meilleur epee");
 		}
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			System.out.println(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase());
@@ -137,7 +155,7 @@ public class Joueur {
 		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==1) 
 			System.out.println("deja poseder");	
 		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==2)
-			System.out.println("Vous posséder une meilleur épee");
+			System.out.println("Vous posseder une meilleur epee");
 		else if(inventaireResource.get(1).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeePierre());
 			inventaireResource.get(1).EnleverResource();
@@ -162,7 +180,7 @@ public class Joueur {
 		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==3) 
 			System.out.println("vous avez deja une hache en bois");
 		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==4 || this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==5)
-			System.out.println("Vous posséder une meilleur hache");
+			System.out.println("Vous posseder une meilleur hache");
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HacheBois());
 			inventaireResource.get(0).EnleverResource();
@@ -175,7 +193,7 @@ public class Joueur {
 		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==4) 
 			System.out.println("vous avez deja une hache en pierre");
 		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==5)
-			System.out.println("Vous posséder une meilleur hache");
+			System.out.println("Vous possï¿½der une meilleur hache");
 		else if(inventaireResource.get(1).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HachePierre());
 			inventaireResource.get(1).EnleverResource();
@@ -200,7 +218,7 @@ public class Joueur {
 		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==6) 
 			System.out.println("vous avez deja une pioche en bois");
 		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==7 || this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==8)
-			System.out.println("Vous posséder une meilleur pioche");
+			System.out.println("Vous posseder une meilleur pioche");
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiocheBois());
 			inventaireResource.get(0).EnleverResource();
@@ -213,7 +231,7 @@ public class Joueur {
 		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==7) 
 			System.out.println("vous avez deja une pioche en pierre");
 		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==7 || this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==8)
-			System.out.println("Vous posséder une meilleur pioche");
+			System.out.println("Vous posseder une meilleur pioche");
 		else if(inventaireResource.get(1).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiochePierre());
 			inventaireResource.get(1).EnleverResource();
@@ -261,6 +279,7 @@ public class Joueur {
 		}
 	}
 	
+	//PISTOLET
 	public void crafterPistolet() {
 		if (inventaireResource.get(2).getResource().getValue()<10 && this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()!=11) 
 			System.out.println("pas assez de metals");
@@ -274,6 +293,21 @@ public class Joueur {
 			inventaireResource.get(2).retirerResource();
 		}
 	}
+	
+	//BOUCLIER
+	public void crafterBouclier() {
+		if (inventaireResource.get(2).getResource().getValue() < 3) 
+			System.out.println("pas assez de metals");
+		else if(nbBouclierProperty.getValue() == 3) 
+			System.out.println("Vous avez deja le maximum de bouclier");
+		else if(inventaireResource.get(2).getResource().getValue()>=3) {	
+			inventaireResource.get(2).EnleverResource();
+			this.gagnerBouclier();
+			System.out.println(nbBouclierProperty.getValue());
+			
+		}
+	}
+
 
 	////////Methodes ajout/supp soin////////
 	public void ajtNbKitdeSoin() {
@@ -311,11 +345,16 @@ public class Joueur {
 	public void setNbSaut(int nbSaut) {
 		this.nbSaut = nbSaut;
 	}
-
+	public void setNbBouclierProperty(IntegerProperty nbBouclierProperty) {
+		this.nbBouclierProperty = nbBouclierProperty;
+	}
 
 	/////// Les Getters //////////////
 	public final int getNbCoeurs() {
 		return this.nbCoeursProperty.getValue();
+	}
+	public final int getNbBouclier() {
+		return this.nbBouclierProperty.getValue();
 	}
 	public final int getX() {
 		return x.getValue();

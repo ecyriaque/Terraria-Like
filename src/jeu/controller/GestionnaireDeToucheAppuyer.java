@@ -52,10 +52,10 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				}		
 				break;
 			case T :
-				joueur.perdrepv();
+				joueur.perdrePv();
 				break;
 			case Y :
-				joueur.gagnerpv();
+				joueur.gagnerPv();
 				break;         
 			
 			case U :
@@ -97,6 +97,10 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 			case L :
 			
 				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
+				break;
+			case V : 
+				joueur.perdreBouclier();
+				System.out.println(joueur.getNbBouclier());
 				break;
 			}
 		});

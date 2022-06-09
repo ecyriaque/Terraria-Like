@@ -95,12 +95,12 @@ public class VueInventaire {
 				case4.setImage(tabImage[11]);
 				break;
 			default:
-				case1.setImage(tabImage[12]);
-				case2.setImage(tabImage[12]);
-				case3.setImage(tabImage[12]);
-				case4.setImage(tabImage[12]);
-				case5.setImage(tabImage[12]);
-				case6.setImage(tabImage[12]);
+				case1.setImage(tabImage[tabImage.length-1]);
+				case2.setImage(tabImage[tabImage.length-1]);
+				case3.setImage(tabImage[tabImage.length-1]);
+				case4.setImage(tabImage[tabImage.length-1]);
+				case5.setImage(tabImage[tabImage.length-1]);
+				case6.setImage(tabImage[tabImage.length-1]);
 				break;
 			}
 			System.out.println(joueur.getInventaireObjet().getInventaire().toString());
