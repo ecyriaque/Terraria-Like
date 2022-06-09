@@ -90,6 +90,13 @@ public class Joueur {
 			this.nbBouclierProperty.setValue(nbBouclier);
 	}
 	
+	public void blesser() {
+		if(getNbBouclier()>0)
+			perdreBouclier();
+		else
+			perdrePv();
+	}
+	
 	///////////// Les integersProperty /////////////
 	public final IntegerProperty xProperty(){
 		return this.x;
@@ -266,9 +273,9 @@ public class Joueur {
 
 	//KITS DE SOINS
 	public void crafterKitDeSoin() {
-		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()!=10) 
+		if (inventaireResource.get(0).getResource().getValue()<6 && this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()!=10) 
 			System.out.println("pas assez de bois");
-		else if(this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()==10) {
+		else if(this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()==10 && inventaireResource.get(0).getResource().getValue()>=6) {
 			ajtNbKitdeSoin();
 			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
 		}

@@ -19,14 +19,18 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private int[]tabMap;
 	private ImageView imgJoueur;
 	private ArrayList<Image> images;
-	boolean visible =false;
-		private Pane menuCraft;
-	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap, ImageView imgJoueur,Pane menuCraft) {
+	private boolean visible =false;
+	private Pane menuCraft;
+	private ImageView craftInventaire;
+	
+	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap, ImageView imgJoueur,Pane menuCraft, ImageView InventaireCraft) {
 		this.root=root;
 		this.joueur=joueur;
 		this.tabMap=tabMap;
 		this.imgJoueur = imgJoueur;
 		this.menuCraft=menuCraft;
+		this.craftInventaire = InventaireCraft;
+		
 		this.images = new ArrayList<>();
 		images.add(new Image("jeu/modele/image/personnage/gauche.png"));
 		images.add(new Image("jeu/modele/image/personnage/droite.png"));
@@ -52,7 +56,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				}		
 				break;
 			case T :
-				joueur.perdrePv();
+				joueur.blesser();
 				break;
 			case Y :
 				joueur.gagnerPv();
@@ -65,9 +69,11 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				
 				if (visible==false) {
 					menuCraft.setVisible(true);
+					craftInventaire.setVisible(true);
 					visible=true;
 				}else if(visible==true) {
 					menuCraft.setVisible(false);
+					craftInventaire.setVisible(false);
 					visible=false;
 				}
 				
@@ -97,10 +103,6 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 			case L :
 			
 				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
-				break;
-			case V : 
-				joueur.perdreBouclier();
-				System.out.println(joueur.getNbBouclier());
 				break;
 			}
 		});

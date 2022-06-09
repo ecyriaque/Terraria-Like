@@ -42,6 +42,8 @@ public class Controller implements Initializable{
 	@FXML
 	private ImageView ImageCraftBandage, ImageCraftEpeeBois, ImageCraftEpeeMetal, ImageCraftEpeePierre, ImageCraftHacheBois, ImageCraftHacheMetal, 
 	ImageCraftHachePierre, ImageCraftKitDeSoin, ImageCraftPiocheBois, ImageCraftPiocheMetal, ImageCraftPiochePierre, ImageCraftPistolet, ImageCraftBouclier;
+	@FXML
+	private ImageView craftInventaire;
 	
 	//VARIABLES
 	private Joueur joueur =new Joueur();//creation du joueur
@@ -72,7 +74,7 @@ public class Controller implements Initializable{
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,vueJ.getImgActive(), menuCraft);
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,vueJ.getImgActive(), menuCraft, craftInventaire);
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
