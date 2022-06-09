@@ -7,7 +7,7 @@ import jeu.modele.Joueur;
 
 public class VuePv {
 	
-	private Image[] tabImage= {new Image("jeu/modele/image/perdue.png"),new Image("jeu/modele/image/1hearts.png"),new Image("jeu/modele/image/2hearts.png"),
+	private Image[] tabImage= {new Image("jeu/modele/image/perdu.png"),new Image("jeu/modele/image/1hearts.png"),new Image("jeu/modele/image/2hearts.png"),
 			new Image("jeu/modele/image/3hearts.png"),new Image("jeu/modele/image/4hearts.png"),new Image("jeu/modele/image/hearts.png"),};	
 	private ImageView imageActive;
 	private Joueur joueur;
@@ -29,6 +29,16 @@ public class VuePv {
 	}
 	
 	public void setImageActive(Image image) {
+		if(image.equals(tabImage[0])) {
+			imageActive.setImage(tabImage[0]);
+			imageActive.setTranslateY(0);
+			imageActive.setOpacity(0.40);
+		}
+		else {
+			imageActive.setImage(image);
+			imageActive.setTranslateY(-100);
+			imageActive.setOpacity(1);
+		}
 		imageActive.setImage(image);
 	}
 }

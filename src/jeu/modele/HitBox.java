@@ -59,7 +59,7 @@ public class HitBox {
 	
 	//DROITE
 	public boolean peutPlacerDroite() {
-		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0  && Collision.graviter(joueur, map) )
+		if(joueur.getInventaireResources().get(0).getResource().getValue() > 0  && Collision.graviter(joueur, map) )
 			return (valTabDroitePlacer!=1 && valTabDroitePlacer!=2 && valTabDroitePlacer!=3 && valTabDroitePlacer!=4 && valTabDroitePlacer!=5 && valTabDroitePlacer!=6);
 		return false;
 	}
@@ -72,18 +72,18 @@ public class HitBox {
 		c.getChildren().remove(this.prochaineTuileDroitePlacer);
 		map[this.prochaineTuileDroitePlacer] = 4;
 		c.getChildren().add(this.prochaineTuileDroitePlacer,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
-		joueur.getInventaireResource().get(0).retirerResource();
+		joueur.getInventaireResources().get(0).retirerResource();
 	}
 	public void casserTuileDroite() {
 		c.getChildren().remove(this.prochaineTuileDroiteCasser);
 		map[this.prochaineTuileDroiteCasser] = 0;
 		c.getChildren().add(this.prochaineTuileDroiteCasser,new ImageView(new Image("jeu/modele/image/map/ciel.png")) );
-		joueur.getInventaireResource().get(0).ajouterResource();
+		joueur.getInventaireResources().get(0).ajouterResource();
 	}
 	
 	//GAUCHE
 	public boolean peutPlacerGauche() {
-		if(joueur.getInventaireResource().get(0).getResource().getValue() > 0 &&  Collision.graviter(joueur, map))
+		if(joueur.getInventaireResources().get(0).getResource().getValue() > 0 &&  Collision.graviter(joueur, map))
 			return (valTabGauchePlacer!=1 && valTabGauchePlacer!=2 && valTabGauchePlacer!=3 && valTabGauchePlacer!=4 && valTabGauchePlacer!=5 && valTabGauchePlacer!=6);
 		return false;
 	}
@@ -94,13 +94,13 @@ public class HitBox {
 		c.getChildren().remove(this.prochaineTuileGauchePlacer);
 		map[this.prochaineTuileGauchePlacer] = 4;
 		c.getChildren().add(this.prochaineTuileGauchePlacer,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
-		joueur.getInventaireResource().get(0).retirerResource();
+		joueur.getInventaireResources().get(0).retirerResource();
 	}
 	public void casserTuileGauche() {
 		c.getChildren().remove(this.prochaineTuileGaucheCasser);
 		map[this.prochaineTuileGaucheCasser] = 0;
 		c.getChildren().add(this.prochaineTuileGaucheCasser,new ImageView(new Image("jeu/modele/image/map/ciel.png")) );
-		joueur.getInventaireResource().get(0).ajouterResource();
+		joueur.getInventaireResources().get(0).ajouterResource();
 	}
 	
 	//Getters

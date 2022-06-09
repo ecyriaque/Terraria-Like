@@ -3,6 +3,7 @@ package jeu.modele;
 import java.util.ArrayList;
 
 
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.inventaire.Inventaire;
@@ -10,10 +11,7 @@ import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.caseInventaire;
 import jeu.modele.inventaire.objet.arme.*;
 import jeu.modele.inventaire.objet.objetSoin.*;
-import jeu.modele.resource.Bois;
-import jeu.modele.resource.Metal;
-import jeu.modele.resource.Pierre;
-import jeu.modele.resource.Resource;
+import jeu.modele.resource.*;
 
 
 public class Joueur {
@@ -399,7 +397,7 @@ public class Joueur {
 	public Inventaire getInventaireObjet() {
 		return this.inventaireObjet;
 	}
-	public ArrayList<Resource> getInventaireResource() {
+	public ArrayList<Resource> getInventaireResources() {
 		return inventaireResource;
 	}
 	

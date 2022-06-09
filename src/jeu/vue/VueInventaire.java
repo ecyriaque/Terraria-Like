@@ -36,9 +36,9 @@ public class VueInventaire {
 	}
 	
 	public void afficherInventaireObjet() {
-		joueur.getInventaireResource().get(0).getResource().addListener((obse,old,nouv)-> this.labelBois.setText(nouv.toString()));
-		joueur.getInventaireResource().get(1).getResource().addListener((obse,old,nouv)-> this.labelPierre.setText(nouv.toString()));
-		joueur.getInventaireResource().get(2).getResource().addListener((obse,old,nouv)-> this.labelMetal.setText(nouv.toString()));		
+		joueur.getInventaireResources().get(0).getResource().addListener((obse,old,nouv)-> this.labelBois.setText(nouv.toString()));
+		joueur.getInventaireResources().get(1).getResource().addListener((obse,old,nouv)-> this.labelPierre.setText(nouv.toString()));
+		joueur.getInventaireResources().get(2).getResource().addListener((obse,old,nouv)-> this.labelMetal.setText(nouv.toString()));		
 		joueur.getNbBandageProperty().addListener((obse,old,nouv)-> this.labelNbDeBandage.setText(nouv.toString()));
 		joueur.getNbKitdeSoinProperty().addListener((obse,old,nouv)-> this.labelNbDeKitDeSoin.setText(nouv.toString()));
 		for (int i = 0; i < joueur.getInventaireObjet().getInventaire().size(); i++) {
