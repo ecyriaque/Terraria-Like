@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -23,80 +24,67 @@
             <TilePane fx:id="carte" prefHeight="600.0" prefWidth="800.0" />
          </children>
       </Pane>
-      <HBox fx:id="inventaireObjet" layoutX="40.0" layoutY="550.0" prefHeight="50.0" prefWidth="310.0" style="-fx-background-color: blue;">
+      <ImageView layoutX="41.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../modele/image/inventaire.png" />
+         </image>
+      </ImageView>
+      <HBox fx:id="inventaireObjet" layoutX="40.0" layoutY="550.0" prefHeight="50.0" prefWidth="310.0">
          <children>
             <ImageView fx:id="case1" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/utilitaires/carrerVide.png" />
-               </image>
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="case2" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/utilitaires/carrerVide.png" />
-               </image>
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="case3" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/utilitaires/carrerVide.png" />
-               </image>
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="case4" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/utilitaires/carrerVide.png" />
-               </image>
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="case5" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/utilitaires/carrerVide.png" />
-               </image>
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="labelNbDeBandage" text="0" textFill="WHITE">
+            <Label fx:id="labelNbDeBandage" ellipsisString="9+" text="0">
                <font>
-                  <Font size="23.0" />
+                  <Font size="20.0" />
                </font>
                <HBox.margin>
-                  <Insets top="15.0" />
+                  <Insets left="2.0" top="17.0" />
                </HBox.margin>
             </Label>
             <ImageView fx:id="case6" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../modele/image/utilitaires/carrerVide.png" />
-               </image>
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ImageView>
-            <Label fx:id="labelNbDeKitDeSoin" text="0" textFill="WHITE">
+            <Label fx:id="labelNbDeKitDeSoin" text="0">
                <font>
-                  <Font size="23.0" />
+                  <Font size="20.0" />
                </font>
                <HBox.margin>
-                  <Insets top="15.0" />
+                  <Insets left="2.0" top="17.0" />
                </HBox.margin>
             </Label>
          </children></HBox>
-      <HBox fx:id="inventaireResource" layoutX="550.0" layoutY="10.0" prefHeight="50.0" prefWidth="250.0">
+      <HBox fx:id="inventaireResource" layoutX="500.0" layoutY="10.0" prefHeight="50.0" prefWidth="300.0">
          <children>
             <ImageView fx:id="imageBois" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../modele/image/map/bois.png" />
                </image></ImageView>
-            <Label fx:id="labelBois" ellipsisString="0" text="0">
+            <Label fx:id="labelBois" ellipsisString="0" prefHeight="25.0" prefWidth="50.0" text="0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -107,7 +95,7 @@
                <image>
                   <Image url="@../modele/image/map/pierre.png" />
                </image></ImageView>
-            <Label fx:id="labelPierre" text="0">
+            <Label fx:id="labelPierre" prefHeight="25.0" prefWidth="50.0" text="0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -118,7 +106,7 @@
                <image>
                   <Image url="@../modele/image/map/metal.png" />
                </image></ImageView>
-            <Label fx:id="labelMetal" ellipsisString="0" text="0">
+            <Label fx:id="labelMetal" ellipsisString="0" prefHeight="25.0" prefWidth="50.0" text="0">
                <font>
                   <Font size="20.0" />
                </font>
@@ -196,9 +184,9 @@
             </ImageView>
          </children>
       </Pane>
-      <Text fx:id="textCraft" layoutX="580.0" layoutY="510.0" strokeType="OUTSIDE" strokeWidth="0.0" text="rien" visible="false">
+      <Text fx:id="textCraft" layoutX="580.0" layoutY="500.0" strokeType="OUTSIDE" strokeWidth="0.0" visible="false">
          <font>
-            <Font size="40.0" />
+            <Font size="30.0" />
          </font></Text>
    </children>
 </Pane>

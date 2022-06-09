@@ -253,7 +253,7 @@ public class Joueur {
 	public void crafterBandage() {
 		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()!=9) 
 			System.out.println("pas assez de bois");
-		else if(this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()==9) {
+		else if(this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()==9 && inventaireResource.get(0).getResource().getValue()>=3) {
 			ajtNbBandage();	
 			System.out.println("bandage :"+this.nbBandageProperty.getValue());
 		}
