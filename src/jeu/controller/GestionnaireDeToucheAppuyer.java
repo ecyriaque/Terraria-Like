@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import jeu.modele.Collision;
+import jeu.modele.Construction;
 import jeu.modele.Joueur;
 import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.objetSoin.KitDeSoin;
@@ -22,6 +23,8 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private boolean visible =false;
 	private Pane menuCraft;
 	private ImageView craftInventaire;
+	private ImageView matChoisi;
+	private int modulo;
 	
 	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap, ImageView imgJoueur,Pane menuCraft, ImageView InventaireCraft) {
 		this.root=root;
@@ -30,8 +33,14 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 		this.imgJoueur = imgJoueur;
 		this.menuCraft=menuCraft;
 		this.craftInventaire = InventaireCraft;
-		
 		this.images = new ArrayList<>();
+		
+		this.matChoisi = new ImageView();
+		matChoisi.setImage(new Image("jeu/modele/image/jaune.png"));
+		matChoisi.setTranslateX(497);
+		matChoisi.setTranslateY(7);
+		matChoisi.setOpacity(0.90);
+		root.getChildren().add(matChoisi);
 		images.add(new Image("jeu/modele/image/personnage/gauche.png"));
 		images.add(new Image("jeu/modele/image/personnage/droite.png"));
 		images.add(new Image("jeu/modele/image/personnage/saut.png"));
@@ -103,6 +112,22 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 			case L :
 			
 				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
+				break;
+				
+			case F1 : 
+				joueur.setMatChoisi(4);
+				matChoisi.setTranslateX(497);
+				System.out.println("bois choisi");
+				break;
+			case F2 :
+				joueur.setMatChoisi(5);
+				matChoisi.setTranslateX(597);
+				System.out.println("pierre choisie");
+				break;
+			case F3 :
+				joueur.setMatChoisi(6);
+				matChoisi.setTranslateX(697);
+				System.out.println("metal choisi");
 				break;
 			}
 		});

@@ -44,6 +44,8 @@ public class Controller implements Initializable{
 	ImageCraftHachePierre, ImageCraftKitDeSoin, ImageCraftPiocheBois, ImageCraftPiocheMetal, ImageCraftPiochePierre, ImageCraftPistolet, ImageCraftBouclier;
 	@FXML
 	private ImageView craftInventaire;
+	@FXML
+	private ImageView matSelectioner;
 	
 	//VARIABLES
 	private Joueur joueur =new Joueur();//creation du joueur
@@ -51,7 +53,7 @@ public class Controller implements Initializable{
 	private int[]tabMap; //map (tableau)
 	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ; //Vue du joueur
-	private HitBox hitBox; // Placer/Casser 
+	private Construction hitBox; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
    
 	
@@ -133,7 +135,7 @@ public class Controller implements Initializable{
 	//Placer/Casser les blocks de la map
 	public void block() {
 		root.setOnMouseClicked(ev -> {
-			hitBox = new HitBox(joueur, carte, tabMap);
+			hitBox = new Construction(joueur, carte, tabMap);
 			if(direction) { // droite
 				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerDroite()) //placer des blocks
 					hitBox.placerTuileDroite();
@@ -148,5 +150,6 @@ public class Controller implements Initializable{
 			}
 		});
 	}
+	
 	
 }

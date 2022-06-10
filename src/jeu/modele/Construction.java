@@ -1,10 +1,12 @@
 package jeu.modele;
 
+import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
 
-public class HitBox {
+public class Construction {
 	
 	//Variables
 	private int xtileDroitePlacer;
@@ -31,9 +33,12 @@ public class HitBox {
 	private int[] map;
 	private Joueur joueur;
 	
+	private ArrayList<Image> imagesMat;
+	private ImageView imagePlacer = new ImageView();
+	
 	
 	//Construceur
-	public HitBox(Joueur joueur, TilePane carte, int[] tabMap  ) {
+	public Construction(Joueur joueur, TilePane carte, int[] tabMap  ) {
 		this.c = carte;
 		this.map = tabMap;
 		this.joueur = joueur;
@@ -55,53 +60,91 @@ public class HitBox {
 		this.prochaineTuileGaucheCasser =  (xtileGaucheCasser+(ytile*20));
 		this.valTabGaucheCasser = tabMap[prochaineTuileGaucheCasser];	
 		
+		this.imagesMat = new ArrayList<>();
+		imagesMat.add(new Image("jeu/modele/image/map/bois.png"));
+		imagesMat.add(new Image("jeu/modele/image/map/pierre.png"));
+		imagesMat.add(new Image("jeu/modele/image/map/metal.png"));
+		imagesMat.add(new Image("jeu/modele/image/map/ciel.png"));
+
 	}
 	
 	//DROITE
+	
+	
+
+	//placer
 	public boolean peutPlacerDroite() {
-		if(joueur.getInventaireResources().get(0).getResource().getValue() > 0  && Collision.graviter(joueur, map) )
+		if(joueur.getInventaireResources().get(joueur.getMatChoisi()-4).getResource().getValue() > 0  && Collision.graviter(joueur, map) )
 			return (valTabDroitePlacer!=1 && valTabDroitePlacer!=2 && valTabDroitePlacer!=3 && valTabDroitePlacer!=4 && valTabDroitePlacer!=5 && valTabDroitePlacer!=6);
 		return false;
 	}
 	
-	public boolean peutCasserDroite() {
-		return (valTabDroiteCasser!=0 && valTabDroiteCasser!=1 && valTabDroiteCasser!=2 && valTabDroiteCasser!=3 && valTabDroiteCasser!=7);
-	}
-	
+	//X
 	public void placerTuileDroite() {
 		c.getChildren().remove(this.prochaineTuileDroitePlacer);
-		map[this.prochaineTuileDroitePlacer] = 4;
-		c.getChildren().add(this.prochaineTuileDroitePlacer,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
-		joueur.getInventaireResources().get(0).retirerResource();
+		map[this.prochaineTuileDroitePlacer] = joueur.getMatChoisi();
+		imagePlacer.setImage(imagesMat.get(joueur.getMatChoisi()-4));
+		c.getChildren().add(this.prochaineTuileDroitePlacer,imagePlacer);
+		joueur.getInventaireResources().get(joueur.getMatChoisi()-4).retirerResource();
+	}
+	
+	
+	//casser
+	public boolean peutCasserDroite() {
+		return (valTabDroiteCasser!=0 && valTabDroiteCasser!=1 && valTabDroiteCasser!=2 && valTabDroiteCasser!=3 && valTabDroiteCasser!=7);
 	}
 	public void casserTuileDroite() {
 		c.getChildren().remove(this.prochaineTuileDroiteCasser);
 		map[this.prochaineTuileDroiteCasser] = 0;
-		c.getChildren().add(this.prochaineTuileDroiteCasser,new ImageView(new Image("jeu/modele/image/map/ciel.png")) );
-		joueur.getInventaireResources().get(0).ajouterResource();
+		imagePlacer.setImage(imagesMat.get(3));
+		c.getChildren().add(this.prochaineTuileDroiteCasser,imagePlacer);
+		if(valTabDroiteCasser==4)
+			joueur.getInventaireResources().get(0).ajouterResource();
+		else if (valTabDroiteCasser == 5)
+			joueur.getInventaireResources().get(1).ajouterResource();
+		else
+			joueur.getInventaireResources().get(2).ajouterResource();
 	}
 	
 	//GAUCHE
+	
+	//placer
 	public boolean peutPlacerGauche() {
-		if(joueur.getInventaireResources().get(0).getResource().getValue() > 0 &&  Collision.graviter(joueur, map))
+		if(joueur.getInventaireResources().get(joueur.getMatChoisi()-4).getResource().getValue() > 0 &&  Collision.graviter(joueur, map))
 			return (valTabGauchePlacer!=1 && valTabGauchePlacer!=2 && valTabGauchePlacer!=3 && valTabGauchePlacer!=4 && valTabGauchePlacer!=5 && valTabGauchePlacer!=6);
 		return false;
 	}
-	public boolean peutCasserGauche() {
-		return (valTabGaucheCasser!=0 && valTabGaucheCasser!=1 && valTabGaucheCasser!=2 && valTabGaucheCasser!=3 && valTabGaucheCasser!=7);
-	}
+	
+	//X
 	public void placerTuileGauche() {
 		c.getChildren().remove(this.prochaineTuileGauchePlacer);
-		map[this.prochaineTuileGauchePlacer] = 4;
-		c.getChildren().add(this.prochaineTuileGauchePlacer,new ImageView(new Image("jeu/modele/image/map/bois.png")) );
-		joueur.getInventaireResources().get(0).retirerResource();
+		map[this.prochaineTuileGauchePlacer] = joueur.getMatChoisi();
+		imagePlacer.setImage(imagesMat.get(joueur.getMatChoisi()-4));
+		c.getChildren().add(this.prochaineTuileGauchePlacer,imagePlacer);
+		joueur.getInventaireResources().get(joueur.getMatChoisi()-4).retirerResource();
+	}
+	
+	
+	//casser
+	public boolean peutCasserGauche() {
+		return (valTabGaucheCasser!=0 && valTabGaucheCasser!=1 && valTabGaucheCasser!=2 && valTabGaucheCasser!=3 && valTabGaucheCasser!=7);
 	}
 	public void casserTuileGauche() {
 		c.getChildren().remove(this.prochaineTuileGaucheCasser);
 		map[this.prochaineTuileGaucheCasser] = 0;
-		c.getChildren().add(this.prochaineTuileGaucheCasser,new ImageView(new Image("jeu/modele/image/map/ciel.png")) );
-		joueur.getInventaireResources().get(0).ajouterResource();
+		imagePlacer.setImage(imagesMat.get(3));
+		c.getChildren().add(this.prochaineTuileDroiteCasser,imagePlacer);
+		if(valTabGaucheCasser==4)
+			joueur.getInventaireResources().get(0).ajouterResource();
+		else if (valTabGaucheCasser == 5)
+			joueur.getInventaireResources().get(1).ajouterResource();
+		else
+			joueur.getInventaireResources().get(2).ajouterResource();
 	}
+	
+	
+	
+	
 	
 	//Getters
 	public int getXtileDroite() {
@@ -131,7 +174,8 @@ public class HitBox {
 	public int[] getMap() {
 		return map;
 	}
-	
+
+
 	
 	//Setters
 	public void setXtileDroitePlacer(int xtileDroite) {

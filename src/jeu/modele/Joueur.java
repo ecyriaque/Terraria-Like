@@ -30,7 +30,7 @@ public class Joueur {
 	private Resource pierre=new Pierre();
 	private IntegerProperty nbBandageProperty,nbKitdeSoinProperty; //nombre de bandage et de kit de soin
 	private IntegerProperty nbBouclierProperty; // nombre bouclier du perso (0 a 3)
-
+	private int matChoisi;
 	
 	//CONSTRUCTEUR//
 	public Joueur() {
@@ -61,6 +61,9 @@ public class Joueur {
 		inventaireResource.add(bois);
 		inventaireResource.add(pierre);
 		inventaireResource.add(metal);
+		
+		this.matChoisi = 4;
+		
 	}
 
 	/////////////Methodes de gestion des PV ///////////////
@@ -331,7 +334,6 @@ public class Joueur {
 			inventaireResource.get(0).EnleverResource();
 		}
 	}
-
 	public void mettreAzero() {
 		this.nbBandageProperty.setValue(0);
 		this.nbKitdeSoinProperty.setValue(0);
@@ -353,6 +355,15 @@ public class Joueur {
 	public void setNbBouclierProperty(IntegerProperty nbBouclierProperty) {
 		this.nbBouclierProperty = nbBouclierProperty;
 	}
+	public void setDroite(boolean droite) {
+		this.droite = droite;
+	}
+	public void setSaute(boolean saute) {
+		this.saute = saute;
+	}
+	public void setMatChoisi(int mat) {
+		matChoisi = mat;
+	}
 
 	/////// Les Getters //////////////
 	public final int getNbCoeurs() {
@@ -373,9 +384,6 @@ public class Joueur {
 	public boolean getDroite() {
 		return droite;
 	}
-	public void setDroite(boolean droite) {
-		this.droite = droite;
-	}
 	public boolean getGauche() {
 		return gauche;
 	}
@@ -384,9 +392,6 @@ public class Joueur {
 	}
 	public boolean getSaute() {
 		return saute;
-	}
-	public void setSaute(boolean saute) {
-		this.saute = saute;
 	}
 	public IntegerProperty getNbKitdeSoinProperty() {
 		return nbKitdeSoinProperty;
@@ -400,6 +405,8 @@ public class Joueur {
 	public ArrayList<Resource> getInventaireResources() {
 		return inventaireResource;
 	}
-	
+	public int getMatChoisi() {
+		return matChoisi;
+	}
 	
 }

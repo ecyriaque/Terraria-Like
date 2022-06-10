@@ -23,8 +23,8 @@ public class VueMap {
 		images.add(new Image("jeu/modele/image/map/sol.png")); //2 sol avec herbes
 		images.add(new Image("jeu/modele/image/map/obsidienne.png")); //3 obsidennes
 		images.add(new Image("jeu/modele/image/map/bois.png")); //4 bois
-		images.add(new Image("jeu/modele/image/map/metal.png")); //5 metal
-		images.add(new Image("jeu/modele/image/map/pierre.png")); //6 pierre
+		images.add(new Image("jeu/modele/image/map/pierre.png")); //5 pierre
+		images.add(new Image("jeu/modele/image/map/metal.png")); //6 metal
 		images.add(new Image("jeu/modele/image/map/haut.png")); //7 haut de la map
 		this.env = new Map();
 		this.tabMap = env.getTab();
