@@ -14,13 +14,11 @@ import jeu.modele.inventaire.objet.objetSoin.*;
 import jeu.modele.resource.*;
 
 
-public class Joueur {
+public class Joueur extends Personnage{
 	//variables//
-	private int xx,yy;
 	private IntegerProperty x,y; //position du joueur
 	private IntegerProperty nbCoeursProperty; // nombre de coeur du perso (0 a 5)
-	protected Map map; //map
-	private int nbSaut=0; //nb saut 
+	private int nbSaut; //nb saut 
 	private int vitesse; //vitesse de deplacement du perso
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
 	private ArrayList<Resource> inventaireResource; 
@@ -28,18 +26,41 @@ public class Joueur {
 	private Resource bois= new Bois();
 	private Resource metal= new Metal();
 	private Resource pierre=new Pierre();
-	private IntegerProperty nbBandageProperty,nbKitdeSoinProperty; //nombre de bandage et de kit de soin
+	private IntegerProperty nbBandageProperty, nbKitdeSoinProperty; //nombre de bandage et de kit de soin
 	private IntegerProperty nbBouclierProperty; // nombre bouclier du perso (0 a 3)
 	private int matChoisi;
+	private boolean direction; //true:droite     false:gauche
+	
+	public void setDirection(boolean direction) {
+		this.direction = direction;
+	}
+	private int xtileDroitePlacer;
+	private int xtileGauchePlacer;
+	
+	private int ytile;
+	
+	private int prochaineTuileDroitePlacer;
+	private int prochaineTuileGauchePlacer;	
+	
+	private int xtileDroiteCasser;
+	private int xtileGaucheCasser;
+	
+	private int prochaineTuileDroiteCasser;
+	private int prochaineTuileGaucheCasser;	
+	
+	private int valTabDroitePlacer;
+	private int valTabGauchePlacer;
+	
+	private int valTabDroiteCasser;
+	private int valTabGaucheCasser;
 	
 	//CONSTRUCTEUR//
 	public Joueur() {
-		this.xx = 40;
-		this.yy =360;
+		
 		this.nbCoeursProperty=new SimpleIntegerProperty(5);
 		this.nbBouclierProperty = new SimpleIntegerProperty(0);
-		this.x = new SimpleIntegerProperty(xx);
-		this.y = new SimpleIntegerProperty(yy);
+		this.x = new SimpleIntegerProperty(40);
+		this.y = new SimpleIntegerProperty(360);
 		this.vitesse = 8;
 		this.nbBandageProperty=new SimpleIntegerProperty(0);
 		this.nbKitdeSoinProperty=new SimpleIntegerProperty(0);
@@ -61,12 +82,33 @@ public class Joueur {
 		inventaireResource.add(bois);
 		inventaireResource.add(pierre);
 		inventaireResource.add(metal);
-		
-		this.matChoisi = 4;
-		
+		this.nbSaut = 0;
+		this.matChoisi = 0;
+	}
+
+	public int getProchaineTuileDroitePlacer() {
+		this.xtileDroitePlacer = ((this.getX()+79)/40);
+		this.ytile = ((this.getY()+20)/40);
+		return this.prochaineTuileDroitePlacer = (xtileDroitePlacer+(ytile*20));
+	}
+	public int getProchaineTuileGauchePlacer() {
+		this.xtileGauchePlacer = ((this.getX()-40)/40);
+		this.ytile = ((this.getY()+20)/40);
+		return this.prochaineTuileGauchePlacer = (xtileGauchePlacer+(ytile*20));
+	}
+	public int getProchaineTuileDroiteCasser() {
+		this.xtileDroitePlacer = ((this.getX()+40)/40);
+		this.ytile = ((this.getY()+20)/40);
+		return this.prochaineTuileDroitePlacer = (xtileDroitePlacer+(ytile*20));
+	}
+	public int getProchaineTuileGaucheCasser() {
+		this.xtileGauchePlacer = ((this.getX()-1)/40);
+		this.ytile = ((this.getY()+20)/40);
+		return this.prochaineTuileGauchePlacer = (xtileGauchePlacer+(ytile*20));
 	}
 
 	/////////////Methodes de gestion des PV ///////////////
+	@Override
 	public void perdrePv() {
 		int nbCoeur =this.getNbCoeurs()-1;
 		if(getNbCoeurs()>=1) 
@@ -113,16 +155,19 @@ public class Joueur {
 	}
 
 	///////// Les methodes de deplacement //////////
+	@Override
 	public void allerAGauche() {
 		int npos = getX()-vitesse;
 		if(npos > -5)
 			this.x.setValue(npos);
 	}
+	@Override
 	public void allerADroite() {
 		int npos = getX()+vitesse;
 		if (npos < 766)
 			this.x.setValue(npos);
 	}
+	@Override
 	public void sauter() {
 		int npos = getY()-10;
 		if(npos >0 )
@@ -131,6 +176,7 @@ public class Joueur {
 				nbSaut++;
 			}
 	}
+	@Override
 	public void tomber() {
 		int npos = getY()+10;
 		this.y.setValue(npos);
@@ -317,6 +363,13 @@ public class Joueur {
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
 	////////Methodes ajout/supp soin////////
 	public void ajtNbKitdeSoin() {
 		int nbKDS = this.nbKitdeSoinProperty.getValue();
@@ -339,6 +392,13 @@ public class Joueur {
 		this.nbKitdeSoinProperty.setValue(0);
 	}
 
+	
+	
+	
+	
+	
+	
+	
 	///////// Les setters /////////////
 	public final void setY(int n){
 		y.setValue(n);
@@ -372,9 +432,11 @@ public class Joueur {
 	public final int getNbBouclier() {
 		return this.nbBouclierProperty.getValue();
 	}
+	@Override
 	public final int getX() {
 		return x.getValue();
 	}
+	@Override
 	public final int getY() {
 		return y.getValue();
 	}
@@ -407,6 +469,9 @@ public class Joueur {
 	}
 	public int getMatChoisi() {
 		return matChoisi;
+	}
+	public boolean getDirection() {
+		return direction;
 	}
 	
 }

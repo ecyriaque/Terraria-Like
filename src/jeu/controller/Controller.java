@@ -1,12 +1,9 @@
 package jeu.controller;
 //IMPORT
 import java.net.URL;
+
 import jeu.modele.*;
-import jeu.vue.VueBouclier;
-import jeu.vue.VueInventaire;
-import jeu.vue.VueJoueur;
-import jeu.vue.VueMap;
-import jeu.vue.VuePv;
+import jeu.vue.*;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -48,13 +45,14 @@ public class Controller implements Initializable{
 	private ImageView matSelectioner;
 	
 	//VARIABLES
-	private Joueur joueur =new Joueur();//creation du joueur
+	private Joueur joueur ;//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
 	private int[]tabMap; //map (tableau)
-	private boolean direction; // direction du joueur true=droite false=gauche
 	private VueJoueur vueJ; //Vue du joueur
 	private Construction hitBox; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
+	private Ennemi ennemi;
+	private VueEnnemi vueEnnemi;
    
 	
 	//INITIALISATION
@@ -73,10 +71,18 @@ public class Controller implements Initializable{
 		vueJ.ajouterImageDuJoueur(); 
 	}
 	
+	//ENNEMI
+	public void ennemi() {
+		vueEnnemi = new VueEnnemi(conteneur, ennemi);
+		vueEnnemi.getImgActive().translateXProperty().bind(ennemi.getXProperty());
+		vueEnnemi.getImgActive().translateYProperty().bind(ennemi.getYProperty());
+		vueEnnemi.ajouterImageEnnemi();
+	}
+	
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap,vueJ.getImgActive(), menuCraft, craftInventaire);
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap, menuCraft, craftInventaire);
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
@@ -85,13 +91,13 @@ public class Controller implements Initializable{
 	//DEPLACEMENT DU JOUEUR
 	public void deplacement() {
 		if(this.joueur.getGauche()) {
-			direction = false;
+			joueur.setDirection(false);
 			if(!Collision.collisionGauche(joueur, tabMap)) {
 				joueur.allerAGauche();
 			}
 		}
 		if(this.joueur.getDroite()) {
-			direction = true;
+			joueur.setDirection(true);
 			if(!Collision.collisionDroite(joueur, tabMap)) {
 				joueur.allerADroite();
 			}
@@ -105,21 +111,25 @@ public class Controller implements Initializable{
 	
 	//BOUCLE DU JEU
 	private void initAnimation() {
+		joueur = new Joueur();
+		ennemi = new Ennemi(joueur);
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		int pxl = 40;
 		int taille = 20;
 		carte.setMaxSize(pxl*taille, pxl*taille);
 		block();
-		vueMap = new VueMap(carte);
+		vueMap = new VueMap(carte, joueur);
 		vueMap.afficherMap();
 		tabMap=vueMap.getTabMap();
-		joueur();
+		this.joueur();
+		//this.ennemi();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
 		this.joueur.getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(joueur, root), joueur));
 		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
 		new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage,ImageCraftPistolet,ImageCraftBouclier);
 		this.gestionDesTouches();
+		
 		KeyFrame kf = new KeyFrame(
 				Duration.seconds(0.05), 
 				(ev ->{			
@@ -127,7 +137,18 @@ public class Controller implements Initializable{
 						joueur.tomber();
 					if(Collision.graviter(joueur, tabMap)) 
 						joueur.setNbSaut(0);
+					if(Collision.collisionDroite(ennemi, tabMap) || Collision.collisionGauche(ennemi, tabMap) ) {
+						ennemi.sauter();
+					}
+					if(!Collision.graviter(ennemi, tabMap))
+						ennemi.tomber();
+					if(Collision.graviter(ennemi, tabMap)) 
+						ennemi.setNbSaut(0);
 					deplacement();
+					//ennemi.suivreJoueur();
+					//this.vueEnnemi.actualiserImage();
+					this.vueJ.actualiserImage();
+					
 				}));
 		gameLoop.getKeyFrames().add(kf);
 	}
@@ -135,18 +156,26 @@ public class Controller implements Initializable{
 	//Placer/Casser les blocks de la map
 	public void block() {
 		root.setOnMouseClicked(ev -> {
-			hitBox = new Construction(joueur, carte, tabMap);
-			if(direction) { // droite
-				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerDroite()) //placer des blocks
+			hitBox = new Construction(joueur, tabMap);
+			if(joueur.getDirection()) { // droite
+				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerDroite()) { //placer des blocks
 					hitBox.placerTuileDroite();
-				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserDroite()) // casser des blocks
+					vueMap.actualiserMapDroite();
+				}
+				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserDroite()) { // casser des blocks
 					hitBox.casserTuileDroite();
+					vueMap.actualiserMapDroiteCasser();
+				}
 			}
 			else{ // gauche
-				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerGauche())  // placer des blocks
+				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerGauche()) {  // placer des blocks
 					hitBox.placerTuileGauche();
-				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserGauche()) // casser des blocks
+					vueMap.actualiserMapGauche();
+				}
+				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserGauche()) { // casser des blocks
 					hitBox.casserTuileGauche();
+					vueMap.actualiserMapGaucheCasser();
+				}
 			}
 		});
 	}

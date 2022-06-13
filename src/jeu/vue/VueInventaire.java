@@ -105,4 +105,8 @@ public class VueInventaire {
 			}
 			System.out.println(joueur.getInventaireObjet().getInventaire().toString());
 		}	
+	
+	public void actualiserLaMap() {
+		
+	}
 }

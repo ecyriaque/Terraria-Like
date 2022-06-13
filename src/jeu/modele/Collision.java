@@ -2,7 +2,7 @@ package jeu.modele;
 
 public class Collision {
 
-	public static boolean collisionDroite(Joueur joueur,int[] tabMap){
+	public static boolean collisionDroite(Personnage joueur,int[] tabMap){
 		int xtile;
 		int ytile,ytile2,ytile3;
 		int ValeurTile,ValeurTil2, ValeurTil3;
@@ -20,7 +20,7 @@ public class Collision {
 		return false;
 	}
 	
-	public static boolean collisionGauche(Joueur joueur,int[] tabMap){
+	public static boolean collisionGauche(Personnage joueur,int[] tabMap){
 		int xtile;
 		int ytile,ytile2,ytile3;
 		int ValeurTile,ValeurTil2, ValeurTil3;
@@ -38,7 +38,7 @@ public class Collision {
 		return false;
 	}
 	
-	public static boolean collisionHaut(Joueur joueur,int[] tabMap){
+	public static boolean collisionHaut(Personnage joueur,int[] tabMap){
 		int xtile,xtile2,xtile3;
 		int ytile;
 		int ValeurTile,ValeurTil2, ValeurTil3;
@@ -58,7 +58,7 @@ public class Collision {
 	
 	
 
-	public static boolean graviter(Joueur joueur,int[] tabMap) {
+	public static boolean graviter(Personnage joueur,int[] tabMap) {
 		int xtile,xtile2,xtile3;
 		int ytile;
 		int ValeurTile,ValeurTil2, ValeurTil3;
