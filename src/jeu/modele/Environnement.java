@@ -56,7 +56,6 @@ public class Environnement {
 		}
 		return null;
 	}
-
 	
 	public ArrayList<Resource> getListeResource() {
 		return listeResource;
@@ -71,25 +70,7 @@ public class Environnement {
 		}
 		return null;
 	}
-	public final IntegerProperty getNbPierreProperty(){
-		return pierre.getNbResourceProperty();
-	}
-	public final IntegerProperty getNbMetalProperty(){
-		return metal.getNbResourceProperty();
-	}
-	
-	public int getNbBois() {
-		return bois.getNbResourceProperty().intValue();
-	}
 
-	public int getNbPierre() {
-		return pierre.getNbResourceProperty().intValue();
-	}
-
-	public int getNbMetal() {
-		return metal.getNbResourceProperty().intValue();
-	}
-	
 	public int getNbResource(String matiere) {
 		if (matiere.equals("bois")) {
 			return bois.getNbResourceProperty().intValue();
