@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
 import jeu.modele.inventaire.Inventaire;
 import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.caseInventaire;
@@ -44,20 +45,7 @@ public class Joueur extends Personnage{
 		this.vitesse = 8;
 		this.nbBandageProperty=new SimpleIntegerProperty(0);
 		this.nbKitdeSoinProperty=new SimpleIntegerProperty(0);
-
-		caseInventaire case1= new caseInventaire(new ObjetVide(),1);
-		caseInventaire case2=new caseInventaire(new ObjetVide(),2);
-		caseInventaire case3=new caseInventaire(new ObjetVide(),3);
-		caseInventaire case4=new caseInventaire(new ObjetVide(),4);
-		caseInventaire case5=new caseInventaire(new ObjetVide(),5);
-		caseInventaire case6=new caseInventaire(new ObjetVide(),6);
-
-		inventaireObjet.ajouterDansLinventaire(case1);
-		inventaireObjet.ajouterDansLinventaire(case2);
-		inventaireObjet.ajouterDansLinventaire(case3);
-		inventaireObjet.ajouterDansLinventaire(case4);
-		inventaireObjet.ajouterDansLinventaire(case5);
-		inventaireObjet.ajouterDansLinventaire(case6);
+		this.ObjetEquiperProperty=new SimpleIntegerProperty(0);
 		
 		this.nbSaut = 0;
 		this.matChoisi = 0;
@@ -164,179 +152,182 @@ public class Joueur extends Personnage{
 	//////////////METHODES CRAFT//////////////////
 	
 	//EPEE
-	public void crafterEpeeBois() {
-		if (env.getNbResource("bois")<3 && this.inventaireObjet.getInventaire().get(0).getNumObjetCase().getValue()==0) 
-			System.out.println("pas assez de bois il vous en manque "+(3-env.getNbResource("bois")));
-		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==0) {
-			System.out.println("deja poseder");
-		}
-		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==1 || this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==2){
-			System.out.println("Vous posseder une meilleur epee");
-		}
-		else if(env.getNbResource("bois")>=3) {
-			System.out.println(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase());
-			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeeBois());
-			env.EnleverResource("bois",3);
+		public void crafterEpeeBois() {
+			if (env.getNbBois()<3 && this.inventaireObjet.getCaseObjetCase(1)!=0) 
+				System.out.println("pas assez de bois il vous en manque "+(3-env.getNbBois()));
+			else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==0) {
+				System.out.println("deja poseder");
+			}
+			else if(this.inventaireObjet.getCaseObjetCase(1)==1 ||this.inventaireObjet.getCaseObjetCase(1)==2){
+				System.out.println("Vous posseder une meilleur epee");
+			}
+			else if(env.getNbBois()>=3) {
+				System.out.println(this.inventaireObjet.getCaseObjetCase(1));
+				this.inventaireObjet.SetObjetCase(1,0);
+				env.EnleverResource("bois",3);
 
+			}
 		}
-	}
 
-	public void crafterEpeePierre() {
-		if (env.getNbResource("pierre")<3 && this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()!=0) 
-			System.out.println("pas assez de pierre il vous en manque "+(3-env.getNbResource("pierre")));
-		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==1) 
-			System.out.println("deja poseder");	
-		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==2)
-			System.out.println("Vous posseder une meilleur epee");
-		else if(env.getNbResource("pierre")>=3) {
-			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeePierre());
-			env.EnleverResource("pierre",3);
+		public void crafterEpeePierre() {
+			if (env.getNbPierre()<3 && this.inventaireObjet.getCaseObjetCase(1)!=0) 
+				System.out.println("pas assez de pierre il vous en manque "+(3-env.getNbPierre()));
+			else if(this.inventaireObjet.getCaseObjetCase(1)==1) 
+				System.out.println("deja poseder");	
+			else if(this.inventaireObjet.getCaseObjetCase(1)==2)
+				System.out.println("Vous posseder une meilleur epee");
+			else if(env.getNbPierre()>=3) {
+				this.inventaireObjet.SetObjetCase(1,1);
+				env.EnleverResource("pierre",3);
+			}
 		}
-	}
 
-	public void crafterEpeeMetal() {
-		if (env.getNbResource("metal")<3 && this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()!=0) 
-			System.out.println("pas assez de metal il vous en manque "+(3-env.getNbResource("metal")));
-		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==2)
-			System.out.println("vous avez deja une epee en metal");
-		else if(env.getNbResource("metal")>=3) {
-			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeeMetal());
-			env.EnleverResource("metal",3);
+		public void crafterEpeeMetal() {
+			if (env.getNbMetal()<3 && this.inventaireObjet.getCaseObjetCase(1)!=0) 
+				System.out.println("pas assez de metal il vous en manque "+(3-env.getNbMetal()));
+			else if(this.inventaireObjet.getCaseObjetCase(1)==2)
+				System.out.println("vous avez deja une epee en metal");
+			else if(env.getNbMetal()>=3) {
+				this.inventaireObjet.SetObjetCase(1,3);
+				env.EnleverResource("metal",3);
+			}
 		}
-	}
 
-	//HACHE
-	public void crafterHacheBois() {
-		if (env.getNbResource("bois")<3 && this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()!=3) 
-			System.out.println("pas assez de bois il vous en manque "+(3-env.getNbResource("bois")));
-		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==3) 
-			System.out.println("vous avez deja une hache en bois");
-		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==4 || this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==5)
-			System.out.println("Vous posseder une meilleur hache");
-		else if(env.getNbResource("bois")>=3) {
-			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HacheBois());
-			env.EnleverResource("bois",3);
+		//HACHE
+		public void crafterHacheBois() {
+			if (env.getNbBois()<3 && this.inventaireObjet.getCaseObjetCase(2)!=3) 
+				System.out.println("pas assez de bois il vous en manque "+(3-env.getNbBois()));
+			else if(this.inventaireObjet.getCaseObjetCase(2)==3) 
+				System.out.println("vous avez deja une hache en bois");
+			else if(this.inventaireObjet.getCaseObjetCase(2)==4 || this.inventaireObjet.getCaseObjetCase(2)==5)
+				System.out.println("Vous posseder une meilleur hache");
+			else if(env.getNbBois()>=3) {
+				this.inventaireObjet.SetObjetCase(2,3);
+				env.EnleverResource("bois",3);
+			}
 		}
-	}
 
-	public void crafterHachePierre() {
-		if (env.getNbResource("pierre")<3 && this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()!=3) 
-			System.out.println("pas assez de pierre il vous en manque "+(3-env.getNbResource("pierre")));
-		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==4) 
-			System.out.println("vous avez deja une hache en pierre");
-		else if(this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()==5)
-			System.out.println("Vous poss�der une meilleur hache");
-		else if(env.getNbResource("pierre")>=3) {
-			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HachePierre());
-			env.EnleverResource("pierre",3);
+		public void crafterHachePierre() {
+			if (env.getNbPierre()<3 && this.inventaireObjet.getCaseObjetCase(2)!=3) 
+				System.out.println("pas assez de pierre il vous en manque "+(3-env.getNbPierre()));
+			else if(this.inventaireObjet.getCaseObjetCase(2)==4) 
+				System.out.println("vous avez deja une hache en pierre");
+			else if(this.inventaireObjet.getCaseObjetCase(2)==5)
+				System.out.println("Vous posseder une meilleur hache");
+			else if(env.getNbPierre()>=3) {
+				this.inventaireObjet.SetObjetCase(2,4);
+				env.EnleverResource("pierre",3);
+			}
 		}
-	}
 
-	public void crafterHacheMetal() {
-		if (env.getNbResource("metal")<3 && this.getInventaireObjet().getInventaire().get(1).getNumObjetCase().getValue()!=3) 
-			System.out.println("pas assez de metal il vous en manque "+(3-env.getNbResource("metal")));
-		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==5)
-			System.out.println("vous avez deja une hache en metal");
-		else if(env.getNbResource("metal")>=3) {
-			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HacheMetal());
-			env.EnleverResource("metal", 3);
+		public void crafterHacheMetal() {
+			if (env.getNbMetal()<3 && this.inventaireObjet.getCaseObjetCase(2)!=3) 
+				System.out.println("pas assez de metal il vous en manque "+(3-env.getNbMetal()));
+			else if(this.inventaireObjet.getCaseObjetCase(2)==5)
+				System.out.println("vous avez deja une hache en metal");
+			else if(env.getNbMetal()>=3) {
+				this.inventaireObjet.SetObjetCase(2,5);
+				env.EnleverResource("metal",3);
+			}
 		}
-	}
 
-	//PIOCHE
-	public void crafterPiocheBois() {
-		if (env.getNbResource("bois")<3 && this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()!=6) 
-			System.out.println("pas assez de bois il vous en manque "+(3-env.getNbResource("bois")));
-		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==6) 
-			System.out.println("vous avez deja une pioche en bois");
-		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==7 || this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==8)
-			System.out.println("Vous posseder une meilleur pioche");
-		else if(env.getNbResource("bois")>=3) {
-			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiocheBois());
-			env.EnleverResource("bois",3);
+		//PIOCHE
+		public void crafterPiocheBois() {
+			if (env.getNbBois()<3 && this.inventaireObjet.getCaseObjetCase(3)!=6) 
+				System.out.println("pas assez de bois il vous en manque "+(3-env.getNbBois()));
+			else if(this.inventaireObjet.getCaseObjetCase(2)==6) 
+				System.out.println("vous avez deja une pioche en bois");
+			else if(this.inventaireObjet.getCaseObjetCase(3)==7 ||this.inventaireObjet.getCaseObjetCase(3)==8)
+				System.out.println("Vous posseder une meilleur pioche");
+			else if(env.getNbBois()>=3) {
+				this.inventaireObjet.SetObjetCase(3,6);
+				env.EnleverResource("bois",3);
+			}
 		}
-	}
-	
-	public void crafterPiochePierre() {
-		if (env.getNbResource("pierre")<3 && this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()!=7) 
-			System.out.println("pas assez de Pierre il vous en manque "+(3-env.getNbResource("pierre")));
-		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==7) 
-			System.out.println("vous avez deja une pioche en pierre");
-		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==7 || this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==8)
-			System.out.println("Vous posseder une meilleur pioche");
-		else if(env.getNbResource("pierre")>=3) {
-			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiochePierre());
-			env.EnleverResource("pierre",3);
+		
+		public void crafterPiochePierre() {
+			if (env.getNbPierre()<3 && this.inventaireObjet.getCaseObjetCase(3)!=7) 
+				System.out.println("pas assez de Pierre il vous en manque "+(3-env.getNbPierre()));
+			else if(this.inventaireObjet.getCaseObjetCase(3)==7) 
+				System.out.println("vous avez deja une pioche en pierre");
+			else if(this.inventaireObjet.getCaseObjetCase(3)==7 || this.inventaireObjet.getCaseObjetCase(3)==8)
+				System.out.println("Vous posseder une meilleur pioche");
+			else if(env.getNbPierre()>=3) {
+				this.inventaireObjet.SetObjetCase(3,7);
+				env.EnleverResource("pierre",3);
+			}
 		}
-	}
 
-	public void crafterPiocheMetal() {
-		if (env.getNbResource("metal")<3 && this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()!=8) 
-			System.out.println("pas assez de metal il vous en manque "+(3-env.getNbResource("metal")));
-		else if(this.getInventaireObjet().getInventaire().get(2).getNumObjetCase().getValue()==8) 
-			System.out.println("vous avez deja une pioche en metal");
-		else if(env.getNbResource("metal")>=3) {
-			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiocheMetal());
-			env.EnleverResource("metal",3);
+		public void crafterPiocheMetal() {
+			if (env.getNbMetal()<3 && this.inventaireObjet.getCaseObjetCase(3)!=8) 
+				System.out.println("pas assez de metal il vous en manque "+(3-env.getNbMetal()));
+			else if(this.inventaireObjet.getCaseObjetCase(3)==8) 
+				System.out.println("vous avez deja une pioche en metal");
+			else if(env.getNbMetal()>=3) {
+				this.inventaireObjet.SetObjetCase(3,8);
+				env.EnleverResource("metal",3);
+			}
 		}
-	}
 
-	//BANDAGES
-	public void crafterBandage() {
-		if (env.getNbResource("bois")<3 && this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()!=9) 
-			System.out.println("pas assez de bois");
-		else if(this.getInventaireObjet().getInventaire().get(4).getNumObjetCase().getValue()==9 && env.getNbResource("bois")>=3) {
-			ajtNbBandage();	
-			System.out.println("bandage :"+this.nbBandageProperty.getValue());
+		//BANDAGES
+		public void crafterBandage() {
+			if (env.getNbBois()<3 && this.inventaireObjet.getCaseObjetCase(5)!=9) 
+				System.out.println("pas assez de bois");
+			else if(this.inventaireObjet.getCaseObjetCase(5)==9 && env.getNbBois()>=3) {
+				ajtNbBandage();	
+				System.out.println("bandage :"+this.nbBandageProperty.getValue());
+			}
+			else if(env.getNbBois()>=3) {
+				this.inventaireObjet.SetObjetCase(5,9);
+				ajtNbBandage();
+				System.out.println("bandage :"+this.nbBandageProperty.getValue());
+			}
 		}
-		else if(env.getNbResource("bois")>=3) {
-			this.getInventaireObjet().getInventaire().get(4).setObjetDeLaCase(new Bandage());
-			ajtNbBandage();
-			System.out.println("bandage :"+this.nbBandageProperty.getValue());
-		}
-	}
 
-	//KITS DE SOINS
-	public void crafterKitDeSoin() {
-		if (env.getNbResource("bois")<6 && this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()!=10) 
-			System.out.println("pas assez de bois");
-		else if(this.inventaireObjet.getInventaire().get(5).getNumObjetCase().getValue()==10 && env.getNbResource("bois")>=6) {
-			ajtNbKitdeSoin();
-			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
+		//KITS DE SOINS
+		public void crafterKitDeSoin() {
+			if (env.getNbBois()<6 && this.inventaireObjet.getCaseObjetCase(6)!=10) 
+				System.out.println("pas assez de bois");
+			else if(this.inventaireObjet.getCaseObjetCase(6)==10 && env.getNbBois()>=6) {
+				ajtNbKitdeSoin();
+				System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
+			}
+			else if(env.getNbBois()>=6 ) {
+				this.inventaireObjet.SetObjetCase(6,10);
+				ajtNbKitdeSoin();
+				System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
+			}
 		}
-		else if(env.getNbResource("bois")>=6 ) {
-			this.getInventaireObjet().getInventaire().get(5).setObjetDeLaCase(new KitDeSoin());
-			ajtNbKitdeSoin();
-			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
-		}
-	}
-	
-	//PISTOLET
-	public void crafterPistolet() {
-		if(env.getNbResource("metal")>=10 && !(this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()==11)) {
-			this.getInventaireObjet().getInventaire().get(3).setObjetDeLaCase(new Pistolet());
-			env.EnleverResource("metal",10);
-		}
-	}
-	
-	//BOUCLIER
-	public void crafterBouclier() {
-		if (env.getNbResource("metal") < 3) 
-			System.out.println("pas assez de metals");
-		else if(nbBouclierProperty.getValue() == 3) 
-			System.out.println("Vous avez deja le maximum de bouclier");
-		else if(env.getNbResource("metal")>=3) {	
-			env.EnleverResource("metal",3);
-			this.gagnerBouclier();
-			System.out.println(nbBouclierProperty.getValue());
+		
+		//PISTOLET
+		public void crafterPistolet() {
+			if (env.getNbMetal()<10 && this.inventaireObjet.getCaseObjetCase(4)!=11) 
+				System.out.println("pas assez de metals");
+			else if(this.inventaireObjet.getCaseObjetCase(4)==11) 
+				System.out.println("vous avez deja un pistolet");
+			else if(env.getNbMetal()>=10) {
+				this.inventaireObjet.SetObjetCase(4,11);
+				env.EnleverResource("metal",10);
 			
+			}
 		}
-	}
+		
+		//BOUCLIER
+		public void crafterBouclier() {
+			if (env.getNbMetal() < 3) 
+				System.out.println("pas assez de metals");
+			else if(nbBouclierProperty.getValue() == 3) 
+				System.out.println("Vous avez deja le maximum de bouclier");
+			else if(env.getNbMetal()>=3) {	
+				env.EnleverResource("metal",3);
+				this.gagnerBouclier();
+				System.out.println(nbBouclierProperty.getValue());
+				
+			}
+		}
 
 
-	
-	
-	
+
 	
 	
 	
@@ -448,4 +439,21 @@ public class Joueur extends Personnage{
 	public Environnement getEnv() {
 		return this.env;
 	}
+
+	public int getCaseChoisi() {
+		return caseChoisi;
+	}
+
+	public void setCaseChoisi(int caseChoisi) {
+		this.caseChoisi = caseChoisi;
+	}
+	public void setObjetEquiper(int i) {
+		this.ObjetEquiperProperty.setValue(i);	
+	}
+
+	public IntegerProperty getObjetEquiperProperty() {
+		// TODO Auto-generated method stub
+		return this.ObjetEquiperProperty;
+	}
+	
 }

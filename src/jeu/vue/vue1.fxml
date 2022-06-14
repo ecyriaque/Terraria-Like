@@ -22,7 +22,9 @@
       <Pane fx:id="conteneur" prefHeight="600.0" prefWidth="800.0">
          <children>
             <TilePane fx:id="carte" prefHeight="600.0" prefWidth="800.0" />
-         </children>
+        
+          <ImageView fx:id="imgObjetDansLesMains" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+          </children>
       </Pane>
       <ImageView fx:id="craftInventaire" fitHeight="150.0" fitWidth="400.0" layoutX="390.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>

@@ -10,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import jeu.modele.Collision;
 import jeu.modele.Construction;
+import jeu.modele.Environnement;
 import jeu.modele.Joueur;
 import jeu.modele.inventaire.objet.ObjetVide;
 import jeu.modele.inventaire.objet.objetSoin.KitDeSoin;
@@ -22,10 +23,11 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private Pane menuCraft;
 	private ImageView craftInventaire;
 	private ImageView matChoisi;
-	
-	public GestionnaireDeToucheAppuyer(Pane root,Joueur joueur,int[]tabMap, Pane menuCraft, ImageView InventaireCraft) {
+	private Environnement env;
+	public GestionnaireDeToucheAppuyer(Pane root,Environnement env,int[]tabMap, Pane menuCraft, ImageView InventaireCraft) {
 		this.root=root;
-		this.joueur=joueur;
+		this.env=env;
+		this.joueur=env.getJoueur();
 		this.tabMap=tabMap;
 		this.menuCraft=menuCraft;
 		this.craftInventaire = InventaireCraft;
@@ -91,19 +93,91 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				joueur.mettreAzero();
 				break;
 			case F1 : 
-				joueur.setMatChoisi(0);
+				env.getJoueur().setMatChoisi(4);
 				matChoisi.setTranslateX(497);
+				matChoisi.setTranslateY(7);
+				matChoisi.setVisible(true);
+				env.getJoueur().setObjetEquiper(13);
 				System.out.println("bois choisi");
 				break;
 			case F2 :
-				joueur.setMatChoisi(1);
+				env.getJoueur().setMatChoisi(5);
 				matChoisi.setTranslateX(597);
+				matChoisi.setTranslateY(7);
+				matChoisi.setVisible(true);
+				env.getJoueur().setObjetEquiper(14);
 				System.out.println("pierre choisie");
 				break;
 			case F3 :
-				joueur.setMatChoisi(2);
+				env.getJoueur().setMatChoisi(6);
 				matChoisi.setTranslateX(697);
+				matChoisi.setTranslateY(7);
+				matChoisi.setVisible(true);
+				env.getJoueur().setObjetEquiper(15);
 				System.out.println("metal choisi");
+				break;
+				
+			case F4 :
+
+				env.getJoueur().setObjetEquiper(env.getJoueur().getInventaireObjet().getInventaire().get(0).getNumObjetCase().intValue());
+				System.out.println("case epee choisi");
+				env.getJoueur().setCaseChoisi(1);
+				matChoisi.setTranslateY(545);
+				matChoisi.setTranslateX(40);
+				matChoisi.setVisible(true);
+				
+				break;
+			case F5 :
+
+				env.getJoueur().setObjetEquiper(env.getJoueur().getInventaireObjet().getInventaire().get(1).getNumObjetCase().intValue());
+				System.out.println("case hache choisi");
+				env.getJoueur().setCaseChoisi(2);
+				matChoisi.setTranslateY(545);
+				matChoisi.setTranslateX(86);
+				matChoisi.setVisible(true);
+				break;
+				
+			case F6 :
+
+				env.getJoueur().setObjetEquiper(env.getJoueur().getInventaireObjet().getInventaire().get(2).getNumObjetCase().intValue());
+				System.out.println("case pioche choisi");
+				env.getJoueur().setCaseChoisi(3);
+				matChoisi.setTranslateY(545);
+				matChoisi.setTranslateX(131);
+				matChoisi.setVisible(true);
+				break;
+				
+			case F7 :
+
+				env.getJoueur().setObjetEquiper(env.getJoueur().getInventaireObjet().getInventaire().get(3).getNumObjetCase().intValue());
+				System.out.println("case pistolet choisi");
+				env.getJoueur().setCaseChoisi(4);
+				matChoisi.setTranslateY(545);
+				matChoisi.setTranslateX(176);
+				matChoisi.setVisible(true);
+				break;
+				
+			case F8 :
+
+				env.getJoueur().setObjetEquiper(env.getJoueur().getInventaireObjet().getInventaire().get(4).getNumObjetCase().intValue());
+				System.out.println("case bandage choisi");
+				env.getJoueur().setCaseChoisi(5);
+				matChoisi.setTranslateY(545);
+				matChoisi.setTranslateX(221);
+				matChoisi.setVisible(true);
+				break;
+			case F9 :
+
+				env.getJoueur().setObjetEquiper(env.getJoueur().getInventaireObjet().getInventaire().get(5).getNumObjetCase().intValue());
+				System.out.println("case kit de Soin choisi");
+				env.getJoueur().setCaseChoisi(6);
+				matChoisi.setTranslateY(545);
+				matChoisi.setTranslateX(281);
+				matChoisi.setVisible(true);
+				break;
+				
+				
+			default:
 				break;
 			}
 		});

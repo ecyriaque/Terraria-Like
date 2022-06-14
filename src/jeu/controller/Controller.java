@@ -46,6 +46,8 @@ public class Controller implements Initializable{
 	@FXML
 	private ImageView matSelectioner;
 	
+	@FXML
+	private ImageView imgObjetDansLesMains;
 	//VARIABLES
 	private Joueur joueur ;//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
@@ -99,7 +101,7 @@ public class Controller implements Initializable{
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, joueur, tabMap, menuCraft, craftInventaire);
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, env, tabMap, menuCraft, craftInventaire);
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
@@ -143,7 +145,7 @@ public class Controller implements Initializable{
 		this.ajouterEnnemi();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
 		this.joueur.getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(joueur, root), joueur));
-		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
+		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6, imgObjetDansLesMains);
 		new gestionnaireDeCraft(joueur,textCraft,imagesCraft);
 		this.gestionDesTouches();
 		

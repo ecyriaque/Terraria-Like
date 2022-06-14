@@ -14,12 +14,15 @@ public class VueInventaire {
 			new Image("jeu/modele/image/utilitaires/piocheBois.png"),new Image("jeu/modele/image/utilitaires/piochePierre.png"),
 			new Image("jeu/modele/image/utilitaires/piocheMetal.png"),new Image("jeu/modele/image/utilitaires/bandage.png"),
 			new Image("jeu/modele/image/utilitaires/kitDeSoin.png"),new Image("jeu/modele/image/utilitaires/pistolet.png"),
-			new Image("jeu/modele/image/utilitaires/carrerVide.png")};	
+			new Image("jeu/modele/image/utilitaires/vide.png"),new Image("jeu/modele/image/utilitaires/bois.png"),
+			new Image("jeu/modele/image/utilitaires/pierre.png"),new Image("jeu/modele/image/utilitaires/metal.png"),};	
 	private Joueur joueur;
 	private Label labelBois,labelPierre,labelMetal,labelNbDeBandage,labelNbDeKitDeSoin;
 	private ImageView case1,case2,case3,case4,case5,case6;
+	private ImageView imgObjetDansLesMains;
+	
 	public VueInventaire(Joueur joueur,HBox boxInv,Label labelNbDeBandage,Label labelNbDeKitDeSoin,Label labelBois,Label labelPierre,Label labelMetal,
-			ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6) {
+			ImageView case1,ImageView case2,ImageView case3,ImageView case4,ImageView case5,ImageView case6,ImageView imgObjetDansLesMains) {
 		this.joueur=joueur;
 		this.labelBois=labelBois;
 		this.labelPierre=labelPierre;
@@ -33,6 +36,10 @@ public class VueInventaire {
 		this.case5=case5;
 		this.case6=case6;
 		afficherInventaireObjet();
+		this.imgObjetDansLesMains=imgObjetDansLesMains;
+		this.imgObjetDansLesMains.translateXProperty().bind(joueur.xProperty().add(40));
+		this.imgObjetDansLesMains.translateYProperty().bind(joueur.yProperty());
+		
 	}
 	
 	public void afficherInventaireObjet() {
@@ -41,6 +48,10 @@ public class VueInventaire {
 		joueur.getEnv().getNbResourceProperty("metal").addListener((obse,old,nouv)-> this.labelMetal.setText(nouv.toString()));		
 		joueur.getNbBandageProperty().addListener((obse,old,nouv)-> this.labelNbDeBandage.setText(nouv.toString()));
 		joueur.getNbKitdeSoinProperty().addListener((obse,old,nouv)-> this.labelNbDeKitDeSoin.setText(nouv.toString()));
+		//listenner qui sert a changer l'objet équiper par le joueur
+				joueur.getObjetEquiperProperty().addListener((obse,old,nouv)-> equiperObjetDansLesMains(nouv.intValue()));		
+				
+		
 		for (int i = 0; i < joueur.getInventaireObjet().getInventaire().size(); i++) {
 			int a=i;
 			joueur.getInventaireObjet().getInventaire().get(i).getObjetDeLaCase().getNumProperty().addListener((obse,old,nouv)-> actualiser(nouv));
@@ -106,7 +117,8 @@ public class VueInventaire {
 			System.out.println(joueur.getInventaireObjet().getInventaire().toString());
 		}	
 	
-	public void actualiserLaMap() {
-		
+	public void equiperObjetDansLesMains(int i) {
+		System.out.println("Objet équiper :"+i );
+		imgObjetDansLesMains.setImage(tabImage[i]);
 	}
 }
