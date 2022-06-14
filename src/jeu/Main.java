@@ -13,6 +13,7 @@ public class Main extends Application {
 			Scene scene = new Scene(root,800,600);
 			root.requestFocus();
 			primaryStage.setScene(scene);
+			
 			primaryStage.show();	
 		} catch (Exception e) {
 			e.printStackTrace();
