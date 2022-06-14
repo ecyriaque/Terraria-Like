@@ -16,9 +16,8 @@ public class VueMap {
 	private ImageView imageActive;
 	private ArrayList<Image> imagesMap;
 	private ArrayList<Image> imageRessources;
-	private Map env;
+	private Map map;
 	private Joueur joueur;
-//	private int prochaineTuileDroitePlacer =  (xtileDroitePlacer+(ytile*20));
 	
 	public VueMap(TilePane carte , Joueur j) {
 		imageActive = new ImageView();
@@ -31,8 +30,8 @@ public class VueMap {
 		imagesMap.add(new Image("jeu/modele/image/map/pierre.png")); //5 pierre
 		imagesMap.add(new Image("jeu/modele/image/map/metal.png")); //6 metal
 		imagesMap.add(new Image("jeu/modele/image/map/haut.png")); //7 haut de la map
-		this.env = new Map();
-		this.tabMap = env.getTab();
+		this.map = new Map();
+		this.tabMap = map.getTab();
 		this.carte = carte; 
 		this.joueur = j;
 		
@@ -75,25 +74,24 @@ public class VueMap {
 	}
 	
 	public void actualiserMapDroite() {
-		carte.getChildren().remove(joueur.getProchaineTuileDroitePlacer());
-		carte.getChildren().add(joueur.getProchaineTuileDroitePlacer(), new ImageView(imageRessources.get(joueur.getMatChoisi()) ));
-	}
-	
+		carte.getChildren().remove(joueur.constructionDroitePlacer());
+		carte.getChildren().add(joueur.constructionDroitePlacer(), new ImageView(imageRessources.get(joueur.getMatChoisi()) ));
+	}	
 	public void actualiserMapGauche() {
-		carte.getChildren().remove(joueur.getProchaineTuileGauchePlacer());
-		carte.getChildren().add(joueur.getProchaineTuileGauchePlacer(), new ImageView (imageRessources.get(joueur.getMatChoisi()) ));
+		carte.getChildren().remove(joueur.constructionGauchePlacer());
+		carte.getChildren().add(joueur.constructionGauchePlacer(), new ImageView (imageRessources.get(joueur.getMatChoisi()) ));
 	}
-	
 	public void actualiserMapDroiteCasser() {
-		carte.getChildren().remove(joueur.getProchaineTuileDroiteCasser());
-		carte.getChildren().add(joueur.getProchaineTuileDroiteCasser(), new ImageView(imagesMap.get(0)));
+		carte.getChildren().remove(joueur.constructionDroiteCasser());
+		carte.getChildren().add(joueur.constructionDroiteCasser(), new ImageView(imagesMap.get(0)));
 	}
-	
 	public void actualiserMapGaucheCasser() {
-		carte.getChildren().remove(joueur.getProchaineTuileGaucheCasser());
-		carte.getChildren().add( joueur.getProchaineTuileGaucheCasser(), new ImageView(imagesMap.get(0)));
+		carte.getChildren().remove(joueur.constructionGaucheCasser());
+		carte.getChildren().add( joueur.constructionGaucheCasser(), new ImageView(imagesMap.get(0)));
 	}
 
+	
+	
 	public int[] getTabMap() {
 		return tabMap;
 	}
@@ -103,11 +101,11 @@ public class VueMap {
 	}
 
 	public Map getEnv() {
-		return env;
+		return map;
 	}
 
 	public void setEnv(Map env) {
-		this.env = env;
+		this.map = env;
 	}
 	
 	

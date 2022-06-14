@@ -4,6 +4,8 @@ import java.net.URL;
 
 import jeu.modele.*;
 import jeu.vue.*;
+
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -49,22 +51,36 @@ public class Controller implements Initializable{
 	private Timeline gameLoop;//boucle du jeu
 	private int[]tabMap; //map (tableau)
 	private VueJoueur vueJ; //Vue du joueur
-	private Construction hitBox; // Placer/Casser 
+	private Construction construction; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
 	private Ennemi ennemi;
 	private VueEnnemi vueEnnemi;
-   
+	private ArrayList<ImageView> imagesCraft;
 	
 	//INITIALISATION
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		this.imagesCraft = new ArrayList<>();
+		imagesCraft.add(ImageCraftEpeeBois);
+		imagesCraft.add(ImageCraftEpeePierre);
+		imagesCraft.add(ImageCraftEpeeMetal);	
+		imagesCraft.add(ImageCraftHacheBois);
+		imagesCraft.add(ImageCraftHachePierre);
+		imagesCraft.add(ImageCraftHacheMetal);
+		imagesCraft.add(ImageCraftPiocheBois);
+		imagesCraft.add(ImageCraftPiochePierre);
+		imagesCraft.add(ImageCraftPiocheMetal);
+		imagesCraft.add(ImageCraftKitDeSoin);
+		imagesCraft.add(ImageCraftBandage);
+		imagesCraft.add(ImageCraftPistolet);
+		imagesCraft.add(ImageCraftBouclier);
 		initAnimation();
 		gameLoop.play();
 		
 	}
 	
 	//JOUEUR
-	public  void joueur() {	
+	public  void ajouterJoueur() {	
 		vueJ = new VueJoueur(conteneur, joueur);
 		vueJ.getImgActive().translateXProperty().bind(joueur.xProperty());
 		vueJ.getImgActive().translateYProperty().bind(joueur.yProperty());
@@ -72,7 +88,7 @@ public class Controller implements Initializable{
 	}
 	
 	//ENNEMI
-	public void ennemi() {
+	public void ajouterEnnemi() {
 		vueEnnemi = new VueEnnemi(conteneur, ennemi);
 		vueEnnemi.getImgActive().translateXProperty().bind(ennemi.getXProperty());
 		vueEnnemi.getImgActive().translateYProperty().bind(ennemi.getYProperty());
@@ -122,12 +138,12 @@ public class Controller implements Initializable{
 		vueMap = new VueMap(carte, joueur);
 		vueMap.afficherMap();
 		tabMap=vueMap.getTabMap();
-		this.joueur();
-		//this.ennemi();
+		this.ajouterJoueur();
+		this.ajouterEnnemi();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
 		this.joueur.getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(joueur, root), joueur));
 		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6);
-		new gestionnaireDeCraft(joueur,textCraft,ImageCraftEpeeBois,ImageCraftEpeePierre,ImageCraftEpeeMetal,ImageCraftHacheBois,ImageCraftHachePierre,ImageCraftHacheMetal,ImageCraftPiocheBois,ImageCraftPiochePierre,ImageCraftPiocheMetal,ImageCraftKitDeSoin,ImageCraftBandage,ImageCraftPistolet,ImageCraftBouclier);
+		new gestionnaireDeCraft(joueur,textCraft,imagesCraft);
 		this.gestionDesTouches();
 		
 		KeyFrame kf = new KeyFrame(
@@ -145,8 +161,8 @@ public class Controller implements Initializable{
 					if(Collision.graviter(ennemi, tabMap)) 
 						ennemi.setNbSaut(0);
 					deplacement();
-					//ennemi.suivreJoueur();
-					//this.vueEnnemi.actualiserImage();
+					ennemi.suivreJoueur();
+					this.vueEnnemi.actualiserImage();
 					this.vueJ.actualiserImage();
 					
 				}));
@@ -156,24 +172,24 @@ public class Controller implements Initializable{
 	//Placer/Casser les blocks de la map
 	public void block() {
 		root.setOnMouseClicked(ev -> {
-			hitBox = new Construction(joueur, tabMap);
+			construction = new Construction(joueur, tabMap);
 			if(joueur.getDirection()) { // droite
-				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerDroite()) { //placer des blocks
-					hitBox.placerTuileDroite();
+				if(ev.getButton().equals(MouseButton.PRIMARY) && construction.peutPlacerDroite()) { //placer des blocks
+					construction.placerTuileDroite();
 					vueMap.actualiserMapDroite();
 				}
-				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserDroite()) { // casser des blocks
-					hitBox.casserTuileDroite();
+				else if(ev.getButton().equals(MouseButton.SECONDARY) && construction.peutCasserDroite()) { // casser des blocks
+					construction.casserTuileDroite();
 					vueMap.actualiserMapDroiteCasser();
 				}
 			}
 			else{ // gauche
-				if(ev.getButton().equals(MouseButton.PRIMARY) && hitBox.peutPlacerGauche()) {  // placer des blocks
-					hitBox.placerTuileGauche();
+				if(ev.getButton().equals(MouseButton.PRIMARY) && construction.peutPlacerGauche()) {  // placer des blocks
+					construction.placerTuileGauche();
 					vueMap.actualiserMapGauche();
 				}
-				else if(ev.getButton().equals(MouseButton.SECONDARY) && hitBox.peutCasserGauche()) { // casser des blocks
-					hitBox.casserTuileGauche();
+				else if(ev.getButton().equals(MouseButton.SECONDARY) && construction.peutCasserGauche()) { // casser des blocks
+					construction.casserTuileGauche();
 					vueMap.actualiserMapGaucheCasser();
 				}
 			}

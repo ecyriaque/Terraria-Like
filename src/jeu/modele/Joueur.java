@@ -23,36 +23,15 @@ public class Joueur extends Personnage{
 	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
 	private ArrayList<Resource> inventaireResource; 
 	private Inventaire inventaireObjet =new Inventaire();
-	private Resource bois= new Bois();
-	private Resource metal= new Metal();
-	private Resource pierre=new Pierre();
+	private Resource bois= new Resource("bois");
+	private Resource metal= new Resource("metal");
+	private Resource pierre=new Resource("pierre");
 	private IntegerProperty nbBandageProperty, nbKitdeSoinProperty; //nombre de bandage et de kit de soin
 	private IntegerProperty nbBouclierProperty; // nombre bouclier du perso (0 a 3)
 	private int matChoisi;
 	private boolean direction; //true:droite     false:gauche
-	
-	public void setDirection(boolean direction) {
-		this.direction = direction;
-	}
-	private int xtileDroitePlacer;
-	private int xtileGauchePlacer;
-	
-	private int ytile;
-	
-	private int prochaineTuileDroitePlacer;
-	private int prochaineTuileGauchePlacer;	
-	
-	private int xtileDroiteCasser;
-	private int xtileGaucheCasser;
-	
-	private int prochaineTuileDroiteCasser;
-	private int prochaineTuileGaucheCasser;	
-	
-	private int valTabDroitePlacer;
-	private int valTabGauchePlacer;
-	
-	private int valTabDroiteCasser;
-	private int valTabGaucheCasser;
+	private int xtile;
+	private int ytile;	
 	
 	//CONSTRUCTEUR//
 	public Joueur() {
@@ -86,25 +65,26 @@ public class Joueur extends Personnage{
 		this.matChoisi = 0;
 	}
 
-	public int getProchaineTuileDroitePlacer() {
-		this.xtileDroitePlacer = ((this.getX()+79)/40);
+	//CONSTRUCION
+	public int constructionDroitePlacer() {
+		this.xtile = ((this.getX()+79)/40);
 		this.ytile = ((this.getY()+20)/40);
-		return this.prochaineTuileDroitePlacer = (xtileDroitePlacer+(ytile*20));
+		return (xtile+(ytile*20));
 	}
-	public int getProchaineTuileGauchePlacer() {
-		this.xtileGauchePlacer = ((this.getX()-40)/40);
+	public int constructionGauchePlacer() {
+		this.xtile = ((this.getX()-40)/40);
 		this.ytile = ((this.getY()+20)/40);
-		return this.prochaineTuileGauchePlacer = (xtileGauchePlacer+(ytile*20));
+		return(xtile+(ytile*20));
 	}
-	public int getProchaineTuileDroiteCasser() {
-		this.xtileDroitePlacer = ((this.getX()+40)/40);
+	public int constructionDroiteCasser() {
+		this.xtile = ((this.getX()+40)/40);
 		this.ytile = ((this.getY()+20)/40);
-		return this.prochaineTuileDroitePlacer = (xtileDroitePlacer+(ytile*20));
+		return (xtile+(ytile*20));
 	}
-	public int getProchaineTuileGaucheCasser() {
-		this.xtileGauchePlacer = ((this.getX()-1)/40);
+	public int constructionGaucheCasser() {
+		this.xtile = ((this.getX()-1)/40);
 		this.ytile = ((this.getY()+20)/40);
-		return this.prochaineTuileGauchePlacer = (xtileGauchePlacer+(ytile*20));
+		return (xtile+(ytile*20));
 	}
 
 	/////////////Methodes de gestion des PV ///////////////
@@ -187,7 +167,7 @@ public class Joueur extends Personnage{
 	
 	//EPEE
 	public void crafterEpeeBois() {
-		if (inventaireResource.get(0).getResource().getValue()<3 && this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==0) 
+		if (inventaireResource.get(0).getResource().getValue()<3 && this.inventaireObjet.getInventaire().get(0).getNumObjetCase().getValue()==0) 
 			System.out.println("pas assez de bois il vous en manque "+(3-inventaireResource.get(0).getResource().getValue()));
 		else if(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase().getValue()==0) {
 			System.out.println("deja poseder");
@@ -198,7 +178,7 @@ public class Joueur extends Personnage{
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			System.out.println(this.getInventaireObjet().getInventaire().get(0).getNumObjetCase());
 			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeeBois());
-			inventaireResource.get(0).EnleverResource();
+			inventaireResource.get(0).EnleverResource(3);
 
 		}
 	}
@@ -212,7 +192,7 @@ public class Joueur extends Personnage{
 			System.out.println("Vous posseder une meilleur epee");
 		else if(inventaireResource.get(1).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeePierre());
-			inventaireResource.get(1).EnleverResource();
+			inventaireResource.get(1).EnleverResource(3);
 		}
 	}
 
@@ -223,7 +203,7 @@ public class Joueur extends Personnage{
 			System.out.println("vous avez deja une epee en metal");
 		else if(inventaireResource.get(2).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new EpeeMetal());
-			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).EnleverResource(3);
 		}
 	}
 
@@ -237,7 +217,7 @@ public class Joueur extends Personnage{
 			System.out.println("Vous posseder une meilleur hache");
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HacheBois());
-			inventaireResource.get(0).EnleverResource();
+			inventaireResource.get(0).EnleverResource(3);
 		}
 	}
 
@@ -250,7 +230,7 @@ public class Joueur extends Personnage{
 			System.out.println("Vous poss�der une meilleur hache");
 		else if(inventaireResource.get(1).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HachePierre());
-			inventaireResource.get(1).EnleverResource();
+			inventaireResource.get(1).EnleverResource(3);
 		}
 	}
 
@@ -261,7 +241,7 @@ public class Joueur extends Personnage{
 			System.out.println("vous avez deja une hache en metal");
 		else if(inventaireResource.get(2).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(1).setObjetDeLaCase(new HacheMetal());
-			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).EnleverResource(3);
 		}
 	}
 
@@ -275,7 +255,7 @@ public class Joueur extends Personnage{
 			System.out.println("Vous posseder une meilleur pioche");
 		else if(inventaireResource.get(0).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiocheBois());
-			inventaireResource.get(0).EnleverResource();
+			inventaireResource.get(0).EnleverResource(3);
 		}
 	}
 	
@@ -288,7 +268,7 @@ public class Joueur extends Personnage{
 			System.out.println("Vous posseder une meilleur pioche");
 		else if(inventaireResource.get(1).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiochePierre());
-			inventaireResource.get(1).EnleverResource();
+			inventaireResource.get(1).EnleverResource(3);
 		}
 	}
 
@@ -299,7 +279,7 @@ public class Joueur extends Personnage{
 			System.out.println("vous avez deja une pioche en metal");
 		else if(inventaireResource.get(2).getResource().getValue()>=3) {
 			this.getInventaireObjet().getInventaire().get(2).setObjetDeLaCase(new PiocheMetal());
-			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).EnleverResource(3);
 		}
 	}
 
@@ -322,7 +302,7 @@ public class Joueur extends Personnage{
 	public void crafterKitDeSoin() {
 		if (inventaireResource.get(0).getResource().getValue()<6 && this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()!=10) 
 			System.out.println("pas assez de bois");
-		else if(this.getInventaireObjet().getInventaire().get(5).getNumObjetCase().getValue()==10 && inventaireResource.get(0).getResource().getValue()>=6) {
+		else if(this.inventaireObjet.getInventaire().get(5).getNumObjetCase().getValue()==10 && inventaireResource.get(0).getResource().getValue()>=6) {
 			ajtNbKitdeSoin();
 			System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
 		}
@@ -335,16 +315,9 @@ public class Joueur extends Personnage{
 	
 	//PISTOLET
 	public void crafterPistolet() {
-		if (inventaireResource.get(2).getResource().getValue()<10 && this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()!=11) 
-			System.out.println("pas assez de metals");
-		else if(this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()==11) 
-			System.out.println("vous avez deja un pistolet");
-		else if(inventaireResource.get(2).getResource().getValue()>=10) {
+		if(inventaireResource.get(2).getResource().getValue()>=10 && !(this.getInventaireObjet().getInventaire().get(3).getNumObjetCase().getValue()==11)) {
 			this.getInventaireObjet().getInventaire().get(3).setObjetDeLaCase(new Pistolet());
-			inventaireResource.get(2).EnleverResource();
-			inventaireResource.get(2).EnleverResource();
-			inventaireResource.get(2).EnleverResource();
-			inventaireResource.get(2).retirerResource();
+			inventaireResource.get(2).EnleverResource(10);
 		}
 	}
 	
@@ -355,7 +328,7 @@ public class Joueur extends Personnage{
 		else if(nbBouclierProperty.getValue() == 3) 
 			System.out.println("Vous avez deja le maximum de bouclier");
 		else if(inventaireResource.get(2).getResource().getValue()>=3) {	
-			inventaireResource.get(2).EnleverResource();
+			inventaireResource.get(2).EnleverResource(3);
 			this.gagnerBouclier();
 			System.out.println(nbBouclierProperty.getValue());
 			
@@ -375,8 +348,7 @@ public class Joueur extends Personnage{
 		int nbKDS = this.nbKitdeSoinProperty.getValue();
 		if(nbKDS < 2) {
 			this.nbKitdeSoinProperty.setValue(nbKitdeSoinProperty.getValue()+1);
-			inventaireResource.get(0).EnleverResource();
-			inventaireResource.get(0).EnleverResource();
+			inventaireResource.get(0).EnleverResource(6);
 		}
 	}
 	
@@ -384,7 +356,7 @@ public class Joueur extends Personnage{
 		int nbBandages = nbBandageProperty.getValue()+1;
 		if(nbBandages<6) {
 			this.nbBandageProperty.setValue(nbBandages);
-			inventaireResource.get(0).EnleverResource();
+			inventaireResource.get(0).EnleverResource(3);
 		}
 	}
 	public void mettreAzero() {
@@ -423,6 +395,9 @@ public class Joueur extends Personnage{
 	}
 	public void setMatChoisi(int mat) {
 		matChoisi = mat;
+	}
+	public void setDirection(boolean direction) {
+		this.direction = direction;
 	}
 
 	/////// Les Getters //////////////

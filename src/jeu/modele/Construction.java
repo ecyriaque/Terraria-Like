@@ -17,6 +17,7 @@ public class Construction {
 	private Joueur joueur;	
 	private ArrayList<Integer> tuileDure ;
 	private ArrayList<Integer> tuileCassable;
+	private int nbTuileParLigne;
 	
 	//Construceur
 	public Construction(Joueur joueur, int[] tabMap  ) {
@@ -35,31 +36,32 @@ public class Construction {
 		this.map = tabMap;
 		this.joueur = joueur;
 		
-		this.valTabDroitePlacer = tabMap[joueur.getProchaineTuileDroitePlacer()];	
-		this.valTabGauchePlacer = tabMap[joueur.getProchaineTuileGauchePlacer()];	
-		this.valTabDroiteCasser = tabMap[joueur.getProchaineTuileDroiteCasser()];	
-		this.valTabGaucheCasser = tabMap[joueur.getProchaineTuileGaucheCasser()];	
+		this.valTabDroitePlacer = tabMap[joueur.constructionDroitePlacer()];	
+		this.valTabGauchePlacer = tabMap[joueur.constructionGauchePlacer()];	
+		this.valTabDroiteCasser = tabMap[joueur.constructionDroiteCasser()];	
+		this.valTabGaucheCasser = tabMap[joueur.constructionGaucheCasser()];
+		
+		this.nbTuileParLigne = 20;
 		
 	}
 	
 	//DROITE
 	//placer
 	public boolean peutPlacerDroite() {
-		if(joueur.getInventaireResources().get(joueur.getMatChoisi()).getResource().getValue() > 0  && Collision.graviter(joueur, map) )
+		if(joueur.getInventaireResources().get(joueur.getMatChoisi()).getResource().getValue() > 0  && Collision.graviter(joueur, map) && tuileDure.contains(map[joueur.constructionDroitePlacer()+nbTuileParLigne] ))
 			return (!tuileDure.contains(valTabDroitePlacer));
 		return false;
 	}
-	public boolean placerTuileDroite() {
-		map[joueur.getProchaineTuileDroitePlacer()] = joueur.getMatChoisi()+4;
-		joueur.getInventaireResources().get(joueur.getMatChoisi()).retirerResource();
-		return true;
+	public void placerTuileDroite() {
+		map[joueur.constructionDroitePlacer()] = joueur.getMatChoisi()+4;
+		joueur.getInventaireResources().get(joueur.getMatChoisi()).EnleverResource(1);
 	}
 	//casser
 	public boolean peutCasserDroite() {
 		return tuileCassable.contains(valTabDroiteCasser);
 	}
 	public void casserTuileDroite() {
-		map[joueur.getProchaineTuileDroiteCasser()] = 0;
+		map[joueur.constructionDroiteCasser()] = 0;
 		if(valTabDroiteCasser==4)
 			joueur.getInventaireResources().get(0).ajouterResource();
 		else if (valTabDroiteCasser == 5)
@@ -73,20 +75,20 @@ public class Construction {
 	//GAUCHE
 	//placer
 	public boolean peutPlacerGauche() {
-		if(joueur.getInventaireResources().get(joueur.getMatChoisi()).getResource().getValue() > 0 &&  Collision.graviter(joueur, map)  )
+		if(joueur.getInventaireResources().get(joueur.getMatChoisi()).getResource().getValue() > 0 &&  Collision.graviter(joueur, map) && tuileDure.contains(map[joueur.constructionGauchePlacer()+nbTuileParLigne] ))
 			return !tuileDure.contains(valTabGauchePlacer);
 		return false;
 	}
 	public void placerTuileGauche() {
-		map[joueur.getProchaineTuileGauchePlacer()] = joueur.getMatChoisi() + 4;
-		joueur.getInventaireResources().get(joueur.getMatChoisi()).retirerResource();
+		map[joueur.constructionGauchePlacer()] = joueur.getMatChoisi() + 4;
+		joueur.getInventaireResources().get(joueur.getMatChoisi()).EnleverResource(1);
 	}
 	//casser
 	public boolean peutCasserGauche() {
 		return tuileCassable.contains(valTabGaucheCasser);
 	}
 	public void casserTuileGauche() {
-		map[joueur.getProchaineTuileGaucheCasser()] = 0;
+		map[joueur.constructionGaucheCasser()] = 0;
 		if(valTabGaucheCasser==4)
 			joueur.getInventaireResources().get(0).ajouterResource();
 		else if (valTabGaucheCasser == 5)

@@ -1,10 +1,12 @@
 package jeu.modele;
 
 
+
 public abstract class Personnage {
+
 	
-	
-	public Personnage() {		
+
+	public Personnage() {	
 	}	
 	public abstract void perdrePv() ;
 	
@@ -19,4 +21,5 @@ public abstract class Personnage {
 	public abstract int getX();
 	
 	public abstract int getY();
+	
 }

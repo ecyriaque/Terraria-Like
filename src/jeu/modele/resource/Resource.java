@@ -1,24 +1,37 @@
 package jeu.modele.resource;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
-public abstract class Resource {
+public class Resource {
 
 	private String typeResource;
+	private IntegerProperty nbResource;
+	
 	
 	public Resource(String typeResource) {
 		this.typeResource=typeResource;
+		nbResource = new SimpleIntegerProperty(0);
 	}
 
-	public String getTypeResource() {
-		return typeResource;
+	
+	public  void ajouterResource(){
+		int c;
+		c=this.nbResource.getValue()+1;
+		if (this.nbResource.getValue() < 99)
+		this.nbResource.setValue(c);
 	}
-
-	public abstract void retirerResource();
 	
-	public abstract void ajouterResource();
+	public IntegerProperty getResource() {
+		return this.getNbPierre();	
+	}
 	
-	public abstract void EnleverResource();
+	public  void EnleverResource(int nbR){
+		int c;
+		c=this.nbResource.getValue()-nbR;
+		this.nbResource.setValue(c);
+	}
 	
-	public abstract IntegerProperty getResource();
-
+	public IntegerProperty getNbPierre() {
+		return nbResource;
+	}
 }

@@ -2,15 +2,15 @@ package jeu.modele;
 
 public class Collision {
 
-	public static boolean collisionDroite(Personnage joueur,int[] tabMap){
+	public static boolean collisionDroite(Personnage personnage,int[] tabMap){
 		int xtile;
 		int ytile,ytile2,ytile3;
 		int ValeurTile,ValeurTil2, ValeurTil3;
 		
-		xtile=(joueur.getX()+41)/40;
-		ytile=(joueur.getY()+20)/40;
-		ytile3=(joueur.getY()+39)/40;
-		ytile2=joueur.getY()/40;
+		xtile=(personnage.getX()+41)/40;
+		ytile=(personnage.getY()+20)/40;
+		ytile3=(personnage.getY()+39)/40;
+		ytile2=personnage.getY()/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
@@ -20,15 +20,15 @@ public class Collision {
 		return false;
 	}
 	
-	public static boolean collisionGauche(Personnage joueur,int[] tabMap){
+	public static boolean collisionGauche(Personnage personnage,int[] tabMap){
 		int xtile;
 		int ytile,ytile2,ytile3;
 		int ValeurTile,ValeurTil2, ValeurTil3;
 		
-		xtile=(joueur.getX()-1)/40;
-		ytile=joueur.getY()/40;
-		ytile2=(joueur.getY()+20)/40;
-		ytile3=(joueur.getY()+39)/40;
+		xtile=(personnage.getX()-1)/40;
+		ytile=personnage.getY()/40;
+		ytile2=(personnage.getY()+20)/40;
+		ytile3=(personnage.getY()+39)/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile+(ytile2*20))];
 		ValeurTil3=tabMap[(xtile+(ytile3*20))];
@@ -38,15 +38,15 @@ public class Collision {
 		return false;
 	}
 	
-	public static boolean collisionHaut(Personnage joueur,int[] tabMap){
+	public static boolean collisionHaut(Personnage personnage,int[] tabMap){
 		int xtile,xtile2,xtile3;
 		int ytile;
 		int ValeurTile,ValeurTil2, ValeurTil3;
 		
-		xtile=(joueur.getX()+20)/40;
-		xtile2=(joueur.getX())/40;
-		xtile3=(joueur.getX()+39)/40;
-		ytile=(joueur.getY()-1)/40;
+		xtile=(personnage.getX()+20)/40;
+		xtile2=(personnage.getX())/40;
+		xtile3=(personnage.getX()+39)/40;
+		ytile=(personnage.getY()-1)/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];
@@ -57,16 +57,15 @@ public class Collision {
 	}
 	
 	
-
-	public static boolean graviter(Personnage joueur,int[] tabMap) {
+	public static boolean graviter(Personnage personnage,int[] tabMap) {
 		int xtile,xtile2,xtile3;
 		int ytile;
 		int ValeurTile,ValeurTil2, ValeurTil3;
 		
-		xtile=joueur.getX()/40;
-		xtile2=(joueur.getX()+20)/40;
-		xtile3=(joueur.getX()+39)/40;
-		ytile=(joueur.getY()+40)/40;
+		xtile=personnage.getX()/40;
+		xtile2=(personnage.getX()+20)/40;
+		xtile3=(personnage.getX()+39)/40;
+		ytile=(personnage.getY()+40)/40;
 		ValeurTile=tabMap[(xtile+(ytile*20))];
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];

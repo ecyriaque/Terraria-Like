@@ -64,7 +64,6 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				joueur.getInventaireResources().get(0).ajouterResource();
 				break;
 			case I :
-				
 				if (visible==false) {
 					menuCraft.setVisible(true);
 					craftInventaire.setVisible(true);
@@ -73,20 +72,13 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 					menuCraft.setVisible(false);
 					craftInventaire.setVisible(false);
 					visible=false;
-				}
-				
-				
+				}		
 				break;
 			case O :
 				joueur.getInventaireResources().get(2).ajouterResource();
 				break;
 			case W :
 				joueur.getInventaireResources().get(1).ajouterResource();
-				break;
-			case P :
-				joueur.getInventaireResources().get(0).retirerResource();
-				joueur.getInventaireResources().get(1).retirerResource();
-				joueur.getInventaireResources().get(2).retirerResource();
 				break;
 			case M :
 				joueur.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new ObjetVide());
@@ -98,11 +90,6 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
 				joueur.mettreAzero();
 				break;
-			case L :
-			
-				System.out.println(joueur.getInventaireObjet().getInventaire().toString());
-				break;
-				
 			case F1 : 
 				joueur.setMatChoisi(0);
 				matChoisi.setTranslateX(497);
