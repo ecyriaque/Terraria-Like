@@ -51,7 +51,7 @@ public class Controller implements Initializable{
 	//VARIABLES
 	private Joueur joueur ;//creation du joueur
 	private Timeline gameLoop;//boucle du jeu
-	private int[]tabMap; //map (tableau)
+	
 	private VueJoueur vueJ; //Vue du joueur
 	private Construction construction; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
@@ -101,7 +101,7 @@ public class Controller implements Initializable{
 	//GESTION DES TOUCHES
 	@FXML
 	void gestionDesTouches() {	
-		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, env, tabMap, menuCraft, craftInventaire);
+		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, env, menuCraft, craftInventaire);
 		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
@@ -111,18 +111,18 @@ public class Controller implements Initializable{
 	public void deplacement() {
 		if(this.joueur.getGauche()) {
 			joueur.setDirection(false);
-			if(!Collision.collisionGauche(joueur, tabMap)) {
+			if(!Collision.collisionGauche(joueur, env.getTabMap())) {
 				joueur.allerAGauche();
 			}
 		}
 		if(this.joueur.getDroite()) {
 			joueur.setDirection(true);
-			if(!Collision.collisionDroite(joueur, tabMap)) {
+			if(!Collision.collisionDroite(joueur, env.getTabMap())) {
 				joueur.allerADroite();
 			}
 		}
 		if(this.joueur.getSaute()) {
-			if(!Collision.collisionHaut(joueur, tabMap)) {
+			if(!Collision.collisionHaut(joueur, env.getTabMap())) {
 				joueur.sauter();
 			}		
 		}
@@ -140,28 +140,28 @@ public class Controller implements Initializable{
 		block();
 		vueMap = new VueMap(carte, joueur);
 		vueMap.afficherMap();
-		tabMap=vueMap.getTabMap();
+		
 		this.ajouterJoueur();
 		this.ajouterEnnemi();
 		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
 		this.joueur.getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(joueur, root), joueur));
-		new VueInventaire(joueur, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6, imgObjetDansLesMains);
+		new VueInventaire(env, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6, imgObjetDansLesMains);
 		new gestionnaireDeCraft(joueur,textCraft,imagesCraft);
 		this.gestionDesTouches();
 		
 		KeyFrame kf = new KeyFrame(
 				Duration.seconds(0.05), 
 				(ev ->{			
-					if(!Collision.graviter(joueur, tabMap)&& !this.joueur.getSaute() || joueur.getNbSaut()==6 || Collision.collisionHaut(joueur, tabMap) && this.joueur.getSaute() ) 
+					if(!Collision.graviter(joueur, env.getTabMap())&& !this.joueur.getSaute() || joueur.getNbSaut()==6 || Collision.collisionHaut(joueur, env.getTabMap()) && this.joueur.getSaute() ) 
 						joueur.tomber();
-					if(Collision.graviter(joueur, tabMap)) 
+					if(Collision.graviter(joueur, env.getTabMap())) 
 						joueur.setNbSaut(0);
-					if(Collision.collisionDroite(ennemi, tabMap) || Collision.collisionGauche(ennemi, tabMap) ) {
+					if(Collision.collisionDroite(ennemi, env.getTabMap()) || Collision.collisionGauche(ennemi, env.getTabMap()) ) {
 						ennemi.sauter();
 					}
-					if(!Collision.graviter(ennemi, tabMap))
+					if(!Collision.graviter(ennemi, env.getTabMap()))
 						ennemi.tomber();
-					if(Collision.graviter(ennemi, tabMap)) 
+					if(Collision.graviter(ennemi, env.getTabMap())) 
 						ennemi.setNbSaut(0);
 					deplacement();
 					ennemi.suivreJoueur();
@@ -175,8 +175,15 @@ public class Controller implements Initializable{
 	//Placer/Casser les blocks de la map
 	public void block() {
 		root.setOnMouseClicked(ev -> {
-			construction = new Construction(joueur, tabMap);
-			if(joueur.getDirection()) { // droite
+			construction = new Construction(env);
+			
+			if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==9) {
+				env.getJoueur().utiliserBandage();
+			}
+			else if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==10) {
+				env.getJoueur().utiliserkitDeSoin();
+			}
+			else if(joueur.getDirection()) { // droite
 				if(ev.getButton().equals(MouseButton.PRIMARY) && construction.peutPlacerDroite()) { //placer des blocks
 					construction.placerTuileDroite();
 					vueMap.actualiserMapDroite();

@@ -24,11 +24,11 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private ImageView craftInventaire;
 	private ImageView matChoisi;
 	private Environnement env;
-	public GestionnaireDeToucheAppuyer(Pane root,Environnement env,int[]tabMap, Pane menuCraft, ImageView InventaireCraft) {
+	public GestionnaireDeToucheAppuyer(Pane root,Environnement env, Pane menuCraft, ImageView InventaireCraft) {
 		this.root=root;
 		this.env=env;
 		this.joueur=env.getJoueur();
-		this.tabMap=tabMap;
+		this.tabMap=env.getTabMap();
 		this.menuCraft=menuCraft;
 		this.craftInventaire = InventaireCraft;
 		
@@ -37,6 +37,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 		matChoisi.setTranslateX(497);
 		matChoisi.setTranslateY(7);
 		matChoisi.setOpacity(0.90);
+		matChoisi.setVisible(false);
 		root.getChildren().add(matChoisi);
 	}
 	@Override

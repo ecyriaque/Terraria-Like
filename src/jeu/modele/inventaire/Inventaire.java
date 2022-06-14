@@ -50,8 +50,13 @@ public class Inventaire {
 		return this.inventaire;
 	}
 	
-	public int getCaseObjetCase(int i){
+	public int getObjetCase(int i){
 		return this.inventaire.get(i-1).getNumObjetCase().get();
+		
+	}
+	
+	public IntegerProperty getObjetCaseProperty(int i){
+		return this.inventaire.get(i-1).getNumObjetCase();
 		
 	}
 	

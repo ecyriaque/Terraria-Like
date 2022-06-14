@@ -2,10 +2,6 @@ package jeu.modele;
 
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.TilePane;
-
 public class Construction {
 	
 	//Variables
@@ -18,9 +14,10 @@ public class Construction {
 	private ArrayList<Integer> tuileDure ;
 	private ArrayList<Integer> tuileCassable;
 	private int nbTuileParLigne;
-	
+	private Environnement env;
 	//Construceur
-	public Construction(Joueur joueur, int[] tabMap  ) {
+	public Construction(Environnement env ) {
+		this.env=env;
 		this.tuileDure = new ArrayList<>();
 		tuileDure.add(1);
 		tuileDure.add(2);
@@ -33,13 +30,13 @@ public class Construction {
 		tuileCassable.add(5);
 		tuileCassable.add(6);
 		
-		this.map = tabMap;
-		this.joueur = joueur;
+		this.map = env.getTabMap();
+		this.joueur =env.getJoueur();
 		
-		this.valTabDroitePlacer = tabMap[joueur.constructionDroitePlacer()];	
-		this.valTabGauchePlacer = tabMap[joueur.constructionGauchePlacer()];	
-		this.valTabDroiteCasser = tabMap[joueur.constructionDroiteCasser()];	
-		this.valTabGaucheCasser = tabMap[joueur.constructionGaucheCasser()];
+		this.valTabDroitePlacer = map[joueur.constructionDroitePlacer()];	
+		this.valTabGauchePlacer = map[joueur.constructionGauchePlacer()];	
+		this.valTabDroiteCasser = map[joueur.constructionDroiteCasser()];	
+		this.valTabGaucheCasser = map[joueur.constructionGaucheCasser()];
 		
 		this.nbTuileParLigne = 20;
 		
@@ -48,7 +45,8 @@ public class Construction {
 	//DROITE
 	//placer
 	public boolean peutPlacerDroite() {
-		if(joueur.getEnv().getListeResource().get(joueur.getMatChoisi()).getNbResourceProperty().getValue() > 0  && Collision.graviter(joueur, map) && tuileDure.contains(map[joueur.constructionDroitePlacer()+nbTuileParLigne] ))
+		
+		if(env.getListeResource().get(joueur.getMatChoisi()).getNbResourceProperty().getValue() > 0  && Collision.graviter(joueur, map) && tuileDure.contains(map[joueur.constructionDroitePlacer()+nbTuileParLigne] ) && joueur.getObjetEquiperProperty().getValue()==joueur.getMatChoisi()+13 )
 			return (!tuileDure.contains(valTabDroitePlacer));
 		return false;
 	}
@@ -58,8 +56,19 @@ public class Construction {
 	}
 	//casser
 	public boolean peutCasserDroite() {
-		return tuileCassable.contains(valTabDroiteCasser);
+		if (valTabDroiteCasser==4 && (joueur.getObjetEquiperProperty().getValue()==3 ||joueur.getObjetEquiperProperty().getValue()==4 || joueur.getObjetEquiperProperty().getValue()==5 ||joueur.getObjetEquiperProperty().getValue()==12 )) {
+			System.out.println("on casse du bois");
+			return tuileCassable.contains(valTabDroiteCasser);
+		}else if (valTabDroiteCasser==5 && (joueur.getObjetEquiperProperty().getValue()==6 ||joueur.getObjetEquiperProperty().getValue()==7 || joueur.getObjetEquiperProperty().getValue()==8 )) {
+			System.out.println("on casse de la pierre");
+			return tuileCassable.contains(valTabDroiteCasser);
+		}else if (valTabDroiteCasser==6 && (joueur.getObjetEquiperProperty().getValue()==7 ||joueur.getObjetEquiperProperty().getValue()==8)) {
+			System.out.println("on casse du metal");
+			return tuileCassable.contains(valTabDroiteCasser);
+		}
+		return false;
 	}
+	
 	public void casserTuileDroite() {
 		map[joueur.constructionDroiteCasser()] = 0;
 		if(valTabDroiteCasser==4)
@@ -77,7 +86,7 @@ public class Construction {
 	//GAUCHE
 	//placer
 	public boolean peutPlacerGauche() {
-		if(joueur.getEnv().getListeResource().get(joueur.getMatChoisi()).getNbResourceProperty().getValue() > 0 &&  Collision.graviter(joueur, map) && tuileDure.contains(map[joueur.constructionGauchePlacer()+nbTuileParLigne] ))
+		if(joueur.getEnv().getListeResource().get(joueur.getMatChoisi()).getNbResourceProperty().getValue() > 0 &&  Collision.graviter(joueur, map) && tuileDure.contains(map[joueur.constructionGauchePlacer()+nbTuileParLigne] )&& joueur.getObjetEquiperProperty().getValue()==joueur.getMatChoisi()+13)
 			return !tuileDure.contains(valTabGauchePlacer);
 		return false;
 	}
