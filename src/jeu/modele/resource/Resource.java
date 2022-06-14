@@ -1,19 +1,15 @@
 package jeu.modele.resource;
-import javafx.beans.binding.IntegerExpression;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 public class Resource {
-
 	
-	private IntegerProperty nbResourceProperty;
+	private IntegerProperty nbResourceProperty;	
 	
-	
-	public Resource() {
-		
+	public Resource() {	
 		nbResourceProperty = new SimpleIntegerProperty(0);
 	}
-
 	
 	public  void ajouterResource(){
 		int c;
