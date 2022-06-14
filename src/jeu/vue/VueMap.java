@@ -1,12 +1,9 @@
 package jeu.vue;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.TilePane;
-import jeu.modele.Construction;
 import jeu.modele.Joueur;
 import jeu.modele.Map;
 

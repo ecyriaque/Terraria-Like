@@ -49,10 +49,10 @@ public class Controller implements Initializable{
 	@FXML
 	private ImageView imgObjetDansLesMains;
 	//VARIABLES
-	private Joueur joueur ;//creation du joueur
+
 	private Timeline gameLoop;//boucle du jeu
 	
-	private VueJoueur vueJ; //Vue du joueur
+	private VueJoueur vueJ; //Vue du env.getJoueur()
 	private Construction construction; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
 	private Ennemi ennemi;
@@ -84,9 +84,9 @@ public class Controller implements Initializable{
 	
 	//JOUEUR
 	public  void ajouterJoueur() {	
-		vueJ = new VueJoueur(conteneur, joueur);
-		vueJ.getImgActive().translateXProperty().bind(joueur.xProperty());
-		vueJ.getImgActive().translateYProperty().bind(joueur.yProperty());
+		vueJ = new VueJoueur(conteneur, env.getJoueur());
+		vueJ.getImgActive().translateXProperty().bind(env.getJoueur().xProperty());
+		vueJ.getImgActive().translateYProperty().bind(env.getJoueur().yProperty());
 		vueJ.ajouterImageDuJoueur(); 
 	}
 	
@@ -102,60 +102,60 @@ public class Controller implements Initializable{
 	@FXML
 	void gestionDesTouches() {	
 		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, env, menuCraft, craftInventaire);
-		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, joueur,vueJ.getImgActive());
+		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, env.getJoueur(),vueJ.getImgActive());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
 	}
 	
 	//DEPLACEMENT DU JOUEUR
 	public void deplacement() {
-		if(this.joueur.getGauche()) {
-			joueur.setDirection(false);
-			if(!Collision.collisionGauche(joueur, env.getTabMap())) {
-				joueur.allerAGauche();
+		if(this.env.getJoueur().getGauche()) {
+			env.getJoueur().setDirection(false);
+			if(!Collision.collisionGauche(env.getJoueur(), env.getTabMap())) {
+				env.getJoueur().allerAGauche();
 			}
 		}
-		if(this.joueur.getDroite()) {
-			joueur.setDirection(true);
-			if(!Collision.collisionDroite(joueur, env.getTabMap())) {
-				joueur.allerADroite();
+		if(this.env.getJoueur().getDroite()) {
+			env.getJoueur().setDirection(true);
+			if(!Collision.collisionDroite(env.getJoueur(), env.getTabMap())) {
+				env.getJoueur().allerADroite();
 			}
 		}
-		if(this.joueur.getSaute()) {
-			if(!Collision.collisionHaut(joueur, env.getTabMap())) {
-				joueur.sauter();
+		if(this.env.getJoueur().getSaute()) {
+			if(!Collision.collisionHaut(env.getJoueur(), env.getTabMap())) {
+				env.getJoueur().sauter();
 			}		
 		}
 	}
 	
 	//BOUCLE DU JEU
 	private void initAnimation() {
-		joueur = env.getJoueur();
-		ennemi = new Ennemi(joueur);
+	
+		ennemi = new Ennemi(env.getJoueur());
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		int pxl = 40;
 		int taille = 20;
 		carte.setMaxSize(pxl*taille, pxl*taille);
 		block();
-		vueMap = new VueMap(carte, joueur);
+		vueMap = new VueMap(carte, env.getJoueur());
 		vueMap.afficherMap();
 		
 		this.ajouterJoueur();
 		this.ajouterEnnemi();
-		this.joueur.nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(joueur, root), joueur));
-		this.joueur.getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(joueur, root), joueur));
+		this.env.getJoueur().nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(env.getJoueur(), root), env.getJoueur()));
+		this.env.getJoueur().getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(env.getJoueur(), root), env.getJoueur()));
 		new VueInventaire(env, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6, imgObjetDansLesMains);
-		new gestionnaireDeCraft(joueur,textCraft,imagesCraft);
+		new gestionnaireDeCraft(env.getJoueur(),textCraft,imagesCraft);
 		this.gestionDesTouches();
 		
 		KeyFrame kf = new KeyFrame(
 				Duration.seconds(0.05), 
 				(ev ->{			
-					if(!Collision.graviter(joueur, env.getTabMap())&& !this.joueur.getSaute() || joueur.getNbSaut()==6 || Collision.collisionHaut(joueur, env.getTabMap()) && this.joueur.getSaute() ) 
-						joueur.tomber();
-					if(Collision.graviter(joueur, env.getTabMap())) 
-						joueur.setNbSaut(0);
+					if(!Collision.graviter(env.getJoueur(), env.getTabMap())&& !this.env.getJoueur().getSaute() || env.getJoueur().getNbSaut()==6 || Collision.collisionHaut(env.getJoueur(), env.getTabMap()) && this.env.getJoueur().getSaute() ) 
+						env.getJoueur().tomber();
+					if(Collision.graviter(env.getJoueur(), env.getTabMap())) 
+						env.getJoueur().setNbSaut(0);
 					if(Collision.collisionDroite(ennemi, env.getTabMap()) || Collision.collisionGauche(ennemi, env.getTabMap()) ) {
 						ennemi.sauter();
 					}
@@ -183,7 +183,7 @@ public class Controller implements Initializable{
 			else if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==10) {
 				env.getJoueur().utiliserkitDeSoin();
 			}
-			else if(joueur.getDirection()) { // droite
+			else if(env.getJoueur().getDirection()) { // droite
 				if(ev.getButton().equals(MouseButton.PRIMARY) && construction.peutPlacerDroite()) { //placer des blocks
 					construction.placerTuileDroite();
 					vueMap.actualiserMapDroite();

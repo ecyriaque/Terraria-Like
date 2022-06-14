@@ -1,19 +1,14 @@
 package jeu.controller;
 
-import java.util.ArrayList;
-
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import jeu.modele.Collision;
-import jeu.modele.Construction;
 import jeu.modele.Environnement;
 import jeu.modele.Joueur;
 import jeu.modele.inventaire.objet.ObjetVide;
-import jeu.modele.inventaire.objet.objetSoin.KitDeSoin;
 
 public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private Pane root;

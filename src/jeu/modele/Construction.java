@@ -96,7 +96,16 @@ public class Construction {
 	}
 	//casser
 	public boolean peutCasserGauche() {
-		return tuileCassable.contains(valTabGaucheCasser);
+		if (valTabGaucheCasser==4 && (joueur.getObjetEquiperProperty().getValue()==3 ||joueur.getObjetEquiperProperty().getValue()==4 || joueur.getObjetEquiperProperty().getValue()==5 ||joueur.getObjetEquiperProperty().getValue()==12 )) {
+			System.out.println("on casse du bois");
+			return tuileCassable.contains(valTabGaucheCasser);
+		}else if (valTabGaucheCasser==5 && (joueur.getObjetEquiperProperty().getValue()==6 ||joueur.getObjetEquiperProperty().getValue()==7 || joueur.getObjetEquiperProperty().getValue()==8 )) {
+			System.out.println("on casse de la pierre");
+			return tuileCassable.contains(valTabGaucheCasser);
+		}else if (valTabGaucheCasser==6 && (joueur.getObjetEquiperProperty().getValue()==7 ||joueur.getObjetEquiperProperty().getValue()==8)) {
+			System.out.println("on casse du metal");
+			return tuileCassable.contains(valTabGaucheCasser);
+		}return false;
 	}
 	public void casserTuileGauche() {
 		map[joueur.constructionGaucheCasser()] = 0;

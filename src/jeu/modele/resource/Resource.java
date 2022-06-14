@@ -1,5 +1,4 @@
 package jeu.modele.resource;
-import javafx.beans.binding.IntegerExpression;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 

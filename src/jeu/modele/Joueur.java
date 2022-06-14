@@ -1,18 +1,8 @@
 package jeu.modele;
 
-import java.util.ArrayList;
-
-
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ObservableValue;
 import jeu.modele.inventaire.Inventaire;
-import jeu.modele.inventaire.objet.ObjetVide;
-import jeu.modele.inventaire.objet.caseInventaire;
-import jeu.modele.inventaire.objet.arme.*;
-import jeu.modele.inventaire.objet.objetSoin.*;
-import jeu.modele.resource.*;
 
 
 public class Joueur extends Personnage{
@@ -164,6 +154,9 @@ public class Joueur extends Personnage{
 			else if(env.getNbBois()>=3) {
 				System.out.println(this.inventaireObjet.getObjetCase(1));
 				this.inventaireObjet.SetObjetCase(1,0);
+				if (caseChoisi==1) {
+					this.ObjetEquiperProperty.set(0);
+				}
 				env.EnleverResource("bois",3);
 
 			}
@@ -178,6 +171,9 @@ public class Joueur extends Personnage{
 				System.out.println("Vous posseder une meilleur epee");
 			else if(env.getNbPierre()>=3) {
 				this.inventaireObjet.SetObjetCase(1,1);
+				if (caseChoisi==1) {
+					this.ObjetEquiperProperty.set(1);
+				}
 				env.EnleverResource("pierre",3);
 			}
 		}
@@ -188,7 +184,10 @@ public class Joueur extends Personnage{
 			else if(this.inventaireObjet.getObjetCase(1)==2)
 				System.out.println("vous avez deja une epee en metal");
 			else if(env.getNbMetal()>=3) {
-				this.inventaireObjet.SetObjetCase(1,3);
+				this.inventaireObjet.SetObjetCase(1,2);
+				if (caseChoisi==1) {
+					this.ObjetEquiperProperty.set(2);
+				}
 				env.EnleverResource("metal",3);
 			}
 		}
@@ -203,6 +202,9 @@ public class Joueur extends Personnage{
 				System.out.println("Vous posseder une meilleur hache");
 			else if(env.getNbBois()>=3) {
 				this.inventaireObjet.SetObjetCase(2,3);
+				if (caseChoisi==2) {
+					this.ObjetEquiperProperty.set(3);
+				}
 				env.EnleverResource("bois",3);
 			}
 		}
@@ -216,6 +218,9 @@ public class Joueur extends Personnage{
 				System.out.println("Vous posseder une meilleur hache");
 			else if(env.getNbPierre()>=3) {
 				this.inventaireObjet.SetObjetCase(2,4);
+				if (caseChoisi==2) {
+					this.ObjetEquiperProperty.set(4);
+				}
 				env.EnleverResource("pierre",3);
 			}
 		}
@@ -227,6 +232,9 @@ public class Joueur extends Personnage{
 				System.out.println("vous avez deja une hache en metal");
 			else if(env.getNbMetal()>=3) {
 				this.inventaireObjet.SetObjetCase(2,5);
+				if (caseChoisi==2) {
+					this.ObjetEquiperProperty.set(5);
+				}
 				env.EnleverResource("metal",3);
 			}
 		}
@@ -241,6 +249,10 @@ public class Joueur extends Personnage{
 				System.out.println("Vous posseder une meilleur pioche");
 			else if(env.getNbBois()>=3) {
 				this.inventaireObjet.SetObjetCase(3,6);
+				if (caseChoisi==3) {
+					
+					this.ObjetEquiperProperty.set(6);
+				}
 				env.EnleverResource("bois",3);
 			}
 		}
@@ -254,6 +266,9 @@ public class Joueur extends Personnage{
 				System.out.println("Vous posseder une meilleur pioche");
 			else if(env.getNbPierre()>=3) {
 				this.inventaireObjet.SetObjetCase(3,7);
+				if (caseChoisi==3) {
+					this.ObjetEquiperProperty.set(7);
+				}
 				env.EnleverResource("pierre",3);
 			}
 		}
@@ -265,6 +280,9 @@ public class Joueur extends Personnage{
 				System.out.println("vous avez deja une pioche en metal");
 			else if(env.getNbMetal()>=3) {
 				this.inventaireObjet.SetObjetCase(3,8);
+				if (caseChoisi==3) {
+					this.ObjetEquiperProperty.set(8);
+				}
 				env.EnleverResource("metal",3);
 			}
 		}
@@ -279,6 +297,9 @@ public class Joueur extends Personnage{
 			}
 			else if(env.getNbBois()>=3) {
 				this.inventaireObjet.SetObjetCase(5,9);
+				if (caseChoisi==5) {
+					this.ObjetEquiperProperty.set(9);
+				}
 				ajtNbBandage();
 				System.out.println("bandage :"+this.nbBandageProperty.getValue());
 			}
@@ -294,6 +315,9 @@ public class Joueur extends Personnage{
 			}
 			else if(env.getNbBois()>=6 ) {
 				this.inventaireObjet.SetObjetCase(6,10);
+				if (caseChoisi==6) {
+					this.ObjetEquiperProperty.set(10);
+				}
 				ajtNbKitdeSoin();
 				System.out.println("kit de soin :"+this.nbKitdeSoinProperty.getValue());
 			}
@@ -307,6 +331,9 @@ public class Joueur extends Personnage{
 				System.out.println("vous avez deja un pistolet");
 			else if(env.getNbMetal()>=10) {
 				this.inventaireObjet.SetObjetCase(4,11);
+				if (caseChoisi==4) {
+					this.ObjetEquiperProperty.set(11);
+				}
 				env.EnleverResource("metal",10);
 			
 			}
