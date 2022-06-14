@@ -15,7 +15,7 @@ public class Ennemi extends Personnage{
 	public Ennemi(Joueur joueur) {
 		this.x = new SimpleIntegerProperty(400);
 		this.y = new SimpleIntegerProperty(360);
-		this.vitesse = 4;
+		this.vitesse = 1;
 		this.pv = new SimpleIntegerProperty(5);
 		this.nbSaut = 0;
 		this.joueur = joueur;

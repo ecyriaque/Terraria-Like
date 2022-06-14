@@ -61,7 +61,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				break;         
 			
 			case U :
-				joueur.getInventaireResources().get(0).ajouterResource();
+				joueur.getEnv().AjouterResource("bois");
 				break;
 			case I :
 				if (visible==false) {
@@ -75,10 +75,10 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				}		
 				break;
 			case O :
-				joueur.getInventaireResources().get(2).ajouterResource();
+				joueur.getEnv().AjouterResource("metal");
 				break;
 			case W :
-				joueur.getInventaireResources().get(1).ajouterResource();
+				joueur.getEnv().AjouterResource("pierre");
 				break;
 			case M :
 				joueur.getInventaireObjet().getInventaire().get(0).setObjetDeLaCase(new ObjetVide());

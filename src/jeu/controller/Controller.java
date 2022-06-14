@@ -56,10 +56,11 @@ public class Controller implements Initializable{
 	private Ennemi ennemi;
 	private VueEnnemi vueEnnemi;
 	private ArrayList<ImageView> imagesCraft;
-	
+	private Environnement env;
 	//INITIALISATION
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		env=new Environnement();
 		this.imagesCraft = new ArrayList<>();
 		imagesCraft.add(ImageCraftEpeeBois);
 		imagesCraft.add(ImageCraftEpeePierre);
@@ -127,7 +128,7 @@ public class Controller implements Initializable{
 	
 	//BOUCLE DU JEU
 	private void initAnimation() {
-		joueur = new Joueur();
+		joueur = env.getJoueur();
 		ennemi = new Ennemi(joueur);
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
