@@ -1,8 +1,9 @@
 package jeu.modele.inventaire.objet.objetSoin;
 
-import jeu.modele.inventaire.objet.ObjetSoin;
+import jeu.modele.inventaire.objet.ObjetInventaire;
 
-public class KitDeSoin extends ObjetSoin{
+
+public class KitDeSoin extends ObjetInventaire{
 
 	public KitDeSoin() {
 		super("kitDeSoin",10);

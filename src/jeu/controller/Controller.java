@@ -177,12 +177,15 @@ public class Controller implements Initializable{
 		root.setOnMouseClicked(ev -> {
 			construction = new Construction(env);
 			
+			//utiliser bandage
 			if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==9) {
 				env.getJoueur().utiliserBandage();
 			}
+			//utiliser un kit De soin
 			else if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==10) {
 				env.getJoueur().utiliserkitDeSoin();
 			}
+			//placer et crafter des bloques a droite
 			else if(env.getJoueur().getDirection()) { // droite
 				if(ev.getButton().equals(MouseButton.PRIMARY) && construction.peutPlacerDroite()) { //placer des blocks
 					construction.placerTuileDroite();
@@ -193,6 +196,7 @@ public class Controller implements Initializable{
 					vueMap.actualiserMapDroiteCasser();
 				}
 			}
+			//placer des block a gauches
 			else{ // gauche
 				if(ev.getButton().equals(MouseButton.PRIMARY) && construction.peutPlacerGauche()) {  // placer des blocks
 					construction.placerTuileGauche();

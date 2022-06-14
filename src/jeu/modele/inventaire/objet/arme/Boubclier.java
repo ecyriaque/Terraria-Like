@@ -1,8 +1,8 @@
 package jeu.modele.inventaire.objet.arme;
 
-public class Boublier extends Arme{
+public class Boubclier extends Arme{
 	
-	public Boublier() {
+	public Boubclier() {
 		super("bouclier", 12);
 	}
 

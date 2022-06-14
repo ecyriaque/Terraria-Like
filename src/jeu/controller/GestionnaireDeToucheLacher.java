@@ -1,11 +1,9 @@
 package jeu.controller;
 
 import javafx.event.EventHandler;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
-import jeu.modele.Collision;
 import jeu.modele.Joueur;
 
 public class GestionnaireDeToucheLacher implements EventHandler<KeyEvent>{

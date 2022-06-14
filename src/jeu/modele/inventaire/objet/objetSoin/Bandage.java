@@ -1,8 +1,9 @@
 package jeu.modele.inventaire.objet.objetSoin;
 
-import jeu.modele.inventaire.objet.ObjetSoin;
+import jeu.modele.inventaire.objet.ObjetInventaire;
 
-public class Bandage extends ObjetSoin{
+
+public class Bandage extends ObjetInventaire{
 
 	public Bandage() {
 		super("bandage",9);

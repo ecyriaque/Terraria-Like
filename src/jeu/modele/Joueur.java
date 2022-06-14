@@ -111,7 +111,7 @@ public class Joueur extends Personnage{
 	}
 	
 	public final IntegerProperty getObjetEquiperProperty() {
-		// TODO Auto-generated method stub
+	
 		return this.ObjetEquiperProperty;
 	}
 	
