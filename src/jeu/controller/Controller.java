@@ -63,20 +63,7 @@ public class Controller implements Initializable{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		env=new Environnement();
-		this.imagesCraft = new ArrayList<>();
-		imagesCraft.add(ImageCraftEpeeBois);
-		imagesCraft.add(ImageCraftEpeePierre);
-		imagesCraft.add(ImageCraftEpeeMetal);	
-		imagesCraft.add(ImageCraftHacheBois);
-		imagesCraft.add(ImageCraftHachePierre);
-		imagesCraft.add(ImageCraftHacheMetal);
-		imagesCraft.add(ImageCraftPiocheBois);
-		imagesCraft.add(ImageCraftPiochePierre);
-		imagesCraft.add(ImageCraftPiocheMetal);
-		imagesCraft.add(ImageCraftKitDeSoin);
-		imagesCraft.add(ImageCraftBandage);
-		imagesCraft.add(ImageCraftPistolet);
-		imagesCraft.add(ImageCraftBouclier);
+	
 		initAnimation();
 		gameLoop.play();
 		
@@ -130,7 +117,20 @@ public class Controller implements Initializable{
 	
 	//BOUCLE DU JEU
 	private void initAnimation() {
-	
+		this.imagesCraft = new ArrayList<>();
+		imagesCraft.add(ImageCraftEpeeBois);
+		imagesCraft.add(ImageCraftEpeePierre);
+		imagesCraft.add(ImageCraftEpeeMetal);	
+		imagesCraft.add(ImageCraftHacheBois);
+		imagesCraft.add(ImageCraftHachePierre);
+		imagesCraft.add(ImageCraftHacheMetal);
+		imagesCraft.add(ImageCraftPiocheBois);
+		imagesCraft.add(ImageCraftPiochePierre);
+		imagesCraft.add(ImageCraftPiocheMetal);
+		imagesCraft.add(ImageCraftKitDeSoin);
+		imagesCraft.add(ImageCraftBandage);
+		imagesCraft.add(ImageCraftPistolet);
+		imagesCraft.add(ImageCraftBouclier);
 		ennemi = new Ennemi(env.getJoueur());
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
