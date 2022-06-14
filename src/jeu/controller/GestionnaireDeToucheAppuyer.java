@@ -93,7 +93,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				joueur.mettreAzero();
 				break;
 			case F1 : 
-				env.getJoueur().setMatChoisi(4);
+				env.getJoueur().setMatChoisi(0);
 				matChoisi.setTranslateX(497);
 				matChoisi.setTranslateY(7);
 				matChoisi.setVisible(true);
@@ -101,7 +101,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				System.out.println("bois choisi");
 				break;
 			case F2 :
-				env.getJoueur().setMatChoisi(5);
+				env.getJoueur().setMatChoisi(1);
 				matChoisi.setTranslateX(597);
 				matChoisi.setTranslateY(7);
 				matChoisi.setVisible(true);
@@ -109,7 +109,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				System.out.println("pierre choisie");
 				break;
 			case F3 :
-				env.getJoueur().setMatChoisi(6);
+				env.getJoueur().setMatChoisi(2);
 				matChoisi.setTranslateX(697);
 				matChoisi.setTranslateY(7);
 				matChoisi.setVisible(true);
