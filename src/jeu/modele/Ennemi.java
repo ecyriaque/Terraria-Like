@@ -8,17 +8,13 @@ public class Ennemi extends Personnage{
 	private IntegerProperty x, y;
 	private IntegerProperty pv;
 	private int vitesse;
-	private int nbSaut;
-	private Joueur joueur;
 	private boolean droite,gauche,saute;
 	
-	public Ennemi(Joueur joueur) {
+	public Ennemi() {
 		this.x = new SimpleIntegerProperty(400);
 		this.y = new SimpleIntegerProperty(360);
-		this.vitesse = 1;
+		this.vitesse = 4;
 		this.pv = new SimpleIntegerProperty(5);
-		this.nbSaut = 0;
-		this.joueur = joueur;
 	}
 	
 	//PVS
@@ -46,10 +42,7 @@ public class Ennemi extends Personnage{
 	public void sauter() {
 		int npos = this.y.getValue()-10;
 		if(npos >0 )
-			if(nbSaut<6) {
 				this.y.setValue(npos);
-				nbSaut++;
-			}
 	}
 	@Override
 	public void tomber() {
@@ -57,33 +50,10 @@ public class Ennemi extends Personnage{
 		this.y.setValue(npos);
 	}
 	
-	
-	//SUIVRE JOUEUR
-	public void suivreJoueur() {
-		if(this.joueur.getX() < this.getX()) {
-			this.allerAGauche();
-			this.gauche = true;
-			this.droite = false;
-		}
-		else if(this.joueur.getX() > this.getX()) {
-			this.allerADroite();
-			this.droite = true;
-			this.gauche = false;
-		}
-		else {
-			this.droite = false;
-			this.gauche = false;
-		}	
-	}
-	
-	
 
 	//getter
 	public IntegerProperty getPv() {
 		return pv;
-	}
-	public int getNbSaut() {
-		return nbSaut;
 	}
 	public IntegerProperty getXProperty() {
 		return this.x;
@@ -112,9 +82,6 @@ public class Ennemi extends Personnage{
 	
 	
 	//setter
-	public void setNbSaut(int nbSaut) {
-		this.nbSaut = nbSaut;
-	}
 	public void setX(IntegerProperty x) {
 		this.x = x;
 	}
@@ -123,5 +90,11 @@ public class Ennemi extends Personnage{
 	}
 	public void setPv(IntegerProperty pv) {
 		this.pv = pv;
+	}
+	public void setDroite(boolean a) {
+		droite = a;
+	}
+	public void setGauche(boolean a) {
+		gauche = a;
 	}
 }

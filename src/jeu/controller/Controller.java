@@ -61,9 +61,9 @@ public class Controller implements Initializable{
 	private Environnement env;
 	//INITIALISATION
 	@Override
+	
 	public void initialize(URL location, ResourceBundle resources) {
 		env=new Environnement();
-	
 		initAnimation();
 		gameLoop.play();
 		
@@ -95,7 +95,7 @@ public class Controller implements Initializable{
 	}
 	
 	//DEPLACEMENT DU JOUEUR
-	public void deplacement() {
+	public void deplacementJoueur() {
 		if(this.env.getJoueur().getGauche()) {
 			env.getJoueur().setDirection(false);
 			if(!Collision.collisionGauche(env.getJoueur(), env.getTabMap())) {
@@ -115,6 +115,28 @@ public class Controller implements Initializable{
 		}
 	}
 	
+	//DEPLACEMENT Ennemi
+		public void deplacementEnnemi() {
+			if(this.env.getJoueur().getX() < this.ennemi.getX() ) {
+				ennemi.setGauche(true);
+				ennemi.setDroite(false);
+				if (!Collision.collisionGauche(ennemi, env.getTabMap())) 
+					this.ennemi.allerAGauche();
+			}
+			
+			else if(this.env.getJoueur().getX() > this.ennemi.getX()) {
+				ennemi.setDroite(true);
+				ennemi.setGauche(false);
+				if(!Collision.collisionDroite(ennemi, env.getTabMap()))
+					this.ennemi.allerADroite();
+			}
+			else {
+				ennemi.setDroite(false);
+				ennemi.setGauche(false);
+			}
+			
+		}
+	
 	//BOUCLE DU JEU
 	private void initAnimation() {
 		this.imagesCraft = new ArrayList<>();
@@ -131,12 +153,9 @@ public class Controller implements Initializable{
 		imagesCraft.add(ImageCraftBandage);
 		imagesCraft.add(ImageCraftPistolet);
 		imagesCraft.add(ImageCraftBouclier);
-		ennemi = new Ennemi(env.getJoueur());
+		ennemi = new Ennemi();
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
-		int pxl = 40;
-		int taille = 20;
-		carte.setMaxSize(pxl*taille, pxl*taille);
 		block();
 		vueMap = new VueMap(carte, env.getJoueur());
 		vueMap.afficherMap();
@@ -156,17 +175,16 @@ public class Controller implements Initializable{
 						env.getJoueur().tomber();
 					if(Collision.graviter(env.getJoueur(), env.getTabMap())) 
 						env.getJoueur().setNbSaut(0);
-					if(Collision.collisionDroite(ennemi, env.getTabMap()) || Collision.collisionGauche(ennemi, env.getTabMap()) ) {
+					
+					if(Collision.collisionDroiteEnnemi(ennemi, env.getTabMap()) && ennemi.isDroite()  || Collision.collisionGaucheEnnemi(ennemi, env.getTabMap()) && ennemi.isGauche() ) 
 						ennemi.sauter();
-					}
-					if(!Collision.graviter(ennemi, env.getTabMap()))
-						ennemi.tomber();
-					if(Collision.graviter(ennemi, env.getTabMap())) 
-						ennemi.setNbSaut(0);
-					deplacement();
-					ennemi.suivreJoueur();
+					else if(!Collision.graviter(ennemi, env.getTabMap()) || Collision.collisionHaut(ennemi, env.getTabMap()) ) 
+						ennemi.tomber();	
+					
+					deplacementJoueur();
 					this.vueEnnemi.actualiserImage();
 					this.vueJ.actualiserImage();
+					this.deplacementEnnemi();
 					
 				}));
 		gameLoop.getKeyFrames().add(kf);

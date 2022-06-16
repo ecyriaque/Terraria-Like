@@ -1,5 +1,7 @@
 package jeu.modele;
 
+import java.util.ArrayList;
+
 public class Collision {
 
 	public static boolean collisionDroite(Personnage personnage,int[] tabMap){
@@ -70,6 +72,53 @@ public class Collision {
 		ValeurTil2=tabMap[(xtile2+(ytile*20))];
 		ValeurTil3=tabMap[(xtile3+(ytile*20))];
 		if (ValeurTile!=0 && ValeurTile!=7 || ValeurTil2!=0 && ValeurTil2!=7  || ValeurTil3!=0 && ValeurTil3!=7  ) {
+			return true;
+		}
+		return false;
+	}
+	public static boolean collisionDroiteEnnemi(Personnage personnage,int[] tabMap){
+		int xtile;
+		int ytile,ytile2,ytile3;
+		int ValeurTile,ValeurTil2, ValeurTil3;		
+		ArrayList<Integer> tuileSauter =  new ArrayList<>();
+		tuileSauter.add(0);
+		tuileSauter.add(4);
+		tuileSauter.add(5);
+		tuileSauter.add(6);
+		tuileSauter.add(7);	
+		
+		xtile=(personnage.getX()+41)/40;
+		ytile=(personnage.getY()+20)/40;
+		ytile3=(personnage.getY()+39)/40;
+		ytile2=personnage.getY()/40;
+		ValeurTile=tabMap[(xtile+(ytile*20))];
+		ValeurTil2=tabMap[(xtile+(ytile2*20))];
+		ValeurTil3=tabMap[(xtile+(ytile3*20))];
+		if (!tuileSauter.contains(ValeurTile)  || !tuileSauter.contains(ValeurTil2)  || !tuileSauter.contains(ValeurTil3) ) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static boolean collisionGaucheEnnemi(Personnage personnage,int[] tabMap){
+		int xtile;
+		int ytile,ytile2,ytile3;
+		int ValeurTile,ValeurTil2, ValeurTil3;
+		ArrayList<Integer> tuileSauter =  new ArrayList<>();
+		tuileSauter.add(0);
+		tuileSauter.add(4);
+		tuileSauter.add(5);
+		tuileSauter.add(6);
+		tuileSauter.add(7);
+		
+		xtile=(personnage.getX()-1)/40;
+		ytile=personnage.getY()/40;
+		ytile2=(personnage.getY()+20)/40;
+		ytile3=(personnage.getY()+39)/40;
+		ValeurTile=tabMap[(xtile+(ytile*20))];
+		ValeurTil2=tabMap[(xtile+(ytile2*20))];
+		ValeurTil3=tabMap[(xtile+(ytile3*20))];
+		if(!tuileSauter.contains(ValeurTile)  || !tuileSauter.contains(ValeurTil2)  || !tuileSauter.contains(ValeurTil3) ) {
 			return true;
 		}
 		return false;
