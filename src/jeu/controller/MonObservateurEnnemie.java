@@ -51,24 +51,8 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 
 	private void changerImageDirection(ImageView img, int intValue) {
 		System.out.println("change");
-		switch (intValue) {
-		case 0:
-			img.setImage(images.get(0));
-			break;
-		case 1:
-			img.setImage(images.get(1));
-			break;
-		case 2:
-			img.setImage(images.get(2));
-			break;
-		case 3:
-			img.setImage(images.get(3));
-			break;
-
-		default:
-			break;
-		}
-
+		img.setImage(images.get(intValue));
+		
 	}
 	private void enleverSprite(Ennemi mort) {
 		
