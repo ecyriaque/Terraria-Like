@@ -28,16 +28,6 @@ public class VueJoueur {
 		this.imgActive = new ImageView(images.get(0));
 	}
 	
-	//getter
-	public ImageView getImgActive() {
-		return imgActive;
-	}
-	
-	//setter
-	public void setImgActive(ImageView imgActive) {
-		this.imgActive = imgActive;
-	}
-	
 	//methode
 	public void ajouterImageDuJoueur() {
 		conteneur.getChildren().add(imgActive);
@@ -56,5 +46,15 @@ public class VueJoueur {
 		else {
 			this.imgActive.setImage(images.get(0));
 		}
+	}
+	
+	//getter
+	public ImageView getImgActive() {
+		return imgActive;
+	}
+
+	//setter
+	public void setImgActive(ImageView imgActive) {
+		this.imgActive = imgActive;
 	}
 }

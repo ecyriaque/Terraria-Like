@@ -4,15 +4,11 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Resource {
 
-	
 	private IntegerProperty nbResourceProperty;
 	
-	
 	public Resource() {
-		
 		nbResourceProperty = new SimpleIntegerProperty(0);
 	}
-
 	
 	public  void ajouterResource(){
 		int c;

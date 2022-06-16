@@ -92,20 +92,14 @@ public class VueMap {
 	public int[] getTabMap() {
 		return tabMap;
 	}
-
 	public void setTabMap(int[] tabMap) {
 		this.tabMap = tabMap;
 	}
-
 	public Map getEnv() {
 		return map;
 	}
-
 	public void setEnv(Map env) {
 		this.map = env;
 	}
-	
-	
-	
-	
+		
 }

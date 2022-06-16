@@ -11,6 +11,7 @@ public class Ennemi extends Personnage{
 	private IntegerProperty direction;
 	private boolean droite,gauche,saute;
 	private String id;
+	
 	public Ennemi(int xx) {
 		this.x = new SimpleIntegerProperty(xx);
 		this.y = new SimpleIntegerProperty(360);
@@ -22,9 +23,7 @@ public class Ennemi extends Personnage{
 	}
 	
 	//PVS
-	@Override
-	public void perdrePv(int i) {
-		
+	public void perdrePv(int i) {	
 		if(i>this.pv.get()) 
 			this.pv.setValue(0);
 		else
@@ -112,13 +111,6 @@ public class Ennemi extends Personnage{
 		
 		this.direction.setValue(i);
 	}
-
-	@Override
-	public void perdrePv() {
-		// TODO Auto-generated method stub
-		
-	}
-
 	public IntegerProperty getDirection() {
 		return direction;
 	}

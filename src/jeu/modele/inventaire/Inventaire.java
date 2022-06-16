@@ -20,17 +20,13 @@ import jeu.modele.inventaire.objet.objetSoin.KitDeSoin;
 
 public class Inventaire {
 	
-	caseInventaire case1= new caseInventaire(new ObjetVide(),1);
-	caseInventaire case2=new caseInventaire(new ObjetVide(),2);
-	caseInventaire case3=new caseInventaire(new ObjetVide(),3);
-	caseInventaire case4=new caseInventaire(new ObjetVide(),4);
-	caseInventaire case5=new caseInventaire(new ObjetVide(),5);
-	caseInventaire case6=new caseInventaire(new ObjetVide(),6);
-
-	
-	
+	private caseInventaire case1= new caseInventaire(new ObjetVide(),1);
+	private caseInventaire case2=new caseInventaire(new ObjetVide(),2);
+	private caseInventaire case3=new caseInventaire(new ObjetVide(),3);
+	private caseInventaire case4=new caseInventaire(new ObjetVide(),4);
+	private caseInventaire case5=new caseInventaire(new ObjetVide(),5);
+	private caseInventaire case6=new caseInventaire(new ObjetVide(),6);
 	private ArrayList<caseInventaire> inventaire;
-	
 	
 	public Inventaire() {
 		inventaire =new ArrayList<caseInventaire>();
@@ -44,20 +40,6 @@ public class Inventaire {
 	
 	public void ajouterDansLinventaire(caseInventaire obj) {
 		this.inventaire.add(obj);
-	}
-	
-	public ArrayList<caseInventaire> getInventaire() {
-		return this.inventaire;
-	}
-	
-	public int getObjetCase(int i){
-		return this.inventaire.get(i-1).getNumObjetCase().get();
-		
-	}
-	
-	public IntegerProperty getObjetCaseProperty(int i){
-		return this.inventaire.get(i-1).getNumObjetCase();
-		
 	}
 	
 	public void SetObjetCase(int numCase,int NumObjet){
@@ -98,13 +80,20 @@ public class Inventaire {
 		case 11 : 
 			this.inventaire.get(numCase-1).setObjetDeLaCase(new Pistolet());	
 			break;
+		}
 	}
 	
+	//getter
+	public ArrayList<caseInventaire> getInventaire() {
+		return this.inventaire;
 	}
-	
-	
+	public int getObjetCase(int i){
+		return this.inventaire.get(i-1).getNumObjetCase().get();		
+	}
+	public IntegerProperty getObjetCaseProperty(int i){
+		return this.inventaire.get(i-1).getNumObjetCase();		
+	}
 	public IntegerProperty getCaseObjetCaseProperty(int i) {
 		return this.inventaire.get(i-1).getNumObjetCase();
 	}
-
 }

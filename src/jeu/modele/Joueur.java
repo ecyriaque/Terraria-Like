@@ -81,7 +81,7 @@ public class Joueur extends Personnage{
 	}
 
 	/////////////Methodes de gestion des PV ///////////////
-	@Override
+	
 	public void perdrePv() {
 		int nbCoeur =this.getNbCoeurs()-1;
 		if(getNbCoeurs()>=1) 

@@ -11,8 +11,8 @@ public class caseInventaire {
 	private ObjetInventaire obj;
 	private BooleanProperty estSelectionnerProperty ;
 	private int numCase;
-	public caseInventaire(ObjetInventaire obj,int numcase) {
-		
+	
+	public caseInventaire(ObjetInventaire obj,int numcase) {	
 		this.numObj=obj.getNumProperty();
 		this.obj=obj;
 		this.estSelectionnerProperty=new SimpleBooleanProperty(false);
@@ -28,30 +28,27 @@ public class caseInventaire {
 		boolean b;
 		b=false;
 		this.estSelectionnerProperty.set(b);
-	}
-	
-	public BooleanProperty estSelectionnerProperty(){
-		return this.estSelectionnerProperty;
-	}
+	}	
 	
 	public void setObjetDeLaCase(ObjetInventaire obj) {
 		this.obj=obj;
 		this.numObj.setValue(obj.getNumProperty().getValue());
 	}
 	
-	
+	//getter
 	public ObjetInventaire getObjetDeLaCase() {
 		return this.obj;
 	}
 	public IntegerProperty getNumObjetCase() {
 		return this.numObj;	
-	}
-	
+	}	
 	public String toString() {
 		return this.obj.toString();
 	}
-
 	public int getNumCase() {
 		return numCase;
+	}
+	public BooleanProperty estSelectionnerProperty(){
+		return this.estSelectionnerProperty;
 	}
 }

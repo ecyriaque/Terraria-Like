@@ -22,18 +22,18 @@ public class VueBouclier {
 		
 	}
 	
+	//getter
 	public IntegerProperty getBouclier() {
 		return this.joueur.getNbBouclierProperty();
 	}
-	
 	public Image[] getTabImage(){
 	 return this.tabImage;
 	}
 	
+	//setter
 	public void setImageActive(Image image) {
 		imageActive.setImage(image);
 	}
-	
 	public void imageSetVisible(boolean visible) {
 		imageActive.setVisible(visible);
 	}

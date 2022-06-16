@@ -12,19 +12,19 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 
 	private Pane conteneur;
 	private ArrayList<Image> images;
+	
 	public MonObservateurEnnemie(Pane conteneur ) {
 		super();
-		this.conteneur=conteneur;
-		
+		this.conteneur=conteneur;	
 		this.images = new ArrayList<>();
 		images.add(new Image("jeu/modele/image/personnage/ennemi/ennemiNeutre.png"));
 		images.add(new Image("jeu/modele/image/personnage/ennemi/ennemiDroite.png"));
 		images.add(new Image("jeu/modele/image/personnage/ennemi/ennemiGauche.png"));
 		images.add(new Image("jeu/modele/image/personnage/ennemi/ennemiSaut.png"));
 		}
+	
 	public void onChanged(javafx.collections.ListChangeListener.Change<? extends Ennemi> c) {
 			System.out.println("ça change");
-			
 			while(c.next()){
 				// on ajoute les nouveau ennemie
 				for(Ennemi nouveau: c.getAddedSubList()){
@@ -34,6 +34,7 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 						r.setId(nouveau.getId());
 						r.translateXProperty().bind(nouveau.getXProperty());
 						r.translateYProperty().bind(nouveau.getYProperty());
+						nouveau.getDirection().addListener((obse,old,nouv)-> changerImageDirection(r,nouv.intValue()));
 						conteneur.getChildren().add(r);	
 				}
 				// on enleve les ennemis mort
@@ -42,16 +43,13 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 						enleverSprite(mort);
 				}
 			}
-
 		}
-		
-
-
-	private void enleverSprite(Ennemi mort) {
-		
-		this.conteneur.getChildren().remove(this.conteneur.lookup("#"+mort.getId()));
-
+	
+	public void changerImageDirection(ImageView img, int intValue) {
+		img.setImage(images.get(intValue));
 	}
 
-		
+	public void enleverSprite(Ennemi mort) {	
+		this.conteneur.getChildren().remove(this.conteneur.lookup("#"+mort.getId()));
+	}	
 }
