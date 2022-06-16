@@ -55,15 +55,13 @@ public class Controller implements Initializable{
 	private VueJoueur vueJ; //Vue du env.getJoueur()
 	private Construction construction; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
-	private Ennemi ennemi;
-	private VueEnnemi vueEnnemi;
 	private ArrayList<ImageView> imagesCraft;
 	private Environnement env;
 	//INITIALISATION
 	@Override
 	
 	public void initialize(URL location, ResourceBundle resources) {
-		env=new Environnement();
+		
 		initAnimation();
 		gameLoop.play();
 		
@@ -77,13 +75,7 @@ public class Controller implements Initializable{
 		vueJ.ajouterImageDuJoueur(); 
 	}
 	
-	//ENNEMI
-	public void ajouterEnnemi() {
-		vueEnnemi = new VueEnnemi(conteneur, ennemi);
-		vueEnnemi.getImgActive().translateXProperty().bind(ennemi.getXProperty());
-		vueEnnemi.getImgActive().translateYProperty().bind(ennemi.getYProperty());
-		vueEnnemi.ajouterImageEnnemi();
-	}
+	
 	
 	//GESTION DES TOUCHES
 	@FXML
@@ -115,30 +107,11 @@ public class Controller implements Initializable{
 		}
 	}
 	
-	//DEPLACEMENT Ennemi
-		public void deplacementEnnemi() {
-			if(this.env.getJoueur().getX() < this.ennemi.getX() ) {
-				ennemi.setGauche(true);
-				ennemi.setDroite(false);
-				if (!Collision.collisionGauche(ennemi, env.getTabMap())) 
-					this.ennemi.allerAGauche();
-			}
-			
-			else if(this.env.getJoueur().getX() > this.ennemi.getX()) {
-				ennemi.setDroite(true);
-				ennemi.setGauche(false);
-				if(!Collision.collisionDroite(ennemi, env.getTabMap()))
-					this.ennemi.allerADroite();
-			}
-			else {
-				ennemi.setDroite(false);
-				ennemi.setGauche(false);
-			}
-			
-		}
+
 	
 	//BOUCLE DU JEU
 	private void initAnimation() {
+		env=new Environnement();
 		this.imagesCraft = new ArrayList<>();
 		imagesCraft.add(ImageCraftEpeeBois);
 		imagesCraft.add(ImageCraftEpeePierre);
@@ -153,7 +126,7 @@ public class Controller implements Initializable{
 		imagesCraft.add(ImageCraftBandage);
 		imagesCraft.add(ImageCraftPistolet);
 		imagesCraft.add(ImageCraftBouclier);
-		ennemi = new Ennemi();
+		new Ennemi(450);
 		gameLoop = new Timeline();
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		block();
@@ -161,7 +134,10 @@ public class Controller implements Initializable{
 		vueMap.afficherMap();
 		
 		this.ajouterJoueur();
-		this.ajouterEnnemi();
+		
+		//this.ajouterEnnemi();
+		this.env.getListeEnnemi().addListener(new MonObservateurEnnemie(conteneur));
+		
 		this.env.getJoueur().nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(env.getJoueur(), root), env.getJoueur()));
 		this.env.getJoueur().getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(env.getJoueur(), root), env.getJoueur()));
 		new VueInventaire(env, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6, imgObjetDansLesMains);
@@ -171,21 +147,19 @@ public class Controller implements Initializable{
 		KeyFrame kf = new KeyFrame(
 				Duration.seconds(0.05), 
 				(ev ->{			
+				
 					if(!Collision.graviter(env.getJoueur(), env.getTabMap())&& !this.env.getJoueur().getSaute() || env.getJoueur().getNbSaut()==6 || Collision.collisionHaut(env.getJoueur(), env.getTabMap()) && this.env.getJoueur().getSaute() ) 
 						env.getJoueur().tomber();
 					if(Collision.graviter(env.getJoueur(), env.getTabMap())) 
 						env.getJoueur().setNbSaut(0);
-					
-					if(Collision.collisionDroiteEnnemi(ennemi, env.getTabMap()) && ennemi.isDroite()  || Collision.collisionGaucheEnnemi(ennemi, env.getTabMap()) && ennemi.isGauche() ) 
-						ennemi.sauter();
-					else if(!Collision.graviter(ennemi, env.getTabMap()) || Collision.collisionHaut(ennemi, env.getTabMap()) ) 
-						ennemi.tomber();	
-					
+				
 					deplacementJoueur();
-					this.vueEnnemi.actualiserImage();
+					env.agit();
 					this.vueJ.actualiserImage();
-					this.deplacementEnnemi();
-					
+		
+					if (env.getJoueur().getNbCoeurs()==0) {
+						gameLoop.stop();
+					}
 				}));
 		gameLoop.getKeyFrames().add(kf);
 	}
@@ -195,8 +169,11 @@ public class Controller implements Initializable{
 		root.setOnMouseClicked(ev -> {
 			construction = new Construction(env);
 			
+			if(ev.getButton().equals(MouseButton.PRIMARY)&& (env.getJoueur().getObjetEquiper()==12 || env.getJoueur().getObjetEquiper()==0 || env.getJoueur().getObjetEquiper()==2 || env.getJoueur().getObjetEquiper()==1)) {
+				env.getJoueur().attquer();
+			}
 			//utiliser bandage
-			if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==9) {
+			else if (ev.getButton().equals(MouseButton.PRIMARY) && env.getJoueur().getObjetEquiperProperty().getValue()==9) {
 				env.getJoueur().utiliserBandage();
 			}
 			//utiliser un kit De soin

@@ -21,5 +21,9 @@ public abstract class Personnage {
 	public abstract int getX();
 	
 	public abstract int getY();
+	public void perdrePv(int i) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

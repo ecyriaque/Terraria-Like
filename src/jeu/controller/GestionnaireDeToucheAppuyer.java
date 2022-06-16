@@ -6,6 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import jeu.modele.Collision;
+import jeu.modele.Ennemi;
 import jeu.modele.Environnement;
 import jeu.modele.Joueur;
 import jeu.modele.inventaire.objet.ObjetVide;
@@ -19,6 +20,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private ImageView craftInventaire;
 	private ImageView matChoisi;
 	private Environnement env;
+	int test=480;
 	public GestionnaireDeToucheAppuyer(Pane root,Environnement env, Pane menuCraft, ImageView InventaireCraft) {
 		this.root=root;
 		this.env=env;
@@ -56,6 +58,9 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				break;
 			case Y :
 				joueur.gagnerPv();
+				env.ajouter(new Ennemi(test) );
+				System.out.println(env.getListeEnnemi());
+				test+=60;
 				break;         
 			
 			case U :

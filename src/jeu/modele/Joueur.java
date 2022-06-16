@@ -40,6 +40,23 @@ public class Joueur extends Personnage{
 		this.nbSaut = 0;
 		this.matChoisi = 0;
 	}
+	
+	
+	public void attquer() {
+		for(Ennemi m : this.env.getListeEnnemi()){
+				if(m.getY()==getY() &&((m.getX()>getX() && m.getX()<getX()+30)||(m.getX()<getX() && m.getX()<getX()-30))){
+					System.out.println("jataqqquueee");
+					if(getObjetEquiper()==12)
+						m.perdrePv(1);
+					else if(getObjetEquiper()==0)
+						m.perdrePv(2);
+					else if(getObjetEquiper()==1)
+						m.perdrePv(3);
+					else if(getObjetEquiper()==2) 
+						m.perdrePv(5);
+				}
+		}
+	}
 
 	//CONSTRUCION
 	public int constructionDroitePlacer() {
@@ -213,7 +230,9 @@ public class Joueur extends Personnage{
 		return caseChoisi;
 	}
 
-
+	public int getObjetEquiper() {
+		return this.ObjetEquiperProperty.getValue();
+	}
 	
 
 	///////// Les methodes de deplacement //////////
