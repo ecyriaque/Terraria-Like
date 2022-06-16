@@ -157,7 +157,6 @@ public class Environnement {
 			}
 			if(a.getX()==getJoueur().getX()) {
 				getJoueur().blesser();
-				
 			}
 		}
 

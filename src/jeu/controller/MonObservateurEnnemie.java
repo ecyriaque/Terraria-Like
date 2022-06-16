@@ -28,13 +28,15 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 			while(c.next()){
 				// on ajoute les nouveau ennemie
 				for(Ennemi nouveau: c.getAddedSubList()){
-				//	nouveau.getDirection().addListener((obse,old,nouv)->changerImageDirection(nouveau,nouv.intValue()));
-					 	ImageView r = new ImageView(images.get(0));
+					ImageView r = new ImageView(images.get(0));
 						r.setOnMouseClicked(e-> System.out.println("clic sur acteur"+ e.getSource()));		
 						r.setId(nouveau.getId());
 						r.translateXProperty().bind(nouveau.getXProperty());
 						r.translateYProperty().bind(nouveau.getYProperty());
+						nouveau.getDirection().addListener((obse,old,nouv)-> changerImageDirection(r,nouv.intValue()));
 						conteneur.getChildren().add(r);	
+					
+					 	
 				}
 				// on enleve les ennemis mort
 				for(Ennemi mort: c.getRemoved()){
@@ -47,6 +49,27 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 		
 
 
+	private void changerImageDirection(ImageView img, int intValue) {
+		System.out.println("change");
+		switch (intValue) {
+		case 0:
+			img.setImage(images.get(0));
+			break;
+		case 1:
+			img.setImage(images.get(1));
+			break;
+		case 2:
+			img.setImage(images.get(2));
+			break;
+		case 3:
+			img.setImage(images.get(3));
+			break;
+
+		default:
+			break;
+		}
+
+	}
 	private void enleverSprite(Ennemi mort) {
 		
 		this.conteneur.getChildren().remove(this.conteneur.lookup("#"+mort.getId()));
