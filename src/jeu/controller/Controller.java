@@ -137,7 +137,7 @@ public class Controller implements Initializable{
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		
 		this.utilisationEtConstruction();
-		vueMap = new VueMap(carte, env.getJoueur());
+		vueMap = new VueMap(carte, env);
 		vueMap.afficherMap();
 		
 		this.ajouterJoueur();
@@ -165,7 +165,6 @@ public class Controller implements Initializable{
 					
 					env.agit();
 					this.vueJ.actualiserImage();
-		
 					if (env.getJoueur().getNbCoeurs()==0) {
 						gameLoop.stop();
 					}

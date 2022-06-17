@@ -22,26 +22,35 @@ public class Map {
 		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 		 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-		 0,0,0,2,0,4,5,6,0,0,3,0,0,0,0,0,0,0,0,0,
+		 0,4,0,4,0,4,0,4,0,4,0,4,0,4,0,4,0,4,0,4,
 		 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
 		 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 		 3,3,3,1,1,1,1,3,1,1,1,3,3,3,3,3,3,3,3,1,
 		 3,3,3,3,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,1,
 		 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
-	private int[] pvBlock = new int[carte.length];  
+	
+	private int[] tabPvBlock = new int[carte.length];  
 	
 	public Map () {
+		pvBlock();
 	}
 	
-	public void getPvBlock() {
+	public void pvBlock() {
 		for(int i=0 ; i < carte.length-1 ; i++) {
 			if(carte[i] == 4 || carte[i] == 5 || carte[i] == 6)
-				pvBlock[i] = 5;
+				tabPvBlock[i] = 5;
 			else
-				pvBlock[i] = 99;
+				tabPvBlock[i] = 99;
 		}
 	}
 	
+	//getter
+	public int[] getTabPvBlock() {
+		return tabPvBlock;
+	}
+	public int getPvBlock(int valTab) {
+		return tabPvBlock[valTab];
+	}
 	public int[] getTab () {
 		return this.carte;
 	}

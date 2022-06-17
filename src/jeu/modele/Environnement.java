@@ -155,5 +155,8 @@ public class Environnement {
 	public ObservableList<Ennemi> getListeEnnemi() {
 		return listeEnnemi;
 	}
+	public Map getMap() {
+		return mape;
+	}
 	
 }
