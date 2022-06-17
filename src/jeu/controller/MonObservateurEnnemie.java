@@ -40,7 +40,7 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 				}
 				// on enleve les ennemis mort
 				for(Ennemi mort: c.getRemoved()){
-					if(mort.getPv().intValue()==0)
+					if(mort.getPv()==0)
 						enleverSprite(mort);
 				}
 			}

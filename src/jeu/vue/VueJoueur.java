@@ -26,6 +26,14 @@ public class VueJoueur {
 		images.add(new Image("jeu/modele/image/personnage/gauche.png"));
 		images.add(new Image("jeu/modele/image/personnage/saut.png"));
 		this.imgActive = new ImageView(images.get(0));
+		this.imgActive.translateXProperty().bind(joueur.xProperty());
+		this.imgActive.translateYProperty().bind(joueur.yProperty());
+		this.ajouterImageDuJoueur(); 
+		
+		//listerner qui change l'image en fonction de la direction : gauche droite saute
+		this.joueur.getDroiteProperty().addListener( e->actualiserImage());
+		this.joueur.getGaucheProperty().addListener( e->actualiserImage());
+		this.joueur.getSauteProperty().addListener( e->actualiserImage());
 	}
 	
 	//getter
@@ -44,17 +52,13 @@ public class VueJoueur {
 	}
 	
 	public void actualiserImage() {
-		if(this.joueur.getDroite()) {
+		if(this.joueur.getDroite()) 
 			this.imgActive.setImage(images.get(1));
-		}
-		else if(this.joueur.getGauche()) {
+		else if(this.joueur.getGauche()) 
 			this.imgActive.setImage(images.get(2));
-		}
-		else if(this.joueur.getSaute()) {
+		else if(this.joueur.getSaute()) 
 			this.imgActive.setImage(images.get(3));
-		}
-		else {
+		else 
 			this.imgActive.setImage(images.get(0));
-		}
 	}
 }

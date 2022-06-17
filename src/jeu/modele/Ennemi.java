@@ -5,18 +5,18 @@ import javafx.beans.property.SimpleIntegerProperty;
 
 public class Ennemi extends Personnage{
 	
-	private IntegerProperty x, y;
-	private IntegerProperty pv;
+	private IntegerProperty xProperty, yProperty;
+	private IntegerProperty pvProperty;
+	private IntegerProperty directionProperty;
 	private int vitesse;
-	private IntegerProperty direction;
 	private boolean droite,gauche,saute;
 	private String id;
 	public Ennemi(int xx) {
-		this.x = new SimpleIntegerProperty(xx);
-		this.y = new SimpleIntegerProperty(360);
-		this.direction =new SimpleIntegerProperty(0);
+		this.xProperty = new SimpleIntegerProperty(xx);
+		this.yProperty = new SimpleIntegerProperty(360);
+		this.directionProperty =new SimpleIntegerProperty(0);
 		this.vitesse = 4;
-		this.pv = new SimpleIntegerProperty(5);
+		this.pvProperty = new SimpleIntegerProperty(5);
 		int compteur=1;
 		this.id="A"+compteur;
 	}
@@ -25,55 +25,59 @@ public class Ennemi extends Personnage{
 	@Override
 	public void perdrePv(int i) {
 		
-		if(i>this.pv.get()) 
-			this.pv.setValue(0);
+		if(i>this.pvProperty.get()) 
+			this.pvProperty.setValue(0);
 		else
-			this.pv.setValue(pv.getValue()-i);
+			this.pvProperty.setValue(pvProperty.getValue()-i);
 	}
 	
 	//DEPLACEMENT
 	@Override
 	public void allerAGauche() {
-		int npos = this.x.getValue()-vitesse;
+		int npos = this.xProperty.getValue()-vitesse;
 		if(npos > -5)
-			this.x.setValue(npos);
+			this.xProperty.setValue(npos);
 	}
 	@Override
 	public void allerADroite() {
-		int npos = this.x.getValue()+vitesse;
+		int npos = this.xProperty.getValue()+vitesse;
 		if (npos < 766)
-			this.x.setValue(npos);
+			this.xProperty.setValue(npos);
 	}
 	@Override
 	public void sauter() {
-		int npos = this.y.getValue()-10;
+		int npos = this.yProperty.getValue()-10;
 		if(npos >0 )
-				this.y.setValue(npos);
+				this.yProperty.setValue(npos);
 	}
 	@Override
 	public void tomber() {
-		int npos = this.y.getValue()+10;
-		this.y.setValue(npos);
+		int npos = this.yProperty.getValue()+10;
+		this.yProperty.setValue(npos);
 	}
 	
 
 	//getter
-	public IntegerProperty getPv() {
-		return pv;
+	public IntegerProperty getPvProperty() {
+		return pvProperty;
+	}
+	
+	public int getPv() {
+		return pvProperty.getValue();
 	}
 	public IntegerProperty getXProperty() {
-		return this.x;
+		return this.xProperty;
 	}
 	public IntegerProperty getYProperty() {
-		return this.y;
+		return this.yProperty;
 	}
 	@Override
 	public int getX() {
-		return this.x.getValue() ;	
+		return this.xProperty.getValue() ;	
 	}
 	@Override
 	public int getY() {
-		return this.y.getValue() ;		
+		return this.yProperty.getValue() ;		
 	}
 	public String getId() {
 		return id;
@@ -93,13 +97,13 @@ public class Ennemi extends Personnage{
 	
 	//setter
 	public void setX(IntegerProperty x) {
-		this.x = x;
+		this.xProperty = x;
 	}
 	public void setY(IntegerProperty y) {
-		this.y = y;
+		this.yProperty = y;
 	}
 	public void setPv(IntegerProperty pv) {
-		this.pv = pv;
+		this.pvProperty = pv;
 	}
 	public void setDroite(boolean a) {
 		droite = a;
@@ -110,7 +114,7 @@ public class Ennemi extends Personnage{
 	
 	public void setDirection(int i) {
 		
-		this.direction.setValue(i);
+		this.directionProperty.setValue(i);
 	}
 
 	@Override
@@ -120,7 +124,7 @@ public class Ennemi extends Personnage{
 	}
 
 	public IntegerProperty getDirection() {
-		return direction;
+		return directionProperty;
 	}
 
 	

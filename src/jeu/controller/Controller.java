@@ -52,7 +52,7 @@ public class Controller implements Initializable{
 
 	private Timeline gameLoop;//boucle du jeu
 	
-	private VueJoueur vueJ; //Vue du env.getJoueur()
+
 	private Construction construction; // Placer/Casser 
 	private VueMap vueMap; //Vue de la Map
 	private ArrayList<ImageView> imagesCraft;
@@ -67,13 +67,8 @@ public class Controller implements Initializable{
 		
 	}
 	
-	//JOUEUR
-	public  void ajouterJoueur() {	
-		vueJ = new VueJoueur(conteneur, env.getJoueur());
-		vueJ.getImgActive().translateXProperty().bind(env.getJoueur().xProperty());
-		vueJ.getImgActive().translateYProperty().bind(env.getJoueur().yProperty());
-		vueJ.ajouterImageDuJoueur(); 
-	}
+
+	
 	
 	
 	
@@ -81,7 +76,7 @@ public class Controller implements Initializable{
 	@FXML
 	void gestionDesTouches() {	
 		GestionnaireDeToucheAppuyer toucheAppuyer =new GestionnaireDeToucheAppuyer(root, env, menuCraft, craftInventaire);
-		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, env.getJoueur(),vueJ.getImgActive());
+		GestionnaireDeToucheLacher toucheLacher =new GestionnaireDeToucheLacher(root, env.getJoueur());
 		root.setOnKeyPressed(toucheAppuyer);
 		root.setOnKeyReleased(toucheLacher);
 	}
@@ -111,7 +106,8 @@ public class Controller implements Initializable{
 	
 	//BOUCLE DU JEU
 	private void initAnimation() {
-		env=new Environnement();
+		gameLoop = new Timeline();
+		env=new Environnement(gameLoop);
 		this.imagesCraft = new ArrayList<>();
 		imagesCraft.add(ImageCraftEpeeBois);
 		imagesCraft.add(ImageCraftEpeePierre);
@@ -126,18 +122,18 @@ public class Controller implements Initializable{
 		imagesCraft.add(ImageCraftBandage);
 		imagesCraft.add(ImageCraftPistolet);
 		imagesCraft.add(ImageCraftBouclier);
-		new Ennemi(450);
-		gameLoop = new Timeline();
+		
+		
 		gameLoop.setCycleCount(Timeline.INDEFINITE);
 		block();
 		vueMap = new VueMap(carte, env.getJoueur());
 		vueMap.afficherMap();
 		
-		this.ajouterJoueur();
+	
 		
 		//this.ajouterEnnemi();
 		this.env.getListeEnnemi().addListener(new MonObservateurEnnemie(conteneur));
-		
+		new VueJoueur(conteneur, env.getJoueur());
 		this.env.getJoueur().nbCoeurProperty().addListener(new ObeservateurPv(new VuePv(env.getJoueur(), root), env.getJoueur()));
 		this.env.getJoueur().getNbBouclierProperty().addListener(new ObservateurBouclier(new VueBouclier(env.getJoueur(), root), env.getJoueur()));
 		new VueInventaire(env, inventaireObjet,labelNbDeBandage,labelNbDeKitDeSoin, labelBois,labelPierre,labelMetal,case1,case2,case3,case4,case5,case6, imgObjetDansLesMains);
@@ -148,18 +144,11 @@ public class Controller implements Initializable{
 				Duration.seconds(0.05), 
 				(ev ->{			
 				
-					if(!Collision.graviter(env.getJoueur(), env.getTabMap())&& !this.env.getJoueur().getSaute() || env.getJoueur().getNbSaut()==6 || Collision.collisionHaut(env.getJoueur(), env.getTabMap()) && this.env.getJoueur().getSaute() ) 
-						env.getJoueur().tomber();
-					if(Collision.graviter(env.getJoueur(), env.getTabMap())) 
-						env.getJoueur().setNbSaut(0);
-				
+					
+
 					deplacementJoueur();
 					env.agit();
-					this.vueJ.actualiserImage();
-		
-					if (env.getJoueur().getNbCoeurs()==0) {
-						gameLoop.stop();
-					}
+
 				}));
 		gameLoop.getKeyFrames().add(kf);
 	}

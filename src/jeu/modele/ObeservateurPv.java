@@ -43,7 +43,7 @@ public class ObeservateurPv implements ChangeListener<Number> {
 		case 0:
 			
 			pv.setImageActive(pv.getTabImage()[0]);
-			
+			j.getEnv().arreterLeJeu();
 			break;
 				
 		default:

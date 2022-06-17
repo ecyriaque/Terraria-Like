@@ -20,7 +20,7 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 	private ImageView craftInventaire;
 	private ImageView matChoisi;
 	private Environnement env;
-	int test=480;
+	int test=0;
 	public GestionnaireDeToucheAppuyer(Pane root,Environnement env, Pane menuCraft, ImageView InventaireCraft) {
 		this.root=root;
 		this.env=env;
@@ -58,9 +58,12 @@ public class GestionnaireDeToucheAppuyer implements EventHandler<KeyEvent>{
 				break;
 			case Y :
 				joueur.gagnerPv();
-				env.ajouter(new Ennemi(test) );
+				if(test%2==0)
+					env.ajouter(new Ennemi(480) );
+				else
+					env.ajouter(new Ennemi(520) );
 				System.out.println(env.getListeEnnemi());
-				test+=60;
+				test++;
 				break;         
 			
 			case U :

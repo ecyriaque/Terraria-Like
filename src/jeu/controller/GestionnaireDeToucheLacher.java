@@ -1,7 +1,6 @@
 package jeu.controller;
 
 import javafx.event.EventHandler;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import jeu.modele.Joueur;
@@ -10,7 +9,7 @@ public class GestionnaireDeToucheLacher implements EventHandler<KeyEvent>{
 	private Pane root;
 	private Joueur joueur;
 
-	public GestionnaireDeToucheLacher(Pane root,Joueur joueur, ImageView imgJoueur) {
+	public GestionnaireDeToucheLacher(Pane root,Joueur joueur) {
 		this.root=root;
 		this.joueur=joueur;
 	}

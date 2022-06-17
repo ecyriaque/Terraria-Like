@@ -1,6 +1,8 @@
 package jeu.modele;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.inventaire.Inventaire;
 
@@ -11,13 +13,13 @@ public class Joueur extends Personnage{
 	private IntegerProperty nbCoeursProperty; // nombre de coeur du perso (0 a 5)
 	private int nbSaut; //nb saut 
 	private int vitesse; //vitesse de deplacement du perso
-	private boolean droite,gauche,saute; //vraie si il se deplace ou saute
+	private BooleanProperty droiteProperty,gaucheProperty,sauteProperty; //vraie si il se deplace ou saute
 	
 	private Inventaire inventaireObjet =new Inventaire();
 
 	private IntegerProperty nbBandageProperty, nbKitdeSoinProperty; //nombre de bandage et de kit de soin
 	private IntegerProperty nbBouclierProperty; // nombre bouclier du perso (0 a 3)
-	private IntegerProperty ObjetEquiperProperty;
+	private IntegerProperty ObjetEquiperProperty;// numero de l'objet equiper 0 a 15
 	private int matChoisi;
 	private int caseChoisi;
 	protected Environnement env;
@@ -36,6 +38,10 @@ public class Joueur extends Personnage{
 		this.nbBandageProperty=new SimpleIntegerProperty(0);
 		this.nbKitdeSoinProperty=new SimpleIntegerProperty(0);
 		this.ObjetEquiperProperty=new SimpleIntegerProperty(12);
+		
+		this.droiteProperty=new  SimpleBooleanProperty();
+		this.gaucheProperty=new  SimpleBooleanProperty();
+		this.sauteProperty=new  SimpleBooleanProperty();
 		
 		this.nbSaut = 0;
 		this.matChoisi = 0;
@@ -113,7 +119,7 @@ public class Joueur extends Personnage{
 			perdrePv();
 	}
 	
-	///////////// Les get integersProperty /////////////
+	///////////// Les get Property /////////////
 	public final IntegerProperty xProperty(){
 		return this.x;
 	}
@@ -140,8 +146,17 @@ public class Joueur extends Personnage{
 		return nbBandageProperty;
 	}
 	
+	public final BooleanProperty getDroiteProperty() {
+		return droiteProperty;
+	}
 	
+	public final BooleanProperty getGaucheProperty() {
+		return gaucheProperty;
+	}
 	
+	public final BooleanProperty getSauteProperty() {
+		return sauteProperty;
+	}
 	
 	///////// Les setters /////////////
 	public final void setY(int n){
@@ -160,10 +175,10 @@ public class Joueur extends Personnage{
 		this.nbBouclierProperty = nbBouclierProperty;
 	}
 	public void setDroite(boolean droite) {
-		this.droite = droite;
+		this.droiteProperty.setValue(droite);
 	}
 	public void setSaute(boolean saute) {
-		this.saute = saute;
+		this.sauteProperty.setValue(saute); 
 	}
 	public void setMatChoisi(int mat) {
 		matChoisi = mat;
@@ -199,16 +214,16 @@ public class Joueur extends Personnage{
 		return nbSaut;
 	}
 	public boolean getDroite() {
-		return droite;
+		return droiteProperty.getValue();
 	}
 	public boolean getGauche() {
-		return gauche;
+		return gaucheProperty.getValue();
 	}
 	public void setGauche(boolean gauche) {
-		this.gauche = gauche;
+		this.gaucheProperty.setValue(gauche);
 	}
 	public boolean getSaute() {
-		return saute;
+		return sauteProperty.getValue();
 	}
 	
 	public Inventaire getInventaireObjet() {
