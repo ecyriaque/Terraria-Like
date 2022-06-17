@@ -21,15 +21,15 @@ public class Projectile {
 		this.vitesses=vitesses;
 		this.id="P"+compteur;
 		if (direction==1) {
-			this.xarriver=xProperty.getValue()+200;
+			this.xarriver=xProperty.getValue()+500;
 		}else 
-			this.xarriver=xProperty.getValue()-200;
+			this.xarriver=xProperty.getValue()-500;
 	
 	}
 
 
 	public void allerAdroite() {
-	
+	System.out.println("x:"+getX()+"y:"+getY());
 		int npos = getX()+this.vitesses;
 			this.xProperty.setValue(npos);
 	}

@@ -159,17 +159,21 @@ public class Environnement {
 		
 			for (int i = 0; i < listeProjectile.size(); i++) {
 				Projectile projectile = listeProjectile.get(i);
+				
 				switch (projectile.getDirection()) {
 				case 1:
+					if (Collision.collisionBalleDroite(projectile.getxProperty().get(), projectile.getyProperty().get(), getTabMap())) {
+						projectile.toucher();
+						System.out.println("mur");
+					}
 					for(int j=listeEnnemi.size()-1; j>=0;j--){
 						Ennemi ennemi = listeEnnemi.get(j);
+						
 						if((projectile.getX()>ennemi.getX() || projectile.getX()==ennemi.getX())&&projectile.getY()==ennemi.getY()) {
-							ennemi.perdrePv(5);
+							ennemi.perdrePv(1);
 							projectile.toucher();
-						}else if (Collision.collisionBalleDroite(projectile.getX(), projectile.getY(), getTabMap())) {
-							projectile.toucher();
-							System.out.println("collision balle");
 						}
+						
 					}
 						
 					if (projectile.getFini()) {
@@ -185,10 +189,14 @@ public class Environnement {
 					break;
 					
 				case 2:
+					if (Collision.collisionBalleGauche(projectile.getxProperty().get(), projectile.getyProperty().get(), getTabMap())) {
+						projectile.toucher();
+						System.out.println("mur");
+					}
 					for(int j=listeEnnemi.size()-1; j>=0;j--){
 						Ennemi a = listeEnnemi.get(j);
 						if((projectile.getX()<(a.getX()+40) || projectile.getX()==a.getX())&&projectile.getY()==a.getY()) {
-							a.perdrePv(5);
+							a.perdrePv(1);
 							projectile.toucher();
 						}
 					}

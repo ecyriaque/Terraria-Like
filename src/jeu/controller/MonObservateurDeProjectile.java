@@ -27,7 +27,7 @@ public class MonObservateurDeProjectile implements ListChangeListener<Projectile
 			for(Projectile nouveau: c.getAddedSubList()){
 			
 					
-					ImageView	imgBalle= new ImageView(new Image("jeu/modele/image/map/bois.png"));
+					ImageView	imgBalle= new ImageView(new Image("jeu/modele/image/utilitaires/balle.png"));
 				
 					imgBalle.setId(nouveau.getId());
 					imgBalle.setOnMouseClicked(e-> System.out.println("clic sur acteur"+ e.getSource()));		
