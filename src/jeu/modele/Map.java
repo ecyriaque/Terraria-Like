@@ -28,9 +28,20 @@ public class Map {
 		 3,3,3,1,1,1,1,3,1,1,1,3,3,3,3,3,3,3,3,1,
 		 3,3,3,3,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,1,
 		 3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
+	private int[] pvBlock = new int[carte.length];  
 	
 	public Map () {
 	}
+	
+	public void getPvBlock() {
+		for(int i=0 ; i < carte.length-1 ; i++) {
+			if(carte[i] == 4 || carte[i] == 5 || carte[i] == 6)
+				pvBlock[i] = 5;
+			else
+				pvBlock[i] = 99;
+		}
+	}
+	
 	public int[] getTab () {
 		return this.carte;
 	}

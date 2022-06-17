@@ -42,6 +42,20 @@ public class Construction {
 		
 	}
 	
+//	0 epeeBois
+//	1 epeePierre
+//	2 epeeMetal
+//	3 hacheBois
+//	4 hachePierre
+//	5 hacheMetal
+//	6 piocheBois
+//	7 piochePierre
+//	8 piocheMetal
+//	9 bandage
+//	10 kitDeSoin
+//	11 pistolet
+//	12 carrerVide
+	
 	//DROITE
 	//placer
 	public boolean peutPlacerDroite() {
