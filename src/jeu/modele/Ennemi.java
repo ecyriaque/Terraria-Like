@@ -11,14 +11,17 @@ public class Ennemi extends Personnage{
 	private int vitesse;
 	private boolean droite,gauche,saute;
 	private String id;
+	public static int compteur=0
+			;
 	public Ennemi(int xx) {
 		this.xProperty = new SimpleIntegerProperty(xx);
 		this.yProperty = new SimpleIntegerProperty(360);
 		this.directionProperty =new SimpleIntegerProperty(0);
 		this.vitesse = 4;
 		this.pvProperty = new SimpleIntegerProperty(5);
-		int compteur=1;
+		
 		this.id="A"+compteur;
+		compteur++;
 	}
 	
 	//PVS
@@ -127,5 +130,7 @@ public class Ennemi extends Personnage{
 		return directionProperty;
 	}
 
-	
+	public String toString() {
+		return this.id;
+	}
 }

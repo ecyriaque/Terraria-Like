@@ -5,6 +5,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import jeu.modele.inventaire.Inventaire;
+import jeu.modele.projectile.Projectile;
 
 
 public class Joueur extends Personnage{
@@ -62,6 +63,17 @@ public class Joueur extends Personnage{
 						m.perdrePv(5);
 				}
 		}
+	}
+	
+	public void tirer() {
+		int directionBalle;
+		if(direction) {
+			directionBalle=1;
+		}else {
+			directionBalle=2;
+		}
+		env.ajouterProjectile(new Projectile(env, getX(), getY(), 15, directionBalle));
+		
 	}
 
 	//CONSTRUCION

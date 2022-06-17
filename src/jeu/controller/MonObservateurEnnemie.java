@@ -33,7 +33,7 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 						r.setId(nouveau.getId());
 						r.translateXProperty().bind(nouveau.getXProperty());
 						r.translateYProperty().bind(nouveau.getYProperty());
-						nouveau.getDirection().addListener((obse,old,nouv)-> changerImageDirection(r,nouv.intValue()));
+						
 						conteneur.getChildren().add(r);	
 					
 					 	
@@ -49,11 +49,7 @@ public class MonObservateurEnnemie implements ListChangeListener<Ennemi>{
 		
 
 
-	private void changerImageDirection(ImageView img, int intValue) {
-		System.out.println("change");
-		img.setImage(images.get(intValue));
-		
-	}
+
 	private void enleverSprite(Ennemi mort) {
 		
 		this.conteneur.getChildren().remove(this.conteneur.lookup("#"+mort.getId()));
