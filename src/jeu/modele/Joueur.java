@@ -50,7 +50,7 @@ public class Joueur extends Personnage{
 	
 	public void attquer() {
 		for(Ennemi m : this.env.getListeEnnemi()){
-				if(m.getY()==getY() &&((m.getX()>getX() && m.getX()<getX()+30)||(m.getX()<getX() && m.getX()<getX()-30))){
+				if(m.getY()==getY() &&((m.getX()>getX() && m.getX()<getX()+40)||(m.getX()<getX() && m.getX()>getX()-40))){
 					System.out.println("jataqqquueee");
 					if(getObjetEquiper()==12)
 						m.perdrePv(1);
